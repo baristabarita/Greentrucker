@@ -3,8 +3,16 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    'node_modules/flowbite-react/lib/esm/**/*.js',
   ],
   theme: {
+    colors: {
+      primarycolor: '#A7C957',
+      secondarycolor: '#FFE492',
+      userclient: '#242423',
+      usertrucker: '#132A13',
+      // ...
+    },
     extend: {
       fontFamily: {
         'poppins': ['Poppins','sans-serif'],
@@ -131,6 +139,8 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
 }
 
