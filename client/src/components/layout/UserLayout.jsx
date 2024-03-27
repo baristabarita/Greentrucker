@@ -9,8 +9,7 @@ const UserLayout = () => {
             <div className='flex-grow'>
                 <div className='animate-fade-in'>
                     <UserNavbar />
-                    <div className='font-roboto w-full mt-[6em]'>
-                        <h1>UserLayout</h1>
+                    <div className='font-roboto w-full mt-[4em]'>
                         <Outlet />
                     </div>
                 </div>
