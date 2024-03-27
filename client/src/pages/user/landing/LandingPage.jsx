@@ -28,29 +28,7 @@ const LandingPage = () => {
                 <div className="container mx-auto text-center">
                     <h2 className="text-3xl font-bold mb-4">Features</h2>
                     <p className="text-lg mb-8">Check out the different features the website has to offer.</p>
-                    <div className="mb-8">
-                        <button
-                            className={`bg-[#007EA7] hover:bg-[#1f3d48] text-white py-2 px-6 rounded mr-4 ${selectedFeature === 'managers' ? 'bg-[#1f3d48]' : ''}`}
-                            onClick={() => setSelectedFeature('managers')}
-                        >
-                            For Managers
-                        </button>
-                        <button
-                            className={`bg-[#007EA7] hover:bg-[#1f3d48] text-white py-2 px-6 rounded ${selectedFeature === 'clients' ? 'bg-[#1f3d48]' : ''}`}
-                            onClick={() => setSelectedFeature('clients')}
-                        >
-                            For Clients
-                        </button>
-                    </div>
-                    <div className="flex flex-wrap justify-center">
-                        {featuresData[selectedFeature].map((feature, index) => (
-                            <div key={index} className="bg-white p-6 m-4 rounded-lg shadow-md w-72">
-                                <img src={feature.image} alt={feature.title} className="w-16 mx-auto mb-4" />
-                                <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                                <p className="text-sm">{feature.description}</p>
-                            </div>
-                        ))}
-                    </div>
+                    
                 </div>
             </section>
 
