@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiX } from "react-icons/fi";
+import { FiX, FiEye, FiEyeOff } from "react-icons/fi";
 import Footer from '../../../components/footer/Footer.jsx';
 import background from '../../../assets/images/bgimg1.png';
 import leftboximg from '../../../assets/images/medium-shot-man-wearing-helmet.png';
@@ -11,6 +11,7 @@ const UserLogin = () => {
     const [emailAdd, setEmailAdd] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleGuest = () => {
         setError("");
@@ -28,12 +29,15 @@ const UserLogin = () => {
     const handleEmailChange = (e) => {
         setEmailAdd(e.target.value);
         setError(""); // Clear error on email change
-      };
-    
-      const handlePasswordChange = (e) => {
+    };
+
+    const handlePasswordChange = (e) => {
         setPassword(e.target.value);
         setError(""); // Clear error on password change
-      };
+    };
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     return (
         <>
@@ -93,17 +97,25 @@ const UserLogin = () => {
                                     required
                                 />
                             </div>
-                            <div className="mb-3">
+                            <div className="mb-3 relative">
                                 <input
                                     placeholder="Password"
-                                    type="password"
-                                    className="mt-1 p-3 w-full border border-gray-300 rounded focus:ring focus:ring-primarycolor focus:border-primarycolor"
+                                    type={showPassword ? "text" : "password"} // Toggle password visibility
+                                    className="mt-1 p-3 w-full border rounded focus:ring focus:ring-primarycolor focus:border-primarycolor"
                                     id="password"
                                     name="password"
                                     value={password}
                                     onChange={handlePasswordChange}
                                     required
                                 />
+                                {/* Button to toggle password visibility */}
+                                <button
+                                    type="button"
+                                    className="absolute top-1/2 right-2 transform -translate-y-1/2"
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {showPassword ? <FiEyeOff /> : <FiEye />}
+                                </button>
                             </div>
                             { /* 
                             <div className="text-right text-sm mb-6">
