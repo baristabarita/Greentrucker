@@ -101,7 +101,7 @@ const TruckerLogin = () => {
                                 <input
                                     placeholder="Password"
                                     type={showPassword ? "text" : "password"} // Toggle password visibility
-                                    className="mt-1 p-3 w-full border rounded focus:ring focus:ring-primarycolor focus:border-primarycolor"
+                                    className="mt-1 p-3 w-full border border-gray-300 rounded focus:ring focus:ring-primarycolor focus:border-primarycolor"
                                     id="password"
                                     name="password"
                                     value={password}
