@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../../util/userAuthentication.jsx";
 import { FiX, FiEye, FiEyeOff } from "react-icons/fi";
 import Footer from '../../../components/footer/Footer.jsx';
 import background from '../../../assets/images/bgimg1.png';
@@ -7,11 +8,13 @@ import leftboximg from '../../../assets/images/medium-shot-man-wearing-helmet.pn
 import logo from '../../../assets/icons/greentrucker-logo.png';
 
 const UserLogin = () => {
+    const { login } = useAuth();
     const navigate = useNavigate();
     const [emailAdd, setEmailAdd] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+
 
     const handleGuest = () => {
         setError("");
@@ -23,8 +26,10 @@ const UserLogin = () => {
     };
 
     const handleLogin = () => {
+        // Assuming successful login for regular user
+        login('user');
         navigate("/");
-    };
+      };
 
     const handleEmailChange = (e) => {
         setEmailAdd(e.target.value);

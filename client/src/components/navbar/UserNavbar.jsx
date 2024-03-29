@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import logoicon from '../../assets/icons/greentrucker-logo2.png'
+import useAuth from '../../util/userAuthentication';
+import logoicon from '../../assets/icons/greentrucker-logo2.png';
+import defaultuser from '../../assets/images/defaultpfp.jpg';
 
 const UserNavbar = () => {
+    const { isLoggedIn, userType, logout } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
+    const [isUserOpen, setIsUserOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
-
+    const toggleUserMenu = () => {
+        setIsUserOpen(!isUserOpen);
+    }
+    const handleLogout = () => {
+        logout();
+        window.location.reload(); // Reloads the page after logout
+    };
+    console.log("LOG STATUS: ", isLoggedIn);
+    console.log("USERTYPE: ", userType);
     return (
         <nav className="bg-userclient fixed w-full z-20 top-0 start-0">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -19,7 +31,31 @@ const UserNavbar = () => {
                     <span className="self-center text-1xl text-white font-semibold whitespace-nowrap">GreenTrucker</span>
                 </div>
                 <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button onClick={() => navigate('/userlogin')} type="button" className="font-roboto text-black bg-secondarycolor hover:bg-secondarycolor focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-secondarycolor dark:hover:bg-secondarycolor dark:focus:ring-blue-800">Sign In</button>
+                    {/* If user is not logged in */}
+                    {!isLoggedIn && (
+                        <button onClick={() => navigate('/userlogin')} type="button" className="font-roboto text-black bg-secondarycolor hover:bg-secondarycolor focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-secondarycolor dark:hover:bg-secondarycolor dark:focus:ring-blue-800">Sign In</button>
+                    )}
+                    {/* If user is logged in */}
+                    {isLoggedIn && (
+                        <div className="relative">
+                            <button type="button" onClick={toggleUserMenu} className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded={isOpen ? 'true' : 'false'} aria-haspopup="true">
+                                <span className="sr-only">Open user menu</span>
+                                <img className="w-8 h-8 rounded-full" src={defaultuser} alt="user photo" />
+                            </button>
+                            {/* Dropdown menu */}
+                            {isUserOpen && (
+                                <div className="absolute z-50 right-0 mt-2 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
+                                    <div className="py-1">
+                                        <button onClick={() => navigate('/dashboard')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" role="menuitem">Dashboard</button>
+                                        <button onClick={() => navigate('/settings')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" role="menuitem">Settings</button>
+                                        <button onClick={() => navigate('/earnings')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" role="menuitem">Earnings</button>
+                                        <button onClick={handleLogout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" role="menuitem">Sign out</button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                    {/* End of dropdown menu */}
                     <button onClick={toggleMenu} type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
                         <span className="sr-only">Open main menu</span>
                         <svg className="w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 17 14">
@@ -42,7 +78,7 @@ const UserNavbar = () => {
                 </div>
             </div>
         </nav>
-    )
+    );
 }
 
 export default UserNavbar;

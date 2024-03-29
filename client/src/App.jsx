@@ -34,18 +34,18 @@ import AdminVerificationPage from './pages/admin/verification/AdminVerification.
 import AdminBookingLogsPage from './pages/admin/bookinglogs/AdminBookingLogs.jsx'
 import AdminSettings from './pages/admin/settings/AdminSettings.jsx'
 
-function App(){
-  return(
+function App() {
+  return (
     <BrowserRouter>
       <Routes>
         {/* General Pages */}
-        <Route path = "/userlogin" element = {<UserLogin/>} />
+        <Route path="/userlogin" element={<UserLogin />} />
         <Route path="/trkrlogin" element={<TruckerLogin />} />
         <Route path="/adlogin" element={<AdminLogin />} />
         <Route path="/usregister" element={<UserRegister />} />
         <Route path="/trkregister" element={<TruckerRegister />} />
         <Route path="/logout" element={<LogoutPage />} />
-        
+
         {/* Layouts */}
         <Route path="/" element={<UserLayout />} >
           <Route index element={<LandingPage />} />
