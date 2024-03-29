@@ -19,8 +19,9 @@ const TruckingServiceCard = ({ trucker }) => {
     const navigate = useNavigate();
 
     const handleViewMoreClick = () => {
+        localStorage.setItem('selectedTrucker', JSON.stringify(trucker));
         // Navigate to the specific trucking service details page
-        navigate(`/bookingchoices/view/${trucker.id}`);
+        navigate('/services/choice/view');
     };
 
     return (
@@ -72,7 +73,7 @@ const TruckingServiceCard = ({ trucker }) => {
                 <div className="text-black text-[1.5em] font-bold mb-2">₱ {servCharge.toFixed(2)}</div>
                 <div className="flex space-x-2">
                     <button
-                        className="bg-usertrucker font-medium text-white rounded-md p-2 flex items-center"
+                        className="bg-usertrucker font-medium text-white rounded-md p-2 flex items-center hover:bg-primarycolor hover:text-usertrucker"
                         onClick={handleViewMoreClick}
                     >
                         <FaEye className="mr-1" />

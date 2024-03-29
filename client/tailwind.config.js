@@ -11,6 +11,7 @@ export default {
       secondarycolor: '#FFE492',
       userclient: '#242423',
       usertrucker: '#132A13',
+      alert: '#BC4749',
       
       // ...
     },

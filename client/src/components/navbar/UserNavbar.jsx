@@ -80,10 +80,10 @@ const UserNavbar = () => {
                             <div onClick={() => navigate('/')} className={`block py-2 px-3 rounded md:p-0 cursor-pointer ${location.pathname === '/' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">Home</div>
                         </li>
                         <li>
-                            <div onClick={() => navigate('/services')} className={`block py-2 px-3 rounded md:p-0 cursor-pointer ${location.pathname === '/services' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">Services</div>
+                            <div onClick={() => navigate('/services')} className={`block py-2 px-3 rounded md:p-0 cursor-pointer ${location.pathname === '/services' || location.pathname === '/services/choice/view' || location.pathname === '/services/choice/book' || location.pathname === '/services/choice/book/confirm' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">Services</div>
                         </li>
                         <li>
-                            <div onClick={() => navigate('/userbookings')} className={`block py-2 px-3 rounded md:p-0 cursor-pointer ${location.pathname === '/userbookings' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">My Bookings</div>
+                            <div onClick={() => navigate('/userbookings')} className={`block py-2 px-3 rounded md:p-0 cursor-pointer ${location.pathname === '/userbookings' || location.pathname === '/userbookings/booking/view' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">My Bookings</div>
                         </li>
                     </ul>
                 </div>
