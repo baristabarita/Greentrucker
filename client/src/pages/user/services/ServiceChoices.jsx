@@ -29,6 +29,7 @@ const ServiceChoices = () => {
                     averageRating: 4.7,
                     servCharge: 1500,
                     contrCharge: 500,
+                    distCharge: 500,
                     logo: defaultserviceicon,
                     customData: {
                         serviceType: 'Long Haul',
