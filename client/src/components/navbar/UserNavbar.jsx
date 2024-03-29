@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FaUserCog } from "react-icons/fa";
+import { BiSolidBookAlt } from "react-icons/bi";
+import { FiLogOut } from "react-icons/fi";
 import useAuth from '../../util/userAuthentication';
 import logoicon from '../../assets/icons/greentrucker-logo2.png';
 import defaultuser from '../../assets/images/defaultpfp.jpg';
@@ -46,10 +49,18 @@ const UserNavbar = () => {
                             {isUserOpen && (
                                 <div className="absolute z-50 right-0 mt-2 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
                                     <div className="py-1">
-                                        <button onClick={() => navigate('/dashboard')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" role="menuitem">Dashboard</button>
-                                        <button onClick={() => navigate('/settings')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" role="menuitem">Settings</button>
-                                        <button onClick={() => navigate('/earnings')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" role="menuitem">Earnings</button>
-                                        <button onClick={handleLogout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" role="menuitem">Sign out</button>
+                                        <button onClick={() => navigate('/userprofile')} className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" role="menuitem">
+                                            <FaUserCog className='mt-1 mx-3' />
+                                            Account Settings
+                                        </button>
+                                        <button onClick={() => navigate('/userbookings')} className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" role="menuitem">
+                                            <BiSolidBookAlt className='mt-1 mx-3' />
+                                            My Bookings
+                                        </button>
+                                        <button onClick={handleLogout} className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" role="menuitem">
+                                            <FiLogOut className='mt-1 mx-3' />
+                                            Sign out
+                                        </button>
                                     </div>
                                 </div>
                             )}
