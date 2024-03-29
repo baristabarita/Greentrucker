@@ -28,9 +28,13 @@ const SelectedServiceChoice = () => {
             setAssets(selectedTrucker.assets || []); // Fallback to an empty array if not present
         } else {
             console.error('Selected trucker data not found');
-            navigate('/bookingchoices'); // Redirect if data is not available
+            navigate('/services'); // Redirect if data is not available
         }
     }, [navigate]);
+
+    const handleBookServicesClick = () => {
+        navigate('/services/choice/book');
+    };
 
     return (
         <div className="animate-fade-in font-poppings bg-primarycolor text-darkblue">
@@ -111,7 +115,7 @@ const SelectedServiceChoice = () => {
                                 className="bg-usertrucker hover:bg-primarycolor font-medium text-white hover:text-usertrucker rounded-md p-2 self-start ml-auto shadow-lg drop-shadow-md"
                                 onClick={() => {
                                     if (isLoggedIn) {
-                                        navigate('/services/choice/book');
+                                        handleBookServicesClick();
                                     } else {
                                         setShowAlert(true);
                                     }
