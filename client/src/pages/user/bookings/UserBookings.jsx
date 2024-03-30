@@ -157,7 +157,7 @@ const UserBookings = () => {
     };
 
     return (
-        <div className="min-h-screen bg-cover" style={{ backgroundImage: `url(${backgroundimg})` }}>
+        <div className="animate-fade-in min-h-screen bg-cover" style={{ backgroundImage: `url(${backgroundimg})` }}>
             <div className="container mx-auto p-8">
                 <div className="flex">
                     {/* Modified Sorting Tabs */}

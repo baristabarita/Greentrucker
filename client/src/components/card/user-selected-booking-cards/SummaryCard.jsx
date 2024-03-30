@@ -18,7 +18,7 @@ const SummaryCard = ({ bookingDetails, onOpenDocumentModal }) => {
                     <div className="flex justify-between items-center mt-2">
                         <p className="font-bold text-[1em]">Pullout Documents:</p>
                         <button
-                            className="flex itmes-center font-bold text-[0.8em] bg-[#007EA7] hover:bg-[#003249] text-white px-2 py-1 rounded"
+                            className="flex itmes-center font-bold text-[0.8em] bg-usertrucker hover:bg-primarycolor text-white px-2 py-1 rounded"
                             onClick={() => onOpenDocumentModal(pulloutDocUrl)}
                         >
                             <FaEye className="mr-1 mt-1" />
@@ -28,7 +28,7 @@ const SummaryCard = ({ bookingDetails, onOpenDocumentModal }) => {
                     <div className="flex justify-between items-center mt-2">
                         <p className="font-bold text-[1em]">Proof of Completion (EIR):</p>
                         <button
-                            className="flex itmes-center font-bold text-[0.8em] bg-[#007EA7] hover:bg-[#003249] text-white px-2 py-1 rounded"
+                            className="flex itmes-center font-bold text-[0.8em] bg-usertrucker hover:bg-primarycolor text-white px-2 py-1 rounded"
                             onClick={() => onOpenDocumentModal(eirDocUrl)}
                         >
                             <FaEye className="mr-1 mt-1" />
@@ -49,7 +49,7 @@ const SummaryCard = ({ bookingDetails, onOpenDocumentModal }) => {
                     <div className="flex items-center mt-2">
                         <p className="font-bold text-[1em] mr-2">Pullout Documents:</p>
                         <button
-                            className="flex itmes-center font-bold text-[0.8em] bg-[#007EA7] hover:bg-[#003249] text-white px-2 py-1 rounded"
+                            className="flex itmes-center font-bold text-[0.8em] bg-usertrucker hover:bg-primarycolor text-white px-2 py-1 rounded"
                             onClick={() => openDocumentModal(pulloutDocUrl)}
                         >
                             <FaEye className="mr-1 mt-1" />

@@ -3,13 +3,29 @@ import { FiX } from "react-icons/fi";
 import { FaTruck, FaCalendar, FaFile, FaCheckCircle, FaHourglass, FaTimesCircle, FaArrowRight } from "react-icons/fa";
 import { GiEmptyHourglass } from "react-icons/gi";
 
-const TrackingDetailsCard = ({ bookingDetails }) => {
+const TrackingDetailsCard = ({ bookingDetails, onShowAlertModal, onOpenRatingModal }) => {
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleFileSubmit = (e) => {
+        e.preventDefault();
+        console.log("Simulated file submission:", selectedFile);
+        // Here you could set state indicating the file is "submitted"
+        alert("File submitted successfully!");
+    };
+
+    const handleFileChange = (e) => {
+        setSelectedFile(e.target.files[0]);
+    };
+
+    const handleRateService = () => {
+        onOpenRatingModal();
+    };
 
     const getStatusIcon = () => {
         switch (bookingDetails.status) {
             case "Pending":
                 return <GiEmptyHourglass size={200} />;
-            case "Pullout Docs Required":
+            case "Processing":
                 return <FaFile size={150} />;
             case "Reserved":
                 return <FaCalendar size={150} />;
@@ -35,9 +51,10 @@ const TrackingDetailsCard = ({ bookingDetails }) => {
                             Your booking has been received by the chosen trucking service,
                             please wait for it to be accepted.
                         </p>
+                        <button onClick={onShowAlertModal} className="bg-alert hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Cancel Booking</button>
                     </div>
                 );
-            case "Processed":
+            case "Processing":
                 return (
                     <div>
                         <p className="text-[1.2em] font-bold mb-1">
@@ -49,12 +66,15 @@ const TrackingDetailsCard = ({ bookingDetails }) => {
                             service to initiate the delivery process.
                         </p>
                         {/* File submission logic and submit button */}
-                        <form onSubmit={handleFileSubmit}>
-                            <input type="file" className="w-full" onChange={handleFileChange} />
-                            <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded mt-2">
-                                Submit
-                            </button>
+                        <form onSubmit={handleFileSubmit} className="w-full">
+                            <input type="file" className="w-full mb-2" onChange={handleFileChange} />
+                            <div className="flex justify-start">
+                                <button type="submit" className="bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient py-2 px-4 rounded-lg mt-2">
+                                    Submit Document
+                                </button>
+                            </div>
                         </form>
+
                     </div>
                 );
             case "Reserved":
@@ -98,6 +118,7 @@ const TrackingDetailsCard = ({ bookingDetails }) => {
                             <strong className="text-left">Contact Number: </strong>
                             <span className="text-right ml-3">{bookingDetails.contact_number}</span>
                         </p>
+                        <button onClick={handleRateService} className="bg-usertrucker hover:bg-primarycolor text-white font-bold py-2 px-4 rounded">Rate Trucking Service</button>
                     </div>
 
                 );
@@ -126,8 +147,8 @@ const TrackingDetailsCard = ({ bookingDetails }) => {
         switch (bookingDetails.status) {
             case "Pending":
                 return "text-white bg-pending py-1 px-4 rounded";
-            case "Processed":
-                return "text-white bg-processed py-1 px-4 rounded";
+            case "Processing":
+                return "text-white bg-processing py-1 px-4 rounded";
             case "Reserved":
                 return "text-white bg-reserved py-1 px-4 rounded";
             case "Ongoing":
@@ -141,79 +162,75 @@ const TrackingDetailsCard = ({ bookingDetails }) => {
                 return "text-white bg-gray-500 py-1 px-4 rounded";
         }
     };
-    const handleFileChange = (e) => {
-        // Handle the file change event
-        const file = e.target.files[0];
-        setSelectedFile(file);
-    };
+
 
     return (
         <div className="bg-white col-span-2 md:col-span-2 border rounded p-4 shadow-lg drop-shadow-lg m-5 w-[55%]">
-          
-          {/* First Row */}
-          <div className="flex justify-between mb-4">
-            <div>
-              <h2 className="font-bold text-[1.6em]">
-                Tracking Booking ID: {bookingDetails.booking_id}
-              </h2>
-              <div className="flex items-center">
-                <h2 className="font-bold text-[1.4em] mr-2">Booking Status:</h2>
-                <h2 className={`font-bold text-[0.8em] ${getStatusTextColor()}`}>
-                  {bookingDetails.status}
-                </h2>
-              </div>
-              <div className="flex items-center mb-2">
-                {bookingDetails.status === "Completed" ? (
-                  <h2 className="font-bold text-[1.4em] mr-2">Completion Date:</h2>
-                ) :
-                bookingDetails.status === "Cancelled" ? (
-                    <></>
-                  ) : (
-                    <h2 className="font-bold text-[1.4em] mr-2">Est. Finish Date:</h2>
-                  )}
-                {bookingDetails.status === "Completed" ? (
-                  <h2 className="text-[1.2em]">{bookingDetails.est_finish_date}</h2>
-                ) :
-                bookingDetails.status === "Cancelled" ? (
-                    <></>
-                  ) : (
-                    <h2 className="text-[1.2em] mr-2">{bookingDetails.est_finish_date}</h2>
-                  )}
-              </div>
+
+            {/* First Row */}
+            <div className="flex justify-between mb-4">
+                <div>
+                    <h2 className="font-bold text-[1.6em]">
+                        Tracking Booking ID: {bookingDetails.booking_id}
+                    </h2>
+                    <div className="flex items-center">
+                        <h2 className="font-bold text-[1.4em] mr-2">Booking Status:</h2>
+                        <h2 className={`font-bold text-[0.8em] ${getStatusTextColor()}`}>
+                            {bookingDetails.status}
+                        </h2>
+                    </div>
+                    <div className="flex items-center mb-2">
+                        {bookingDetails.status === "Completed" ? (
+                            <h2 className="font-bold text-[1.4em] mr-2">Completion Date:</h2>
+                        ) :
+                            bookingDetails.status === "Cancelled" ? (
+                                <></>
+                            ) : (
+                                <h2 className="font-bold text-[1.4em] mr-2">Est. Finish Date:</h2>
+                            )}
+                        {bookingDetails.status === "Completed" ? (
+                            <h2 className="text-[1.2em]">{bookingDetails.est_finish_date}</h2>
+                        ) :
+                            bookingDetails.status === "Cancelled" ? (
+                                <></>
+                            ) : (
+                                <h2 className="text-[1.2em] mr-2">{bookingDetails.est_finish_date}</h2>
+                            )}
+                    </div>
+                </div>
             </div>
-          </div>
-    
-          {/* Second Row */}
-          <div className="flex items-center mr-1 mb-4">
-            <div className="w-[35%] h-auto ml-4">{getStatusIcon()}</div>
-            <div className="ml-[5%]">{renderStatusDetails()}</div>
-          </div>
-          <hr className="my-4 border-gray-400" />
-    
-          {/* Third Row */}
-          <div className="mb-4 flex items-center">
-            {/* First Column */}
-            <div className="flex-1">
-              <p>
-                <strong>Pickup Location:</strong>
-              </p>
-              <p>{bookingDetails.pickup_location}</p>
+
+            {/* Second Row */}
+            <div className="flex items-center mr-1 mb-4">
+                <div className="w-[35%] h-auto ml-4">{getStatusIcon()}</div>
+                <div className="ml-[5%]">{renderStatusDetails()}</div>
             </div>
-    
-            {/* Second Column */}
-            <div className="mx-2">
-              <FaArrowRight size={50} />
+            <hr className="my-4 border-gray-400" />
+
+            {/* Third Row */}
+            <div className="mb-4 flex items-center">
+                {/* First Column */}
+                <div className="flex-1">
+                    <p>
+                        <strong>Pickup Location:</strong>
+                    </p>
+                    <p>{bookingDetails.pickup_location}</p>
+                </div>
+
+                {/* Second Column */}
+                <div className="mx-2">
+                    <FaArrowRight size={50} />
+                </div>
+                {/* Third Column */}
+                <div className="flex-1 ml-[10%]">
+                    <p>
+                        <strong>Delivery Location:</strong>
+                    </p>
+                    <p>{bookingDetails.delivery_address}</p>
+                </div>
             </div>
-            {/* Third Column */}
-            <div className="flex-1 ml-[10%]">
-              <p>
-                <strong>Delivery Location:</strong>
-              </p>
-              <p>{bookingDetails.delivery_address}</p>
-            </div>
-          </div>
         </div>
-      );
+    );
 }
 
 export default TrackingDetailsCard

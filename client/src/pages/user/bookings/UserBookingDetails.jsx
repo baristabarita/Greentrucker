@@ -4,6 +4,8 @@ import TrackingDetailsCard from "../../../components/card/user-selected-booking-
 import SummaryCard from "../../../components/card/user-selected-booking-cards/SummaryCard";
 import LoadingDetails from "../../../components/loaders/LoadingDetails";
 import ViewDocumentModal from "../../../components/modals/ViewDocumentModal";
+import CustomAlertModal from "../../../components/modals/CustomAlertModal";
+import CustomRatingModal from "../../../components/modals/CustomRatingModal";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import backgroundimg from '../../../assets/images/bgimg1.png';
 
@@ -11,7 +13,15 @@ const UserBookingDetails = () => {
     const navigate = useNavigate();
     const [bookingDetails, setBookingDetails] = useState(null); // Initialized to null for clarity
     const [isOpen, setIsOpen] = useState(false);
+    const [showAlertModal, setShowAlertModal] = useState(false);
     const [documentUrl, setDocumentUrl] = useState('');
+    const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
+    const [ratingSubmission, setRatingSubmission] = useState({
+        rating: null,
+        comment: '',
+        submitted: false,
+    });
+
 
     useEffect(() => {
         // Attempt to retrieve the booking details from localStorage
@@ -40,6 +50,32 @@ const UserBookingDetails = () => {
 
     const handleCloseModal = () => setIsOpen(false);
 
+    const handleShowAlertModal = () => {
+        setShowAlertModal(true);
+    };
+    const handleCloseAlertModal = () => {
+        setShowAlertModal(false);
+    };
+
+    // Function to handle the booking cancellation
+    const handleCancelBooking = () => {
+        console.log("Booking canceled.");
+        setShowAlertModal(false); // Close the modal after cancellation
+        navigate('/userbookings'); // Navigate back to users bookings page 
+    };
+
+    // Function to open the rating modal
+    const openRatingModal = () => setIsRatingModalOpen(true);
+
+    // Function to close the rating modal
+    const closeRatingModal = () => setIsRatingModalOpen(false);
+
+    // Function to handle the rating submission
+    const submitRating = (rating, comment) => {
+        setRatingSubmission({ rating, comment, submitted: true });
+        closeRatingModal();
+
+    };
     console.log(bookingDetails);
 
     return (
@@ -58,12 +94,13 @@ const UserBookingDetails = () => {
             <div className="container mx-auto my-auto flex flex-col items-center">
                 {/* Render TrackingDetailsCard only if bookingDetails is not null */}
                 {bookingDetails ? (
-                    <TrackingDetailsCard bookingDetails={bookingDetails} />
+                    <TrackingDetailsCard bookingDetails={bookingDetails} onShowAlertModal={handleShowAlertModal}  onOpenRatingModal={openRatingModal}/>
+
                 ) : (
                     <LoadingDetails />
                 )}
                 {bookingDetails ? (
-                    <SummaryCard bookingDetails={bookingDetails} onOpenDocumentModal={handleOpenDocumentModal}  />
+                    <SummaryCard bookingDetails={bookingDetails} onOpenDocumentModal={handleOpenDocumentModal} />
                 ) : (
                     <LoadingDetails />
                 )}
@@ -72,6 +109,22 @@ const UserBookingDetails = () => {
                 isOpen={isOpen}
                 documentUrl={documentUrl}
                 onClose={handleCloseModal}
+            />
+            <CustomAlertModal
+                isOpen={showAlertModal}
+                onClose={handleCloseAlertModal}
+                title="Cancel Selected Booking"
+                description="Are you sure you want to cancel your booking? This action cannot be undone."
+                buttonOneText="Return"
+                buttonOneOnClick={handleCloseAlertModal}
+                buttonTwoText="Cancel"
+                buttonTwoOnClick={handleCancelBooking}
+            />
+
+            <CustomRatingModal
+                isOpen={isRatingModalOpen}
+                onClose={closeRatingModal}
+                onSubmitRating={submitRating}
             />
         </div>
     );
