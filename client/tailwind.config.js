@@ -12,7 +12,13 @@ export default {
       userclient: '#242423',
       usertrucker: '#132A13',
       alert: '#BC4749',
-      
+      pending: '#FFA756',
+      processing: '#6226EF',
+      reserved: '#BA29FF',
+      ongoing: '#00B4D8',
+      complete: '#00B69B',
+      cancelled: '#EF3826',
+
       // ...
     },
     extend: {
