@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../../util/userAuthentication";
 import UserBookingCard from '../../../components/card/UserBookingCard';
 import backgroundimg from '../../../assets/images/bgimg1.png';
 
 
 const UserBookings = () => {
+    const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
     const [bookings, setBookings] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -159,7 +161,9 @@ const UserBookings = () => {
     return (
         <div className="animate-fade-in min-h-screen bg-cover" style={{ backgroundImage: `url(${backgroundimg})` }}>
             <div className="container mx-auto p-8">
-                <div className="flex">
+            {isLoggedIn ? (
+            <>
+            <div className="flex">
                     {/* Modified Sorting Tabs */}
                     <div className="w-1/5 bg-white rounded-lg shadow-lg p-4">
                         <h3 className="text-lg font-bold mb-2">Sort my Bookings</h3>
@@ -222,6 +226,12 @@ const UserBookings = () => {
                         &raquo;
                     </button>
                 </div>
+            </>
+            ) : (
+                <h1 className="font-bold text-alert">UNABLE TO VIEW CONTENTS. Only logged in users can view this page.</h1>
+            )}
+                
+
             </div>
         </div>
     )
