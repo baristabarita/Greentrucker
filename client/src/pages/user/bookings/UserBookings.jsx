@@ -15,19 +15,115 @@ const UserBookings = () => {
     useEffect(() => {
         setBookings([
             {
-                booking_id: 1, status: "Pending", businessName: "Quick Logistics", delivery_address: "101 Main St, Metropolis", est_finish_date: "2023-10-10", is_visible: 1
+                booking_id: 1, 
+                status: "Pending", 
+                businessName: "Quick Logistics", 
+                contact_number: "123-456-7890", 
+                delivery_address: "101 Main St, Metropolis",
+                pickup_location: "88 Speedway Blvd, Gotham",
+                est_finish_date: "2023-10-10",
+                truckAsset: { 
+                    brand: "Nissan",
+                    model: "AB123",
+                    plate_number: "ABC 1234",
+                },  
+                container:{
+                    quantity: "4",
+                    container_type: "1 x 40",
+                    item_type: "Building Materials",
+                    item_weight: "20",
+                },
+                payments:{
+                    container_charge: "10000.00",
+                    service_charge: "1540.00",
+                    distance_charge: "500.00",
+                    total_balance: "12040.00",
+                    paymentStatus: "Pending",
+                },
+                is_visible: 1
             },
             {
-                booking_id: 2, status: "Completed", businessName: "Global Shipping Co.", delivery_address: "2020 Vision Rd, Star City", est_finish_date: "2023-09-20", is_visible: 1
+                booking_id: 2, 
+                status: "Completed", 
+                businessName: "Global Shipping Co.", 
+                contact_number: "123-456-7890", 
+                pickup_location: "100 South St, Metropolis", 
+                delivery_address: "2020 Vision Rd, Star City", 
+                est_finish_date: "2023-09-20",
+                container:{
+                    quantity: "2",
+                    container_type: "2 x 20",
+                    item_type: "Electronics",
+                    item_weight: "10",
+                },
+                payments:{
+                    container_charge: "8000.00",
+                    service_charge: "1200.00",
+                    distance_charge: "400.00",
+                    total_balance: "9600.00",
+                    paymentStatus: "Paid",
+                },
+                is_visible: 1
             },
             {
-                booking_id: 3, status: "Reserved", businessName: "Fast Movers", delivery_address: "88 Speedway Blvd, Gotham", est_finish_date: "2023-11-15", is_visible: 1
+                booking_id: 3, 
+                status: "Reserved", 
+                businessName: "Fast Movers", 
+                delivery_address: "88 Speedway Blvd, Gotham",
+                pickup_location: "100 South St, Metropolis",  
+                est_finish_date: "2023-11-15",
+                container:{
+                    quantity: "3",
+                    container_type: "3 x 20",
+                    item_type: "Furniture",
+                    item_weight: "15",
+                },
+                payments:{
+                    container_charge: "9000.00",
+                    service_charge: "1350.00",
+                    distance_charge: "450.00",
+                    total_balance: "10800.00",
+                    paymentStatus: "Pending",
+                },
+                is_visible: 1
             },
             {
-                booking_id: 4, status: "Cancelled", businessName: "Reliable Transports", delivery_address: "42 Galaxy Way, Central City", est_finish_date: "2023-08-05", is_visible: 1
+                booking_id: 4, 
+                status: "Cancelled", 
+                businessName: "Reliable Transports", 
+                delivery_address: "42 Galaxy Way, Central City",
+                pickup_location: "100 South St, Metropolis",  
+                est_finish_date: "2023-08-05", 
+                is_visible: 1
+                // No truckAsset, container, or payments due to cancellation
             },
             {
-                booking_id: 5, status: "Ongoing", businessName: "Efficient Carriers", delivery_address: "1234 Riverside Drive, Jump City", est_finish_date: "2023-08-18", is_visible: 1
+                booking_id: 5, 
+                status: "Ongoing", 
+                businessName: "Efficient Carriers", 
+                contact_number: "123-456-7890", 
+                delivery_address: "1234 Riverside Drive, Jump City", 
+                pickup_location: "100 South St, Metropolis", 
+                est_finish_date: "2023-08-18",
+                truckAsset: { 
+                    brand: "Volvo",
+                    model: "FH16",
+                    plate_number: "XYZ 1234",
+                },
+                container:{
+                    quantity: "5",
+                    container_type: "5 x 20",
+                    item_type: "Automotive Parts",
+                    item_weight: "25",
+                },
+                payments:{
+                    container_charge: "11000.00",
+                    service_charge: "1650.00",
+                    distance_charge: "550.00",
+                    total_balance: "13200.00",
+                    paymentStatus: "Pending",
+                },
+                is_visible: 1
             }
         ]);
     }, []);
@@ -48,6 +144,17 @@ const UserBookings = () => {
     const currentBookings = filteredBookings.slice(firstItemIndex, lastItemIndex);
 
     const totalPageCount = Math.ceil(filteredBookings.length / itemsPerPage);
+    
+    const handleViewDetailsClick = (bookingId) => {
+        // Find the booking data using the bookingId
+        const bookingData = bookings.find(booking => booking.booking_id === bookingId);
+        
+        // Store the found booking data in localStorage or handle it as needed
+        localStorage.setItem('currentBooking', JSON.stringify(bookingData));
+        
+        // Navigate to the booking details page
+        navigate(`/userbookings/booking/view`);
+    };
 
     return (
         <div className="min-h-screen bg-cover" style={{ backgroundImage: `url(${backgroundimg})` }}>
@@ -82,7 +189,7 @@ const UserBookings = () => {
                                     businessName={booking.businessName}
                                     deliveryAddress={`Delivery Address: ${booking.delivery_address}`}
                                     estFinishDate={`Estimated Finish Date: ${booking.est_finish_date}`}
-                                    handleDetailsClick={() => navigate(`/bookingdetails/${booking.booking_id}`)}
+                                    handleDetailsClick={() => handleViewDetailsClick(booking.booking_id)}
                                 />
                             ))}
                             {currentBookings.length === 0 && <p>No bookings found for this category.</p>}
