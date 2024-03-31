@@ -57,6 +57,14 @@ function App() {
           <Route path="/userbookings" element={<UserBookingsPage />} />
           <Route path="/userbookings/booking/view" element={<UserBookingDetailsPage />} />
         </Route>
+        
+        <Route path="/trucker" element={<TruckerLayout />}>
+          <Route index path="truckerdash" element={<TruckerDashboard />} />
+          <Route path="truckerbookings" element={<BookingsPage />} />
+          <Route path="truckerassets" element={<AssetsPage />} />
+          <Route path="truckerpayments" element={<PaymentsPage />} />
+          <Route path="truckersettings" element={<TruckerSettings />} />
+        </Route>
 
       </Routes>
     </BrowserRouter>
