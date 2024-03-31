@@ -30,7 +30,7 @@ const TruckerNavbar = ({ toggleSidebar, isSidebarOpen }) => {
 */
 
   return (
-    <nav className="bg-[#011627] text-white p-4 flex justify-between items-center shadow-2xl">
+    <nav className="bg-usertrucker text-white p-4 flex justify-between items-center shadow-2xl">
       <div className="flex items-center">
         <button onClick={toggleSidebar} className="text-3xl ml-1">
           <FaBars />
@@ -38,8 +38,6 @@ const TruckerNavbar = ({ toggleSidebar, isSidebarOpen }) => {
         <img src={logo} alt="Logo" className="h-10 ml-10" />
       </div>
       <div className="flex items-center">
-      <p className='ml-[0.8rem] mr-2 text-[1.1em] xs:max-sm:text-[1em] xs:max-sm:ml-[0.7em] xl:max-2xl:text-[0.9em] text-[#21a2da] font-medium'>{username}</p>
-        
         <div className="mr-6">
           <FaUserCircle className="text-2xl cursor-pointer" />
         </div>

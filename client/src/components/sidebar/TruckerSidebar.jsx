@@ -15,24 +15,24 @@ const TruckerSide = ({ isSidebarOpen, toggleSidebar }) => {
   };
 
   return (
-    <div className={`h-screen fixed bg-[#011627] text-[#6488a5] text-[1.2em] font-semibold p-4 flex flex-col items-start ${isSidebarOpen ? 'w-60' : 'w-16'} transition-all duration-300 ease-in-out`}>
-      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckerdash' ? 'bg-gray-700 text-[#21a1da] p-2 rounded' : ''}`} onClick={() => handleNavigation('/trucker/truckerdash')}>
+    <div className={`h-screen fixed bg-usertrucker text-[#B1B1B1] text-[1.2em] font-semibold p-4 flex flex-col items-start ${isSidebarOpen ? 'w-60' : 'w-16'} transition-all duration-300 ease-in-out`}>
+      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckerdash' ? ' text-primarycolor rounded' : ''}`} onClick={() => handleNavigation('/trucker/truckerdash')}>
         <BiSolidDashboard className={`mr-2`} />
         {isSidebarOpen && 'Dashboard'}
       </div>
-      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckerbookings' ? 'bg-gray-700 text-[#21a1da] p-2 rounded' : ''}`} onClick={() => handleNavigation('/trucker/truckerbookings')}>
+      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckerbookings' ? ' text-primarycolor rounded' : ''}`} onClick={() => handleNavigation('/trucker/truckerbookings')}>
         <FaBook className={`mr-2`} />
         {isSidebarOpen && 'Bookings'}
       </div>
-      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckerassets' ? 'bg-gray-700 text-[#21a1da] p-2 rounded' : ''}`} onClick={() => handleNavigation('/trucker/truckerassets')}>
+      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckerassets' ? ' text-primarycolor rounded' : ''}`} onClick={() => handleNavigation('/trucker/truckerassets')}>
         <FaTruck className={`mr-2`} />
         {isSidebarOpen && 'Assets'}
       </div>
-      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckerpayments' ? 'bg-gray-700 text-[#21a1da] p-2 rounded' : ''}`} onClick={() => handleNavigation('/trucker/truckerpayments')}>
+      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckerpayments' ? ' text-primarycolor rounded' : ''}`} onClick={() => handleNavigation('/trucker/truckerpayments')}>
         <FaDollarSign className={`mr-2`} />
         {isSidebarOpen && 'Payments'}
       </div>
-      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckersettings' ? 'bg-gray-700 text-[#21a1da] p-2 rounded' : ''}`} onClick={() => handleNavigation('/trucker/truckersettings')}>
+      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckersettings' ? ' text-primarycolor rounded' : ''}`} onClick={() => handleNavigation('/trucker/truckersettings')}>
         <FaUser className={`mr-2`} />
         {isSidebarOpen && 'Account Settings'}
       </div>
