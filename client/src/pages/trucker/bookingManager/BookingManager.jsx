@@ -42,7 +42,9 @@ const BookingManager = () => {
     const prevButtonDisabled = currentPage <= 1;
 
     // Add New Booking - Stub for demonstration (You might open a modal or navigate to a form)
-    const addNewBooking = () => alert("Add New Booking clicked!");
+    const handleNewBooking = () => {
+        navigate('/trucker/truckerbookings/bookingform');
+    }
 
     const handleViewDetails = (bookingId) => {
         localStorage.setItem('selectedBookingId', bookingId);
@@ -82,7 +84,7 @@ const BookingManager = () => {
                 </div>
 
                 <div>
-                    <button onClick={addNewBooking} className="btn btn-sm px-4 py-2 rounded-md bg-usertrucker text-white hover:bg-primarycolor hover:text-usertrucker btn-primary">Add New Booking</button>
+                    <button onClick={handleNewBooking} className="btn btn-sm px-4 py-2 rounded-md bg-usertrucker text-white hover:bg-primarycolor hover:text-usertrucker btn-primary">Add New Booking</button>
                 </div>
 
             </div>
