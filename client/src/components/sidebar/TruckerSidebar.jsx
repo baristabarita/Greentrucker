@@ -20,7 +20,7 @@ const TruckerSide = ({ isSidebarOpen, toggleSidebar }) => {
         <BiSolidDashboard className={`mr-2`} />
         {isSidebarOpen && 'Dashboard'}
       </div>
-      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckerbookings' || location.pathname === '/trucker/truckerbookings/booking' ? ' text-primarycolor rounded' : ''}`} onClick={() => handleNavigation('/trucker/truckerbookings')}>
+      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckerbookings' || location.pathname === '/trucker/truckerbookings/booking' || location.pathname === '/trucker/truckerbookings/bookingform'  ? ' text-primarycolor rounded' : ''}`} onClick={() => handleNavigation('/trucker/truckerbookings')}>
         <FaBook className={`mr-2`} />
         {isSidebarOpen && 'Bookings'}
       </div>

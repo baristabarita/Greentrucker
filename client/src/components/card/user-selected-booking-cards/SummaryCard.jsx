@@ -50,7 +50,7 @@ const SummaryCard = ({ bookingDetails, onOpenDocumentModal }) => {
                         <p className="font-bold text-[1em] mr-2">Pullout Documents:</p>
                         <button
                             className="flex itmes-center font-bold text-[0.8em] bg-usertrucker hover:bg-primarycolor text-white px-2 py-1 rounded"
-                            onClick={() => openDocumentModal(pulloutDocUrl)}
+                            onClick={() => onOpenDocumentModal(pulloutDocUrl)}
                         >
                             <FaEye className="mr-1 mt-1" />
                             View Document
