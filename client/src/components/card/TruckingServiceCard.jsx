@@ -21,7 +21,7 @@ const TruckingServiceCard = ({ trucker }) => {
     const handleViewMoreClick = () => {
         localStorage.setItem('selectedTrucker', JSON.stringify(trucker));
         // Navigate to the specific trucking service details page
-        navigate('/services/choice/view');
+        navigate('/services/choice');
     };
 
     return (

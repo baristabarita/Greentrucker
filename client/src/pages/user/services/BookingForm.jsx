@@ -57,7 +57,7 @@ const BookingForm = () => {
              <div className="mt-[1em] text-userclient bg-primarycolor">
                 <h3
                     className="ml-[2%] py-[1%] font-bold flex items-center xl:max-2xl:text-[1.2em] xl:max-2xl:py-[0.5%]"
-                    onClick={() => navigate('/services/choice/view')}
+                    onClick={() => navigate('/services/choice')}
                 >
                     <AiOutlineArrowLeft className="text-black mr-[1%] hover:text-white" />
                     Back to Viewing Selected Service
@@ -208,7 +208,7 @@ const BookingForm = () => {
                                 type="button"
                                 className="bg-alert hover:bg-red-600 text-white p-2 rounded ml-4"
                                 onClick={() => {
-                                    navigate("/services/choice/view");
+                                    navigate("/services/choice");
                                 }}
                             >
                                 Cancel <FaTimes className="inline ml-2" />

@@ -155,7 +155,7 @@ const UserBookings = () => {
         localStorage.setItem('currentBooking', JSON.stringify(bookingData));
         
         // Navigate to the booking details page
-        navigate(`/userbookings/booking/view`);
+        navigate(`/userbookings/booking`);
     };
 
     return (

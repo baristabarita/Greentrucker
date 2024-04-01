@@ -23,6 +23,8 @@ import UserBookingDetailsPage from './pages/user/bookings/UserBookingDetails.jsx
 import TruckerLayout from './components/layout/TruckerLayout.jsx'
 import TruckerDashboard from './pages/trucker/dashboard/Dashboard.jsx'
 import BookingsPage from './pages/trucker/bookingManager/BookingManager.jsx'
+import NewBookingForm from './pages/trucker/bookingManager/NewBookingForm.jsx'
+import SelectedBooking from './pages/trucker/bookingManager/SelectedBooking.jsx'
 import AssetsPage from './pages/trucker/assetManager/AssetManager.jsx'
 import PaymentsPage from './pages/trucker/paymentManager/PaymentsManager.jsx'
 import TruckerSettings from './pages/trucker/settings/TruckerSettings.jsx'
@@ -33,6 +35,7 @@ import AccountsLogsPage from './pages/admin/accountlogs/AdminAccountsLogs.jsx'
 import AdminVerificationPage from './pages/admin/verification/AdminVerification.jsx'
 import AdminBookingLogsPage from './pages/admin/bookinglogs/AdminBookingLogs.jsx'
 import AdminSettings from './pages/admin/settings/AdminSettings.jsx'
+
 
 function App() {
   return (
@@ -51,21 +54,22 @@ function App() {
           <Route index element={<LandingPage />} />
           <Route path="/userprofile" element={<ProfilePage />} />
           <Route path="/services" element={<ServiceChoicesPage />} />
-          <Route path="/services/choice/view" element={<SelectedServicePage />} />
+          <Route path="/services/choice" element={<SelectedServicePage />} />
           <Route path="/services/choice/book" element={<BookingFormPage />} />
           <Route path="/services/choice/book/confirm" element={<BookingConfirmPage />} />
           <Route path="/userbookings" element={<UserBookingsPage />} />
-          <Route path="/userbookings/booking/view" element={<UserBookingDetailsPage />} />
+          <Route path="/userbookings/booking" element={<UserBookingDetailsPage />} />
         </Route>
         
         <Route path="/trucker" element={<TruckerLayout />}>
           <Route index path="truckerdash" element={<TruckerDashboard />} />
           <Route path="truckerbookings" element={<BookingsPage />} />
+          <Route path="truckerbookings/bookingform" element={<NewBookingForm />} />
+          <Route path="truckerbookings/booking" element={<SelectedBooking />} />
           <Route path="truckerassets" element={<AssetsPage />} />
           <Route path="truckerpayments" element={<PaymentsPage />} />
           <Route path="truckersettings" element={<TruckerSettings />} />
         </Route>
-
       </Routes>
     </BrowserRouter>
   )
