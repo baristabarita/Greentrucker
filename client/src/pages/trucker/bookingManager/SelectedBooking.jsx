@@ -85,15 +85,21 @@ const SelectedBooking = () => {
     // Display the selected booking details
     return (
         <div className="animate-fade-in p-5">
-            <div className="text-userclient mb-4">
+
+            <div className="flex justify-between mb-4">
                 <h3
-                    className="cursor-pointer py-[1%] font-bold flex items-center xl:max-2xl:text-[1.2em] xl:max-2xl:py-[0.5%]"
+                    className="text-userclient cursor-pointer py-[1%] font-bold flex items-center xl:max-2xl:text-[1.2em] xl:max-2xl:py-[0.5%]"
                     onClick={() => navigate('/trucker/truckerbookings')}
                 >
-                    <AiOutlineArrowLeft className="text-black mr-[1%] hover:text-primarycolor" />
+                    <AiOutlineArrowLeft className="text-black hover:text-primarycolor" />
                     Back to Bookings List
                 </h3>
+                <div>
+                    <button className="mb-2 mr-2 px-4 py-2 bg-alert text-white hover:bg-red-500  rounded-lg font-bold">Delete Booking</button>
+                    <button className="mb-2 px-4 py-2 bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient  rounded-lg font-bold">Edit Booking</button>
+                </div>
             </div>
+
             <MainDetailsCard booking={booking} />
             <div className="flex flex-col md:flex-row md:space-x-4 mt-5">
                 {/* First Column: Container and Item details */}
