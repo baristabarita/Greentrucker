@@ -9,7 +9,7 @@ const LineChart = ({ data }) => {
   return (
     <ResponsiveLine
       data={data}
-      margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+      margin={{ top: 50, right: 110, bottom: 50, left: 70 }}
       xScale={{ type: 'time', format: '%Y-%m-%d', precision: 'day' }}
       xFormat="time:%Y-%m-%d"
       yScale={{ type: 'linear', min: 0, max: 'auto', stacked: true, reverse: false }}
@@ -24,7 +24,7 @@ const LineChart = ({ data }) => {
         legendOffset: 36,
         legendPosition: 'middle',
         format: '%b %d',
-        tickValues: 'every 2 days',
+        tickValues: 'every 1 days',
       }}
       axisLeft={{
         orient: 'left',
@@ -37,7 +37,7 @@ const LineChart = ({ data }) => {
         // Adjust the number of ticks based on the data's range
         tickValues: 5,
       }}
-      colors={"#0000FF"}
+      colors={"#132A13"}
       pointSize={10}
       pointColor={{ theme: 'background' }}
       pointBorderWidth={2}
