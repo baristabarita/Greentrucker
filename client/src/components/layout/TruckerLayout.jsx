@@ -15,7 +15,8 @@ const TruckerLayout = () => {
             <div className='flex flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 transition-all duration-300 ease-in-out'>
                 <TruckerSide isSidebarOpen={isSidebarOpen} />
                 <div
-                    className={`font-roboto flex-1 transition-all duration-300 ease-in-out ${isSidebarOpen ? 'ml-[20%] mr-0 w-[80%]' : 'ml-[5%] mr-0 w-full'} `}
+                    className={`flex-1 transition-all duration-300 ease-in-out font-roboto ${isSidebarOpen ? 'ml-[20%] mr-[4%] w-[76%]' : 'ml-[7%] mr-[4%] w-[81%]'
+                        }`}
                 >
                     <Outlet />
                 </div>
