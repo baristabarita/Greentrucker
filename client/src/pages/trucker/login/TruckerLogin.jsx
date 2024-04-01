@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiX, FiEye, FiEyeOff } from "react-icons/fi";
+import useAuth from "../../../util/userAuthentication.jsx";
 import Footer from '../../../components/footer/Footer.jsx';
 import background from '../../../assets/images/bgimg1.png';
 import leftboximg from '../../../assets/images/medium-shot-man-wearing-helmet.png';
 import logo from '../../../assets/icons/greentrucker-logo.png';
 
 const TruckerLogin = () => {
+    const { login } = useAuth();
     const navigate = useNavigate();
     const [emailAdd, setEmailAdd] = useState("");
     const [password, setPassword] = useState("");
@@ -23,8 +25,10 @@ const TruckerLogin = () => {
     };
 
     const handleLogin = () => {
-        navigate("/");
-    };
+        // Assuming successful login for regular user
+        login('trucker');
+        navigate("/trucker/truckerdash");
+      };
 
     const handleEmailChange = (e) => {
         setEmailAdd(e.target.value);
