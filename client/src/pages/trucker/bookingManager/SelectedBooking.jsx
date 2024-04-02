@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { initialBookings } from "./sampleBookingsData";
-import MainDetailsCard from "../../../components/card/trucker-selected-booking-cards/MainDetailsCard";
-import MiscDetailsCard from "../../../components/card/trucker-selected-booking-cards/MiscDetailsCard";
-import AssignedAssetDetailsCard from "../../../components/card/trucker-selected-booking-cards/AssignedAssetDetailsCard";
-import ViewDocumentModal from "../../../components/modals/ViewDocumentModal";
+import { initialBookings } from "@/util/data/sampleBookingsData";
+import MainDetailsCard from "@/components/card/trucker-selected-booking-cards/MainDetailsCard";
+import MiscDetailsCard from "@/components/card/trucker-selected-booking-cards/MiscDetailsCard";
+import AssignedAssetDetailsCard from "@/components/card/trucker-selected-booking-cards/AssignedAssetDetailsCard";
+import ViewDocumentModal from "@/components/modals/ViewDocumentModal";
+import CustomAlertModal from "@/components/modals/CustomAlertModal";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { FaEye } from 'react-icons/fa'
-import sampledocument from "../../../assets/images/sample-document.jpg"
+import sampledocument from "@/assets/images/sample-document.jpg"
 
 
 const SelectedBooking = () => {
@@ -80,9 +81,15 @@ const SelectedBooking = () => {
         setDocumentUrl(url);
         setIsOpen(true);
     };
-
     const handleCloseModal = () => setIsOpen(false);
-    // Display the selected booking details
+    
+    const handleShowAlertModal = () => {
+        setShowAlertModal(true);
+    };
+    const handleCloseAlertModal = () => {
+        setShowAlertModal(false);
+    };
+
     return (
         <div className="animate-fade-in p-5">
 
@@ -95,7 +102,8 @@ const SelectedBooking = () => {
                     Back to Bookings List
                 </h3>
                 <div>
-                    <button className="mb-2 mr-2 px-4 py-2 bg-alert text-white hover:bg-red-500  rounded-lg font-bold">Delete Booking</button>
+                    <button className="mb-2 mr-2 px-4 py-2 bg-alert text-white hover:bg-red-500  rounded-lg font-bold"
+                    onClick={handleShowAlertModal}>Delete Booking</button>
                     <button className="mb-2 px-4 py-2 bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient  rounded-lg font-bold">Edit Booking</button>
                 </div>
             </div>
@@ -146,6 +154,16 @@ const SelectedBooking = () => {
                 isOpen={isOpen}
                 documentUrl={documentUrl}
                 onClose={handleCloseModal}
+            />
+            <CustomAlertModal
+                isOpen={showAlertModal}
+                onClose={handleCloseAlertModal}
+                title="Delete Selected Booking"
+                description="Are you sure you want to delete booking? This action cannot be undone."
+                buttonOneText="Cancel"
+                buttonOneOnClick={handleCloseAlertModal}
+                buttonTwoText="Delete"
+                buttonTwoOnClick={()=> {navigate("/trucker/truckerbookings")}}
             />
         </div>
     );

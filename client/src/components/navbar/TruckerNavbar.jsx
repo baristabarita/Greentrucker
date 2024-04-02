@@ -32,7 +32,7 @@ const TruckerNavbar = ({ toggleSidebar, isSidebarOpen }) => {
   return (
     <nav className="bg-usertrucker text-white p-4 flex justify-between items-center shadow-2xl">
       <div className="flex items-center">
-        <button onClick={toggleSidebar} className="text-3xl ml-1">
+        <button onClick={toggleSidebar} className="text-3xl ml-1 hover:text-primarycolor">
           <FaBars />
         </button>
         <img src={logo} alt="Logo" className="h-10 ml-10" />

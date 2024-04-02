@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const useAuth = () => {
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState('');
 
@@ -23,6 +25,7 @@ const useAuth = () => {
     localStorage.removeItem('userType');
     setIsLoggedIn(false);
     setUserType('');
+    navigate("/");
   };
 
   return { isLoggedIn, userType, login, logout };

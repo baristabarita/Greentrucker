@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Security = () => {
     const [passwords, setPasswords] = useState({
-        currentPassword: '',
+        currentPassword: 'Password123',
         newPassword: '',
         confirmNewPassword: '',
     });

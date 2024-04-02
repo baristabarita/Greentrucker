@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiSolidBookBookmark } from "react-icons/bi";
-import { initialBookings } from "./sampleBookingsData";
+import { initialBookings } from "@/util/data/sampleBookingsData";
 
 const BookingManager = () => {
     
