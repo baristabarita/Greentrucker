@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { truckerAssets } from "@/util/data/sampleAssetsData";
 import AddNewAssetModal from "@/components/modals/trucker/AddNewAssetModal";
+import EditAssetModal from "@/components/modals/trucker/EditAssetModal";
+import CustomAlertModal from "@/components/modals/CustomAlertModal";
 import { BiSolidTruck, BiSolidAddToQueue } from "react-icons/bi";
 
 
@@ -11,6 +13,9 @@ const AssetManager = () => {
     const [truckPage, setTruckPage] = useState(0);
     const [trailerPage, setTrailerPage] = useState(0);
     const [isNewAssetModalOpen, setIsNewAssetModalOpen] = useState(false);
+    const [editAsset, setEditAsset] = useState(null); // Initially, no asset is selected for editing
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [showAlertModal, setShowAlertModal] = useState(false);
     const rowsPerPage = 3;
     const filteredTruckAssets = truckerAssets.filter(asset => asset.asset_type === 'Truck');
     const filteredTrailerAssets = truckerAssets.filter(asset => asset.asset_type === 'Trailer');
@@ -55,15 +60,31 @@ const AssetManager = () => {
             </div>
         </div>
     );
-    
+
     const handleOpenNewAssetModal = () => setIsNewAssetModalOpen(true);
     const handleCloseNewAssetModal = () => setIsNewAssetModalOpen(false);
-    
+
     // Function to handle adding a new asset
     const handleAddAsset = (assetType, assetDetails) => {
         // Here you would add logic to process the new asset data,
         // such as updating state or sending it to a server.
         console.log(assetType, assetDetails);
+    };
+    const handleEditAsset = (asset) => {
+        setEditAsset(asset); // Set the currently selected asset for editing
+        setIsEditModalOpen(true); // Open the modal
+    };
+
+    const handleCloseEditModal = () => {
+        setIsEditModalOpen(false);
+        setEditAsset(null); // Reset the edit asset state
+    };
+
+    const handleShowAlertModal = () => {
+        setShowAlertModal(true);
+    };
+    const handleCloseAlertModal = () => {
+        setShowAlertModal(false);
     };
 
     return (
@@ -113,11 +134,11 @@ const AssetManager = () => {
                                     </p></td>
                                     <td className="py-4 px-6 flex justify-center items-center">
                                         <button className="font-bold px-4 py-1 rounded-lg bg-secondarycolor text-userclient hover:bg-primarycolor hover:underline mr-2"
-
+                                            onClick={() => handleEditAsset(asset)}
                                         >Edit Details
                                         </button>
                                         <button className="font-bold px-4 py-1 rounded-lg bg-alert text-white hover:bg-red-500 hover:underline mr-2"
-
+                                            onClick={handleShowAlertModal}
                                         >Delete Asset
                                         </button>
                                     </td>
@@ -167,11 +188,11 @@ const AssetManager = () => {
                                     </p></td>
                                     <td className="py-4 px-6 flex justify-center items-center">
                                         <button className="font-bold px-4 py-1 rounded-lg bg-secondarycolor text-userclient hover:bg-primarycolor hover:underline mr-2"
-
+                                            onClick={() => handleEditAsset(asset)}
                                         >Edit Details
                                         </button>
                                         <button className="font-bold px-4 py-1 rounded-lg bg-alert text-white hover:bg-red-500 hover:underline mr-2"
-
+                                            onClick={handleShowAlertModal}
                                         >Delete Asset
                                         </button>
                                     </td>
@@ -189,6 +210,26 @@ const AssetManager = () => {
                 isOpen={isNewAssetModalOpen}
                 onClose={handleCloseNewAssetModal}
                 onAddAsset={handleAddAsset}
+            />
+            <EditAssetModal
+                isOpen={isEditModalOpen}
+                onClose={handleCloseEditModal}
+                onSave={(assetId, assetDetails) => {
+                    // Implement saving logic here
+                    console.log(assetId, assetDetails); // Example implementation
+                    handleCloseEditModal();
+                }}
+                asset={editAsset}
+            />
+            <CustomAlertModal
+                isOpen={showAlertModal}
+                onClose={handleCloseAlertModal}
+                title="Delete Selected Asset"
+                description="Are you sure you want to delete Asset? This action cannot be undone."
+                buttonOneText="Cancel"
+                buttonOneOnClick={handleCloseAlertModal}
+                buttonTwoText="Delete"
+                buttonTwoOnClick={() => { navigate("/trucker/truckerassets") }}
             />
         </div>
     );
