@@ -72,13 +72,13 @@ const AssignAssetModal = ({ isOpen, onClose, assignedAssets, sampleAssetsData, o
         <div className="flex justify-between mt-4">
           <button
             onClick={onClose}
-            className="font-roboto button text-usertrucker p-[0.7em] w-[45%] rounded-full border-solid border-2 border-usertrucker font-bold hover:bg-usertrucker hover:text-primarycolor transition-colors delay-250 duration-[3000] ease-in"
+            className="font-roboto button text-usertrucker p-[0.7em] w-[45%] rounded-lg border-solid border-2 border-gray-300 font-bold hover:bg-usertrucker hover:text-primarycolor transition-colors delay-250 duration-[3000] ease-in"
           >
             Cancel
           </button>
           <button
             onClick={onClose}
-            className="button bg-usertrucker text-white p-[0.5em] w-[45%] rounded-full hover:bg-secondarycolor hover:text-usertrucker font-bold transition-colors delay-250 duration-[3000] ease-in"
+            className="button bg-primarycolor text-white p-[0.5em] w-[45%] rounded-lg hover:bg-secondarycolor hover:text-usertrucker font-bold transition-colors delay-250 duration-[3000] ease-in"
           >
             Confirm
           </button>

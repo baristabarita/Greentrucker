@@ -7,7 +7,8 @@ import MiscDetailsCard from "@/components/card/trucker-selected-booking-cards/Mi
 import AssignedAssetDetailsCard from "@/components/card/trucker-selected-booking-cards/AssignedAssetDetailsCard";
 import ViewDocumentModal from "@/components/modals/ViewDocumentModal";
 import CustomAlertModal from "@/components/modals/CustomAlertModal";
-import AssignAssetModal from "@/components/modals/AssignAssetModal";
+import AssignAssetModal from "@/components/modals/trucker/AssignAssetModal";
+import EditBookingModal from "@/components/modals/trucker/EditBookingModal";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { FaEye } from 'react-icons/fa'
 import sampledocument from "@/assets/images/sample-document.jpg"
@@ -21,6 +22,7 @@ const SelectedBooking = () => {
     const [documentUrl, setDocumentUrl] = useState('');
     const [isAssetModalOpen, setIsAssetModalOpen] = useState(false);
     const [assignedAssets, setAssignedAssets] = useState([]);
+    const [showEditModal, setShowEditModal] = useState(false);
     const pulloutDocUrl = sampledocument; // Placeholder for pullout document URL
     const eirDocUrl = sampledocument; // Placeholder for EIR document URL
 
@@ -39,7 +41,7 @@ const SelectedBooking = () => {
     if (!booking) {
         return <div>Loading booking details...</div>;
     }
-    
+
     const renderBookingDocuments = () => {
         if (booking.status === "Completed") {
             return (
@@ -101,7 +103,7 @@ const SelectedBooking = () => {
     const handleShowAssetModal = () => setIsAssetModalOpen(true);
     const handleCloseAssetModal = () => setIsAssetModalOpen(false);
 
-   
+
 
     const handleAddAsset = (selectedAssetIndex) => {
         const newAsset = truckerAssets[selectedAssetIndex]; // Assuming truckerAssets is your sample assets data array
@@ -111,6 +113,9 @@ const SelectedBooking = () => {
     const handleRemoveAsset = (indexToRemove) => {
         setAssignedAssets(currentAssets => currentAssets.filter((_, index) => index !== indexToRemove));
     };
+
+    const handleShowEditModal = () => setShowEditModal(true);
+    const handleCloseEditModal = () => setShowEditModal(false);
 
     return (
         <div className="animate-fade-in p-5">
@@ -126,7 +131,8 @@ const SelectedBooking = () => {
                 <div>
                     <button className="mb-2 mr-2 px-4 py-2 bg-alert text-white hover:bg-red-500  rounded-lg font-bold"
                         onClick={handleShowAlertModal}>Delete Booking</button>
-                    <button className="mb-2 px-4 py-2 bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient  rounded-lg font-bold">Edit Booking</button>
+                    <button className="mb-2 px-4 py-2 bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient  rounded-lg font-bold"
+                    onClick={handleShowEditModal}>Edit Booking</button>
                 </div>
             </div>
 
@@ -196,7 +202,13 @@ const SelectedBooking = () => {
                 onAddAsset={handleAddAsset}
                 onRemoveAsset={handleRemoveAsset}
             />
-
+            <EditBookingModal
+                isOpen={showEditModal}
+                onClose={handleCloseEditModal}
+                onSave={handleCloseEditModal}
+                initialStatus={booking.status}
+                initialDate={booking.est_finish_date}
+            />
         </div>
     );
 };

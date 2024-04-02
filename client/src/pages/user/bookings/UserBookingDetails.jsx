@@ -5,7 +5,7 @@ import SummaryCard from "@/components/card/user-selected-booking-cards/SummaryCa
 import LoadingDetails from "@/components/loaders/LoadingDetails";
 import ViewDocumentModal from "@/components/modals/ViewDocumentModal";
 import CustomAlertModal from "@/components/modals/CustomAlertModal";
-import CustomRatingModal from "@/components/modals/CustomRatingModal";
+import CustomRatingModal from "@/components/modals/user/CustomRatingModal";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import backgroundimg from '@/assets/images/bgimg1.png';
 
