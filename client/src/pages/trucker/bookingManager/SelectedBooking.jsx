@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { initialBookings } from "@/util/data/sampleBookingsData";
+import { truckerAssets } from "@/util/data/sampleAssetsData"
 import MainDetailsCard from "@/components/card/trucker-selected-booking-cards/MainDetailsCard";
 import MiscDetailsCard from "@/components/card/trucker-selected-booking-cards/MiscDetailsCard";
 import AssignedAssetDetailsCard from "@/components/card/trucker-selected-booking-cards/AssignedAssetDetailsCard";
 import ViewDocumentModal from "@/components/modals/ViewDocumentModal";
 import CustomAlertModal from "@/components/modals/CustomAlertModal";
+import AssignAssetModal from "@/components/modals/AssignAssetModal";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { FaEye } from 'react-icons/fa'
 import sampledocument from "@/assets/images/sample-document.jpg"
@@ -17,6 +19,8 @@ const SelectedBooking = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [showAlertModal, setShowAlertModal] = useState(false);
     const [documentUrl, setDocumentUrl] = useState('');
+    const [isAssetModalOpen, setIsAssetModalOpen] = useState(false);
+    const [assignedAssets, setAssignedAssets] = useState([]);
     const pulloutDocUrl = sampledocument; // Placeholder for pullout document URL
     const eirDocUrl = sampledocument; // Placeholder for EIR document URL
 
@@ -27,11 +31,15 @@ const SelectedBooking = () => {
             setBooking(selectedBooking);
         }
     }, []);
-
+    useEffect(() => {
+        if (booking && booking.assignedAssetDetails) {
+            setAssignedAssets(booking.assignedAssetDetails);
+        }
+    }, [booking]);
     if (!booking) {
         return <div>Loading booking details...</div>;
     }
-
+    
     const renderBookingDocuments = () => {
         if (booking.status === "Completed") {
             return (
@@ -82,12 +90,26 @@ const SelectedBooking = () => {
         setIsOpen(true);
     };
     const handleCloseModal = () => setIsOpen(false);
-    
+
     const handleShowAlertModal = () => {
         setShowAlertModal(true);
     };
     const handleCloseAlertModal = () => {
         setShowAlertModal(false);
+    };
+
+    const handleShowAssetModal = () => setIsAssetModalOpen(true);
+    const handleCloseAssetModal = () => setIsAssetModalOpen(false);
+
+   
+
+    const handleAddAsset = (selectedAssetIndex) => {
+        const newAsset = truckerAssets[selectedAssetIndex]; // Assuming truckerAssets is your sample assets data array
+        setAssignedAssets(prev => [...prev, newAsset]);
+    };
+
+    const handleRemoveAsset = (indexToRemove) => {
+        setAssignedAssets(currentAssets => currentAssets.filter((_, index) => index !== indexToRemove));
     };
 
     return (
@@ -103,7 +125,7 @@ const SelectedBooking = () => {
                 </h3>
                 <div>
                     <button className="mb-2 mr-2 px-4 py-2 bg-alert text-white hover:bg-red-500  rounded-lg font-bold"
-                    onClick={handleShowAlertModal}>Delete Booking</button>
+                        onClick={handleShowAlertModal}>Delete Booking</button>
                     <button className="mb-2 px-4 py-2 bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient  rounded-lg font-bold">Edit Booking</button>
                 </div>
             </div>
@@ -139,7 +161,8 @@ const SelectedBooking = () => {
                 <div className="flex-1 mt-5 md:mt-0">
                     <div className="flex justify-between">
                         <h2 className="text-xl font-bold mb-4">Assigned Assets</h2>
-                        <button className="mb-2 px-4 py-2 bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient  rounded-lg font-bold">Set Assets</button>
+                        <button className="mb-2 px-4 py-2 bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient  rounded-lg font-bold"
+                            onClick={handleShowAssetModal}>Set Assets</button>
                     </div>
                     {booking.assignedAssetDetails && booking.assignedAssetDetails.length > 0 ? (
                         booking.assignedAssetDetails.map((asset, index) => (
@@ -163,8 +186,17 @@ const SelectedBooking = () => {
                 buttonOneText="Cancel"
                 buttonOneOnClick={handleCloseAlertModal}
                 buttonTwoText="Delete"
-                buttonTwoOnClick={()=> {navigate("/trucker/truckerbookings")}}
+                buttonTwoOnClick={() => { navigate("/trucker/truckerbookings") }}
             />
+            <AssignAssetModal
+                isOpen={isAssetModalOpen}
+                onClose={handleCloseAssetModal}
+                assignedAssets={assignedAssets}
+                sampleAssetsData={truckerAssets} // Assuming this is your array of sample assets
+                onAddAsset={handleAddAsset}
+                onRemoveAsset={handleRemoveAsset}
+            />
+
         </div>
     );
 };
