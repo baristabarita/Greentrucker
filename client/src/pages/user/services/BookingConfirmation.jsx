@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import CustomConfirmationModal from "../../../components/modals/CustomConfirmationModal.jsx";
+import CustomConfirmationModal from "@/components/modals/CustomConfirmationModal.jsx";
 import { FaUser, FaPhone, FaEnvelope, FaMapMarker, FaCheck, FaTimes } from "react-icons/fa";
 import Rating from "@mui/material/Rating";
-import backgroundimg from '../../../assets/images/bgimg1.png';
+import backgroundimg from '@/assets/images/bgimg1.png';
 
 const BookingConfirmation = () => {
     const navigate = useNavigate();

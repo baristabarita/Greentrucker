@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../../util/userAuthentication";
-import UserBookingCard from '../../../components/card/UserBookingCard';
-import backgroundimg from '../../../assets/images/bgimg1.png';
+import useAuth from "@/util/userAuthentication";
+import UserBookingCard from '@/components/card/UserBookingCard';
+import backgroundimg from '@/assets/images/bgimg1.png';
 
 
 const UserBookings = () => {

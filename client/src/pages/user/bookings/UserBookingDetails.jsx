@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TrackingDetailsCard from "../../../components/card/user-selected-booking-cards/TrackingDetailsCard";
-import SummaryCard from "../../../components/card/user-selected-booking-cards/SummaryCard";
-import LoadingDetails from "../../../components/loaders/LoadingDetails";
-import ViewDocumentModal from "../../../components/modals/ViewDocumentModal";
-import CustomAlertModal from "../../../components/modals/CustomAlertModal";
-import CustomRatingModal from "../../../components/modals/CustomRatingModal";
+import TrackingDetailsCard from "@/components/card/user-selected-booking-cards/TrackingDetailsCard";
+import SummaryCard from "@/components/card/user-selected-booking-cards/SummaryCard";
+import LoadingDetails from "@/components/loaders/LoadingDetails";
+import ViewDocumentModal from "@/components/modals/ViewDocumentModal";
+import CustomAlertModal from "@/components/modals/CustomAlertModal";
+import CustomRatingModal from "@/components/modals/CustomRatingModal";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import backgroundimg from '../../../assets/images/bgimg1.png';
+import backgroundimg from '@/assets/images/bgimg1.png';
 
 const UserBookingDetails = () => {
     const navigate = useNavigate();

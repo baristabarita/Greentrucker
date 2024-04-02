@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import defaultimage from '../../../assets/images/defaultpfp.jpg';
+import defaultimage from '@/assets/images/defaultpfp.jpg';
 
 const EditProfile = () => {
     const [userDetails, setUserDetails] = useState({

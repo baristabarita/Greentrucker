@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaEye } from 'react-icons/fa'
-import sampledocument from "../../../assets/images/sample-document.jpg"
+import sampledocument from "@/assets/images/sample-document.jpg"
 
 const SummaryCard = ({ bookingDetails, onOpenDocumentModal }) => {
 

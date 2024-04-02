@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LineChart from "../../../components/charts/trucker/LineChart";
+import LineChart from "@/components/charts/trucker/LineChart";
 import { BiSolidDashboard } from "react-icons/bi";
 import { BsFillCalendar2EventFill } from "react-icons/bs"
 import { MdPayments, MdPendingActions } from "react-icons/md"

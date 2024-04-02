@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import TruckingServiceCard from '../../../components/card/TruckingServiceCard';
-import LoadingBar from '../../../components/loaders/LoadingBar.jsx';
+import TruckingServiceCard from '@/components/card/TruckingServiceCard';
+import LoadingBar from '@/components/loaders/LoadingBar.jsx';
 import { FaSortAlphaDown, FaSortAlphaUp } from 'react-icons/fa';
-import backgroundimg from '../../../assets/images/bgimg1.png';
-import defaultserviceicon from '../../../assets/icons/transport.png';
+import backgroundimg from '@/assets/images/bgimg1.png';
+import defaultserviceicon from '@/assets/icons/transport.png';
 
 const ServiceChoices = () => {
     const [truckerData, setTruckerData] = useState([]);

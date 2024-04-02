@@ -1,6 +1,6 @@
 import React from "react";
-import truckIcon from "../../../assets/icons/transport.png"; // Adjust path as necessary
-import trailerIcon from "../../../assets/icons/trailer.png"; // Adjust path as necessary
+import truckIcon from "@/assets/icons/transport.png"; // Adjust path as necessary
+import trailerIcon from "@/assets/icons/trailer.png"; // Adjust path as necessary
 
 const AssignedAssetDetailsCard = ({ asset }) => {
     // Determine which icon to use based on asset_type

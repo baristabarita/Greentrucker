@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import { FiX } from "react-icons/fi";
-import backgroundimg from '../../../assets/images/bgimg1.png';
+import backgroundimg from '@/assets/images/bgimg1.png';
 
 const BookingForm = () => {
     const [showPopup, setShowPopup] = useState(false);

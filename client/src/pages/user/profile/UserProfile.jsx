@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EditProfile from "../../../components/settings/usersettings/EditProfile";
-import Security from "../../../components/settings/usersettings/Security";
-import backgroundimg from '../../../assets/images/bgimg1.png';
+import EditProfile from "@/components/settings/usersettings/EditProfile";
+import Security from "@/components/settings/usersettings/Security";
+import backgroundimg from '@/assets/images/bgimg1.png';
 
 
 const UserProfile = () => {

@@ -4,12 +4,12 @@ import Rating from '@mui/material/Rating';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { FaUser, FaPhone, FaEnvelope, FaMapMarker } from 'react-icons/fa';
 import { FiX } from "react-icons/fi";
-import useAuth from '../../../util/userAuthentication.jsx';
-import LoadingBar from '../../../components/loaders/LoadingBar.jsx';
-import TruckingServiceAssetsCard from '../../../components/card/TruckingServiceAssetsCard.jsx';
-import backgroundimg from '../../../assets/images/bgimg1.png';
-import truckicon from '../../../assets/icons/fast-delivery.png';
-import trailericon from '../../../assets/icons/trailer.png';
+import useAuth from '@/util/userAuthentication.jsx';
+import LoadingBar from '@/components/loaders/LoadingBar.jsx';
+import TruckingServiceAssetsCard from '@/components/card/TruckingServiceAssetsCard.jsx';
+import backgroundimg from '@/assets/images/bgimg1.png';
+import truckicon from '@/assets/icons/fast-delivery.png';
+import trailericon from '@/assets/icons/trailer.png';
 
 const SelectedServiceChoice = () => {
     const { isLoggedIn } = useAuth();

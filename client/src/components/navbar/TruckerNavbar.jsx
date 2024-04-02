@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaBars, FaUserCircle } from 'react-icons/fa';
-import logo from '../../assets/images/logo2.png';
+import logo from '@/assets/images/logo2.png';
 
 const TruckerNavbar = ({ toggleSidebar, isSidebarOpen }) => {
   const [username, setUsername] = useState("");

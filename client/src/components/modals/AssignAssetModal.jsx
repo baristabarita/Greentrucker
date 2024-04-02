@@ -77,7 +77,7 @@ const AssignAssetModal = ({ isOpen, onClose, assignedAssets, sampleAssetsData, o
             Cancel
           </button>
           <button
-            onClick={() => { /* confirm logic here */ }}
+            onClick={onClose}
             className="button bg-usertrucker text-white p-[0.5em] w-[45%] rounded-full hover:bg-secondarycolor hover:text-usertrucker font-bold transition-colors delay-250 duration-[3000] ease-in"
           >
             Confirm

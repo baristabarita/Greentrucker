@@ -3,9 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FaUserCog } from "react-icons/fa";
 import { BiSolidBookAlt } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
-import useAuth from '../../util/userAuthentication';
-import logoicon from '../../assets/icons/greentrucker-logo2.png';
-import defaultuser from '../../assets/images/defaultpfp.jpg';
+import useAuth from '@/util/userAuthentication';
+import logoicon from '@/assets/icons/greentrucker-logo2.png';
+import defaultuser from '@/assets/images/defaultpfp.jpg';
 
 const UserNavbar = () => {
     const { isLoggedIn, userType, logout } = useAuth();

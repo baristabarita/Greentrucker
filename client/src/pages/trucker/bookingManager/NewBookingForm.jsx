@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CustomConfirmationModal from "../../../components/modals/CustomConfirmationModal";
+import CustomConfirmationModal from "@/components/modals/CustomConfirmationModal";
 import { FaPlus , FaTimes } from "react-icons/fa";
 import { FiX } from "react-icons/fi";
 

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiX, FiEye, FiEyeOff } from "react-icons/fi";
-import Footer from '../../../components/footer/Footer.jsx';
-import background from '../../../assets/images/bgimg1.png';
-import leftboximg from '../../../assets/images/medium-shot-man-wearing-helmet.png';
-import logo from '../../../assets/icons/greentrucker-logo.png';
+import Footer from '@/components/footer/Footer.jsx';
+import background from '@/assets/images/bgimg1.png';
+import leftboximg from '@/assets/images/medium-shot-man-wearing-helmet.png';
+import logo from '@/assets/icons/greentrucker-logo.png';
 
 
 const UserRegister = () => {

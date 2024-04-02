@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 import { FaEnvelope, FaPhone } from 'react-icons/fa'
-import headerbackgroundimage from '../../../assets/images/landingbannerimg.png'
-import aboutusimg from '../../../assets/images/landingpage-aboutimg.png'
-import feature1 from '../../../assets/icons/project-management.png'
-import feature2 from '../../../assets/icons/booking.png'
-import feature3 from '../../../assets/icons/bar-chart.png'
-import contactusimg from '../../../assets/images/contactus-img.png'
+import headerbackgroundimage from '@/assets/images/landingbannerimg.png'
+import aboutusimg from '@/assets/images/landingpage-aboutimg.png'
+import feature1 from '@/assets/icons/project-management.png'
+import feature2 from '@/assets/icons/booking.png'
+import feature3 from '@/assets/icons/bar-chart.png'
+import contactusimg from '@/assets/images/contactus-img.png'
 
 const LandingPage = () => {
     const featuresData = [
