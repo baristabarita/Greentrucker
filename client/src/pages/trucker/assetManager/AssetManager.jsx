@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { truckerAssets } from "@/util/data/sampleAssetsData";
+import AddNewAssetModal from "@/components/modals/trucker/AddNewAssetModal";
 import { BiSolidTruck, BiSolidAddToQueue } from "react-icons/bi";
 
 
 const AssetManager = () => {
+
     const navigate = useNavigate();
     const [truckPage, setTruckPage] = useState(0);
     const [trailerPage, setTrailerPage] = useState(0);
+    const [isNewAssetModalOpen, setIsNewAssetModalOpen] = useState(false);
     const rowsPerPage = 3;
     const filteredTruckAssets = truckerAssets.filter(asset => asset.asset_type === 'Truck');
     const filteredTrailerAssets = truckerAssets.filter(asset => asset.asset_type === 'Trailer');
@@ -52,6 +55,16 @@ const AssetManager = () => {
             </div>
         </div>
     );
+    
+    const handleOpenNewAssetModal = () => setIsNewAssetModalOpen(true);
+    const handleCloseNewAssetModal = () => setIsNewAssetModalOpen(false);
+    
+    // Function to handle adding a new asset
+    const handleAddAsset = (assetType, assetDetails) => {
+        // Here you would add logic to process the new asset data,
+        // such as updating state or sending it to a server.
+        console.log(assetType, assetDetails);
+    };
 
     return (
         <div className="animate-fade-in p-5">
@@ -59,6 +72,7 @@ const AssetManager = () => {
                 <p className="flex text-[2em]"><BiSolidTruck className="mr-2 mt-1" />Assets Overview</p>
                 <button
                     className="flex ml-auto items-center bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient font-bold px-4 py-3 rounded"
+                    onClick={handleOpenNewAssetModal}
                 >
                     <BiSolidAddToQueue className="mt-[5%] mr-2" /> Add New Asset
                 </button>
@@ -171,6 +185,11 @@ const AssetManager = () => {
             </div>
             {/* Pagination and Showing X of Y bookings */}
             {renderPaginationControls(trailerPage, totalTrailerPages, goToPreviousTrailerPage, goToNextTrailerPage)}
+            <AddNewAssetModal
+                isOpen={isNewAssetModalOpen}
+                onClose={handleCloseNewAssetModal}
+                onAddAsset={handleAddAsset}
+            />
         </div>
     );
 }
