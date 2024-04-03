@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ViewRequestModal from "@/components/modals/admin/ViewRequestModal";
 import { verifyRequests } from "@/util/data/sampleVerificationsData";
 import { BsCheckSquareFill } from "react-icons/bs";
+import defaultImage from '@/assets/images/defaultpfp.jpg';
 
 const AdminVerification = () => {
 
@@ -10,6 +12,8 @@ const AdminVerification = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const requestsPerPage = 10;
     const [filterStatus, setFilterStatus] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedRequest, setSelectedRequest] = useState(null);
 
     const statusOptions = ["All", "Pending", "Verified", "Declined"];
 
@@ -35,8 +39,11 @@ const AdminVerification = () => {
     const prevButtonDisabled = currentPage <= 1;
 
     const handleViewDetails = (requestId) => {
-        alert("deets")
+        const requestDetails = requests.find(request => request.id === requestId);
+        setSelectedRequest(requestDetails);
+        setIsModalOpen(true);
     };
+
     return (
         <div className="animate-fade-in p-5">
             <div className="flex items-center mb-4 text-primarycolor">
@@ -139,6 +146,11 @@ const AdminVerification = () => {
                     </button>
                 </div>
             </div>
+            <ViewRequestModal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+                request={selectedRequest} 
+            />
         </div>
     )
 }
