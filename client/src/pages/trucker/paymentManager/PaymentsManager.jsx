@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PaymentRevenueChart from "@/components/charts/trucker/PaymentRevenueChart";
+import SetChargesModal from "@/components/modals/trucker/SetChargesModal";
 import { paymentsList } from "@/util/data/samplePaymentsData";
 import { MdPayments, MdEditSquare } from "react-icons/md";
 
@@ -11,7 +12,8 @@ const PaymentManager = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [filterDate, setFilterDate] = useState('');
     const [filterStatus, setFilterStatus] = useState('');
-    
+    const [showSetChargesModal, setShowSetChargesModal] = useState(false);
+
     const paymentsGraphData = [
         {
             id: "Graph Data",
@@ -23,7 +25,7 @@ const PaymentManager = () => {
                 { x: "2024-04-04", y: 23000 },
                 { x: "2024-04-11", y: 27000 },
                 { x: "2024-04-18", y: 28000 },
-                
+
             ],
         },
     ];
@@ -57,8 +59,14 @@ const PaymentManager = () => {
     const nextButtonDisabled = currentPage >= totalPages;
     const prevButtonDisabled = currentPage <= 1;
 
-    const handleSetCharges = () => {
-        alert("this sets the charges");
+    const handleSetCharges = (chargesDetails) => {
+        console.log(chargesDetails);
+    }
+    const handleOpenSetCharges = () => {
+        setShowSetChargesModal(true);
+    }
+    const handleCloseSetCharges = () => {
+        setShowSetChargesModal(false);
     }
 
     const handleViewDetails = (paymentId) => {
@@ -72,8 +80,8 @@ const PaymentManager = () => {
                 <MdPayments className="text-3xl mr-2" />
                 <h2 className="text-3xl font-bold">Payments Overview</h2>
             </div>
-             {/* Graph Section */}
-             <section className="container my-5 bg-[white] rounded-md border shadow-lg drop-shadow-lg ">
+            {/* Graph Section */}
+            <section className="container my-5 bg-[white] rounded-md border shadow-lg drop-shadow-lg ">
                 <div className="flex items-center justify-between py-2 px-4 border-b-2 border-gray-300">
                     <h2 className="text-[1.5em] font-bold">Weekly Revenue</h2>
                 </div>
@@ -106,7 +114,7 @@ const PaymentManager = () => {
                     </div>
                 </div>
                 <div>
-                    <button onClick={handleSetCharges} className="btn btn-sm px-4 py-2 rounded-md bg-usertrucker text-white hover:bg-primarycolor hover:text-usertrucker btn-primary">Set Payment Charges</button>
+                    <button onClick={handleOpenSetCharges} className="btn btn-sm px-4 py-2 rounded-md bg-usertrucker text-white hover:bg-primarycolor hover:text-usertrucker btn-primary">Set Payment Charges</button>
                 </div>
 
             </section>
@@ -187,6 +195,11 @@ const PaymentManager = () => {
                     </button>
                 </div>
             </section>
+            <SetChargesModal
+                isOpen={showSetChargesModal}
+                onClose={handleCloseSetCharges}
+                onSetCharges={handleSetCharges}
+            />
         </div>
     )
 }
