@@ -28,7 +28,7 @@ const TruckerSide = ({ isSidebarOpen, toggleSidebar }) => {
         <FaTruck className={`mr-2`} />
         {isSidebarOpen && 'Assets'}
       </div>
-      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckerpayments' ? ' text-primarycolor rounded' : 'hover:text-primarycolor'}`} onClick={() => handleNavigation('/trucker/truckerpayments')}>
+      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/trucker/truckerpayments' || location.pathname === '/trucker/truckerpayments/payment' ? ' text-primarycolor rounded' : 'hover:text-primarycolor'}`} onClick={() => handleNavigation('/trucker/truckerpayments')}>
         <FaDollarSign className={`mr-2`} />
         {isSidebarOpen && 'Payments'}
       </div>

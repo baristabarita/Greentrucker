@@ -27,6 +27,7 @@ import NewBookingForm from './pages/trucker/bookingManager/NewBookingForm.jsx'
 import SelectedBooking from './pages/trucker/bookingManager/SelectedBooking.jsx'
 import AssetsPage from './pages/trucker/assetManager/AssetManager.jsx'
 import PaymentsPage from './pages/trucker/paymentManager/PaymentsManager.jsx'
+import SelectedPayment from './pages/trucker/paymentManager/SelectedPayment.jsx'
 import TruckerSettings from './pages/trucker/settings/TruckerSettings.jsx'
 
 import AdminLayout from './components/layout/AdminLayout.jsx'
@@ -35,6 +36,7 @@ import AccountsLogsPage from './pages/admin/accountlogs/AdminAccountsLogs.jsx'
 import AdminVerificationPage from './pages/admin/verification/AdminVerification.jsx'
 import AdminBookingLogsPage from './pages/admin/bookinglogs/AdminBookingLogs.jsx'
 import AdminSettings from './pages/admin/settings/AdminSettings.jsx'
+
 
 
 function App() {
@@ -68,6 +70,7 @@ function App() {
           <Route path="truckerbookings/booking" element={<SelectedBooking />} />
           <Route path="truckerassets" element={<AssetsPage />} />
           <Route path="truckerpayments" element={<PaymentsPage />} />
+          <Route path="truckerpayments/payment" element={<SelectedPayment />} />
           <Route path="truckersettings" element={<TruckerSettings />} />
         </Route>
       </Routes>
