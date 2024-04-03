@@ -11,6 +11,7 @@ export default {
       secondarycolor: '#FFE492',
       userclient: '#242423',
       usertrucker: '#132A13',
+      useradmin: '#191B25',
       alert: '#BC4749',
       pending: '#FFA756',
       processing: '#6226EF',

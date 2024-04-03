@@ -73,6 +73,15 @@ function App() {
           <Route path="truckerpayments/payment" element={<SelectedPayment />} />
           <Route path="truckersettings" element={<TruckerSettings />} />
         </Route>
+
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index path="admindash" element={<AdminDashboard />} />
+          <Route path = "verifications" element={<AdminVerificationPage />}/>
+          <Route path = "accountlogs" element={<AccountsLogsPage />}/>
+          <Route path = "bookinglogs" element={<AdminBookingLogsPage />}/>
+          <Route path = "adminsettings" element={<AdminSettings />}/>
+          
+        </Route>
       </Routes>
     </BrowserRouter>
   )
