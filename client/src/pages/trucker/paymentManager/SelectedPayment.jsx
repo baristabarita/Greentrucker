@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { paymentsList } from "@/util/data/samplePaymentsData";
 import CustomAlertModal from "@/components/modals/CustomAlertModal";
+import EditPaymentModal from "@/components/modals/trucker/EditPaymentModal";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const SelectedPayment = () => {
@@ -94,7 +95,7 @@ const SelectedPayment = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Charges Column */}
                     <div className="px-20">
-                        
+
                         <div className="flex justify-between mb-2">
                             <span className="font-bold">Service Charge:</span> <span>₱ {payment.service_charge.toFixed(2)}</span>
                         </div>
@@ -120,6 +121,27 @@ const SelectedPayment = () => {
                     </div>
                 </div>
             </div>
+            <EditPaymentModal
+                isOpen={showEditModal}
+                onClose={handleCloseEditModal}
+                onSave={handleCloseEditModal}
+                initialInvoiceDate={payment.invoice_date}
+                initialDueDate={payment.due_date}
+                initialPaymentDate={payment.paid_date}
+                initialPaidAmount={payment.paid_amount}
+                initialStatus={payment.payment_status}
+            />
+
+            <CustomAlertModal
+                isOpen={showAlertModal}
+                onClose={handleCloseAlertModal}
+                title="Delete Selected Payment"
+                description="Are you sure you want to delete this payment? This action cannot be undone."
+                buttonOneText="Cancel"
+                buttonOneOnClick={handleCloseAlertModal}
+                buttonTwoText="Delete"
+                buttonTwoOnClick={() => { navigate("/trucker/truckerpayments") }}
+            />
         </div>
     );
 }
