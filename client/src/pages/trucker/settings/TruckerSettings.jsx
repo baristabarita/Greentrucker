@@ -1,6 +1,7 @@
 import React from 'react';
 import SettingsContainer from '@/components/settings/truckersettings/SettingsContainer'; // Adjust the import path as necessary
 import defaultImage from '@/assets/images/defaultpfp.jpg';
+import { BsFillGearFill } from "react-icons/bs";
 
 const TruckerSettings = () => {
   // Simulated user profile data
@@ -38,15 +39,18 @@ const TruckerSettings = () => {
   };
 
   return (
-    <>
-      <h1 className="text-2xl font-bold my-5">Settings Page</h1>
+    <div className="animate-fade-in p-5">
+      <div className="flex items-center mb-4 text-primarycolor">
+        <BsFillGearFill className="text-3xl mr-2" />
+        <h2 className="text-3xl font-bold"> Account Settings</h2>
+      </div>
       <SettingsContainer
         userProfile={userProfile}
         onSaveProfile={onSaveProfile}
         onSaveSecurity={onSaveSecurity}
         onAccountVerification={onAccountVerification}
       />
-    </>
+    </div>
   );
 }
 
