@@ -35,8 +35,8 @@ import AdminDashboard from './pages/admin/admindashboard/AdminDashboard.jsx'
 import AccountsLogsPage from './pages/admin/accountlogs/AdminAccountsLogs.jsx'
 import AdminVerificationPage from './pages/admin/verification/AdminVerification.jsx'
 import AdminBookingLogsPage from './pages/admin/bookinglogs/AdminBookingLogs.jsx'
+import SelectedBookingLog from './pages/admin/bookinglogs/SelectedBookingLog.jsx'
 import AdminSettings from './pages/admin/settings/AdminSettings.jsx'
-
 
 
 function App() {
@@ -79,6 +79,7 @@ function App() {
           <Route path = "verifications" element={<AdminVerificationPage />}/>
           <Route path = "accountlogs" element={<AccountsLogsPage />}/>
           <Route path = "bookinglogs" element={<AdminBookingLogsPage />}/>
+          <Route path = "bookinglogs/booking" element = {<SelectedBookingLog />} />
           <Route path = "adminsettings" element={<AdminSettings />}/>
           
         </Route>

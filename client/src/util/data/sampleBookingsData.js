@@ -34,7 +34,9 @@ export const initialBookings = [
                 trailer_type: "Enclosed",
                 plate_number: "XYZ789"
             }
-        ]
+        ],
+        visibility: "viewable", 
+        last_updated: "2023-04-02"
     },
     {
         id: 2,
@@ -77,7 +79,9 @@ export const initialBookings = [
                 truck_type: "Electric",
                 plate_number: "GHI789"
             }
-        ]
+        ],
+        visibility: "viewable", 
+        last_updated: "2023-05-02"
     },
     {
         id: 3,
@@ -108,7 +112,9 @@ export const initialBookings = [
                 truck_type: "Cargo",
                 plate_number: "AZR-567J"
             }
-        ]
+        ],
+        visibility: "viewable", 
+        last_updated: "2023-06-11" ,
     },
     {
         id: 4,
@@ -145,7 +151,9 @@ export const initialBookings = [
                 truck_type: "Electric",
                 plate_number: "TES-123E"
             }
-        ]
+        ],
+        visibility: "viewable", 
+        last_updated: "2023-07-23"
     },
     {
         id: 5,
@@ -176,7 +184,9 @@ export const initialBookings = [
                 truck_type: "Flatbed",
                 plate_number: "WI-9876M"
             }
-        ]
+        ],
+        visibility: "viewable", 
+        last_updated: "2023-08-06"
     },
     {
         id: 6,
@@ -214,7 +224,9 @@ export const initialBookings = [
                 truck_type: "Refrigerated",
                 plate_number: "NC-5678R"
             }
-        ]
+        ],
+        visibility: "viewable", 
+        last_updated: "2023-09-16"
     },
     {
         id: 7,
@@ -246,7 +258,9 @@ export const initialBookings = [
                 trailer_type: "Refrigerated",
                 plate_number: "OR-7890M"
             }
-        ]
+        ],
+        visibility: "viewable", 
+        last_updated: "2023-10-02"
     },
     {
         id: 8,
@@ -284,7 +298,9 @@ export const initialBookings = [
                 trailer_type: "Flatbed",
                 plate_number: "CA-8765F"
             }
-        ]
+        ],
+        visibility: "viewable", 
+        last_updated: "2023-11-16"
     },
     {
         id: 9,
@@ -316,7 +332,9 @@ export const initialBookings = [
                 trailer_type: "Enclosed",
                 plate_number: "GA-1234A"
             }
-        ]
+        ],
+        visibility: "viewable", 
+        last_updated: "2023-12-06"
     },
     {
         id: 10,
@@ -354,7 +372,9 @@ export const initialBookings = [
                 truck_type: "Sleeper",
                 plate_number: "AZ-9012C"
             }
-        ]
+        ],
+        visibility: "viewable", 
+        last_updated: "2024-01-16" 
     },
     {
         id: 11,
@@ -386,7 +406,9 @@ export const initialBookings = [
                 trailer_type: "Enclosed",
                 plate_number: "VA-3456D"
             }
-        ]
+        ],
+        visibility: "viewable", 
+        last_updated: "2024-02-21"
     },
     {
         id: 12,
@@ -424,7 +446,9 @@ export const initialBookings = [
                 trailer_type: "Flatbed",
                 plate_number: "MI-9876F"
             }
-        ]
+        ],
+        visibility: "viewable", 
+        last_updated: "2024-03-11"
     },
     {
         id: 13,
@@ -456,6 +480,8 @@ export const initialBookings = [
                 truck_type: "Tanker",
                 plate_number: "TN-1234G"
             }
-        ]
+        ],
+        visibility: "unviewable", 
+        last_updated: "2024-04-06" 
     }
 ];

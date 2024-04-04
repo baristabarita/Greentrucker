@@ -36,7 +36,7 @@ const AdminSidebar = ({ isSidebarOpen, toggleSidebar }) => {
         <FaUser className={`mr-2`} />
         {isSidebarOpen && 'Account Logs'}
       </div>
-      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/admin/bookinglogs' ? ' text-primarycolor rounded' : 'hover:text-primarycolor'}`} onClick={() => handleNavigation('/admin/bookinglogs')}>
+      <div className={`mb-5 cursor-pointer flex items-center ${location.pathname === '/admin/bookinglogs' || location.pathname === '/admin/bookinglogs/booking' ? ' text-primarycolor rounded' : 'hover:text-primarycolor'}`} onClick={() => handleNavigation('/admin/bookinglogs')}>
         <FaBook className={`mr-2`} />
         {isSidebarOpen && 'Booking Logs'}
       </div>
