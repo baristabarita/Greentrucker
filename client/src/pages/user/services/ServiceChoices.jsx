@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TruckingServiceCard from '@/components/card/TruckingServiceCard';
 import LoadingBar from '@/components/loaders/LoadingBar.jsx';
+import ServiceCardSkeleton from '@/components/skeletons/ServiceCardSkeleton';
 import { FaSortAlphaDown, FaSortAlphaUp } from 'react-icons/fa';
 import backgroundimg from '@/assets/images/bgimg1.png';
 import defaultserviceicon from '@/assets/icons/transport.png';
@@ -238,7 +239,7 @@ const ServiceChoices = () => {
             ]);
             {/*setTruckerCount(1);*/ } // Set the initial count of trucker services
             setLoading(false);
-        }, 1000);
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, []);
@@ -262,7 +263,7 @@ const ServiceChoices = () => {
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
-        <div className="flex-grow min-h-screen bg-image bg-cover h-full" style={{ backgroundImage: `url(${backgroundimg})` }}>
+        <div className="flex-grow min-h-screen bg-image bg-cover h-full animate-fade-in" style={{ backgroundImage: `url(${backgroundimg})` }}>
             <div className="mb-4 text-center bg-primarycolor py-4 rounded-lg">
                 <h1 className="font-bold text-5xl text-[#363636] mt-4 mb-5">Choose the Trucking Service that Fits Your Needs</h1>
                 <p className="text-[#363636] text-xl mb-5">
@@ -271,7 +272,12 @@ const ServiceChoices = () => {
             </div>
 
             {loading ? (
-                <LoadingBar />
+                <>
+                    <LoadingBar />
+                    <ServiceCardSkeleton />
+                    <ServiceCardSkeleton />
+                </>
+
             ) : (
                 <div className='mx-5'>
                     <div className="flex flex-wrap justify-between items-center p-2">
