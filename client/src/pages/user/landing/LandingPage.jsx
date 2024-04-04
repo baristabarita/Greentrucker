@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
+import LandingPageSkeleton from '@/components/skeletons/LandingPageSkeleton';
 
 import { FaEnvelope, FaPhone } from 'react-icons/fa'
 import headerbackgroundimage from '@/assets/images/landingbannerimg.png'
@@ -10,6 +11,16 @@ import feature3 from '@/assets/icons/bar-chart.png'
 import contactusimg from '@/assets/images/contactus-img.png'
 
 const LandingPage = () => {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 4000); // Wait for 3 seconds
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (loading) {
+        return <LandingPageSkeleton />; // Show the skeleton if loading
+    }
     const featuresData = [
         {
             title: 'Booking Management',
