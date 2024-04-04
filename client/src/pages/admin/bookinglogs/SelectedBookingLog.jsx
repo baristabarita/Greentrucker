@@ -189,6 +189,16 @@ const SelectedBookingLog = () => {
                 documentUrl={documentUrl}
                 onClose={handleCloseModal}
             />
+             <CustomAlertModal
+                isOpen={showAlertModal}
+                onClose={handleCloseAlertModal}
+                title="Delete Selected Booking"
+                description="Are you sure you want to delete booking? This action cannot be undone."
+                buttonOneText="Cancel"
+                buttonOneOnClick={handleCloseAlertModal}
+                buttonTwoText="Delete"
+                buttonTwoOnClick={() => { navigate("/admin/bookinglogs") }}
+            />
         </div>
     )
 }
