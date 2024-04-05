@@ -4,13 +4,13 @@ import TruckerNavbar from '../navbar/TruckerNavbar';
 import TruckerSide from '../sidebar/TruckerSidebar';
 
 const TruckerLayout = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true)
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
 
     return (
-        <div className='flex flex-col h-screen overflow-hidden'>
+        <div className='flex flex-col h-screen animate-fade-in overflow-hidden'>
             <TruckerNavbar toggleSidebar={toggleSidebar} />
             <div className='flex flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 transition-all duration-300 ease-in-out'>
                 <TruckerSide isSidebarOpen={isSidebarOpen} />

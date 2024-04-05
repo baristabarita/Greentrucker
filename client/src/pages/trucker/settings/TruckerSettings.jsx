@@ -40,7 +40,7 @@ const TruckerSettings = () => {
 
   return (
     <div className="animate-fade-in p-5">
-      <div className="flex items-center mb-4 text-primarycolor">
+      <div className="flex items-center mb-4 text-userclient">
         <BsFillGearFill className="text-3xl mr-2" />
         <h2 className="text-3xl font-bold"> Account Settings</h2>
       </div>

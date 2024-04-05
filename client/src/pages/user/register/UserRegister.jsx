@@ -27,7 +27,7 @@ const UserRegister = () => {
     };
 
     const handleRegister = () => {
-        navigate("/");
+        navigate("/userlogin");
     };
 
     const handleEmailChange = (e) => {

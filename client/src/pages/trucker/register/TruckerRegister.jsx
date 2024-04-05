@@ -23,7 +23,7 @@ const TruckerRegister = () => {
     };
 
     const handleRegister = () => {
-        navigate("/");
+        navigate("/trkrlogin");
     };
 
     const handleEmailChange = (e) => {
