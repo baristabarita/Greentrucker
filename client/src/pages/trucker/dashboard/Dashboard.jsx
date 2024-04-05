@@ -1,23 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LineChart from "@/components/charts/trucker/LineChart";
+import DashboardSkeleton from "@/components/skeletons/DashboardSkeleton";
 import { BiSolidDashboard } from "react-icons/bi";
 import { BsFillCalendar2EventFill } from "react-icons/bs"
 import { MdPayments, MdPendingActions } from "react-icons/md"
 import { FaCalendarCheck } from "react-icons/fa"
 
 const Dashboard = () => {
-    // Sample Data for the tables
+    const [loading, setLoading] = useState(true);
     const [pendingBookings, setPendingBookings] = useState([
         { booking_id: 'BKG001', client_name: 'ACME Corp.', item_type: 'General Goods', container_type: '20ft', booking_date: '2023-09-01' },
         { booking_id: 'BKG002', client_name: 'Global Importers', item_type: 'Building Materials', container_type: '40ft', booking_date: '2023-09-05' },
     ]);
-
     const [assets, setAssets] = useState([
         { asset_id: 'AST001', asset_category: 'Truck', status: 'Idle' },
         { asset_id: 'AST002', asset_category: 'Container', status: 'In Transit' },
     ]);
 
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 3000); // Wait for 3 seconds
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (loading) {
+        return <DashboardSkeleton />; // Show the skeleton if loading
+    }
     const sampleData = [
         {
             id: "Sample Data",
@@ -29,7 +37,7 @@ const Dashboard = () => {
                 { x: "2023-04-05", y: 7 },
                 { x: "2023-04-06", y: 8 },
                 { x: "2023-04-07", y: 5 },
-                
+
             ],
         },
     ];

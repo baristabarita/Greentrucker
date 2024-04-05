@@ -21,6 +21,7 @@ const LandingPage = () => {
     if (loading) {
         return <LandingPageSkeleton />; // Show the skeleton if loading
     }
+    
     const featuresData = [
         {
             title: 'Booking Management',
