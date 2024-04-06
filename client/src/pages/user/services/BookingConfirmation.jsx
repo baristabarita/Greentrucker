@@ -104,6 +104,25 @@ const BookingConfirmation = () => {
                                 <p className="font-bold">₱ {(storedFormData.quantity * businessDetails.contrCharge) + businessDetails.servCharge + businessDetails.distCharge}</p> {/* Sample Total Price */}
                             </div>
                         </div>
+                        {/* Payment Method Selection */}
+                        <div className="bg-white border-gray-400 rounded p-4 shadow-lg drop-shadow-lg mt-3">
+                            <h2 className="font-bold mb-4">Select Payment Method</h2>
+                            <hr className="my-4 border-gray-400" />
+                            <div className="flex flex-col">
+                                <label className="inline-flex items-center mt-3">
+                                    <input type="radio" className="form-radio h-5 w-5 text-gray-600" name="paymentMethod" value="Cash" />
+                                    <span className="ml-2 text-gray-700">Physical Cash</span>
+                                </label>
+                                <label className="inline-flex items-center mt-3">
+                                    <input type="radio" className="form-radio h-5 w-5 text-gray-600" name="paymentMethod" value="GCash" />
+                                    <span className="ml-2 text-gray-700">GCash</span>
+                                </label>
+                                <label className="inline-flex items-center mt-3">
+                                    <input type="radio" className="form-radio h-5 w-5 text-gray-600" name="paymentMethod" value="Card" />
+                                    <span className="ml-2 text-gray-700">Card</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
