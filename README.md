@@ -1,4 +1,4 @@
-# GreenTrucker: An Online Booking and Asset Management Website for Trucking Businesses
+# GreenTrucker: An Online Booking Management Website for Trucking Businesses and Clients
 
 ## Driving towards Greener Tomorrow!
 
