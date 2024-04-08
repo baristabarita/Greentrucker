@@ -14,7 +14,7 @@ const LandingPage = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const timer = setTimeout(() => setLoading(false), 3000); // Wait for 3 seconds
+        const timer = setTimeout(() => setLoading(false), 2000); // Wait for 2 seconds
         return () => clearTimeout(timer);
     }, []);
 
