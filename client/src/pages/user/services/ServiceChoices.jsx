@@ -239,7 +239,7 @@ const ServiceChoices = () => {
             ]);
             {/*setTruckerCount(1);*/ } // Set the initial count of trucker services
             setLoading(false);
-        }, 3000);
+        }, 2000);
 
         return () => clearTimeout(timer);
     }, []);
