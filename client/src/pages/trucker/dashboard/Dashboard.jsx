@@ -8,6 +8,7 @@ import { MdPayments, MdPendingActions } from "react-icons/md"
 import { FaCalendarCheck } from "react-icons/fa"
 
 const Dashboard = () => {
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [pendingBookings, setPendingBookings] = useState([
         { booking_id: 'BKG001', client_name: 'ACME Corp.', item_type: 'General Goods', container_type: '20ft', booking_date: '2023-09-01' },
@@ -61,7 +62,7 @@ const Dashboard = () => {
                         ) */
                         }
                     </div>
-                    <p className="flex font-medium mt-1 text-[0.7em]">Verify your account <span className="ml-2" style={{ cursor: "pointer", color: "#21a1da" }} onClick={() => navigate("/trucker/trkrsettings")}> here</span>.</p>
+                    <p className="flex font-medium mt-1 text-[0.7em]">Verify your account <span className="ml-2 cursor-pointer text-ongoing hover:text-primarycolor" onClick={() => navigate("/trucker/truckersettings")}> here</span>.</p>
                 </div>
             </div>
             {/* Top Boxes */}
@@ -74,7 +75,7 @@ const Dashboard = () => {
                                 TOTAL BOOKINGS
                             </p>
                             <p className="text-userclient text-[3em] font-bold xl:text-[2em]">
-                                #
+                                35
                             </p>
                         </div>
                         <BsFillCalendar2EventFill className="text-userclient bg-primarycolor rounded-lg p-2 text-[5em]" />
@@ -87,7 +88,7 @@ const Dashboard = () => {
                                 PENDING PAYMENTS
                             </p>
                             <p className="text-userclient text-[3em] font-bold xl:text-[2em]">
-                                #
+                                10
                             </p>
                         </div>
                         <MdPayments className="text-userclient bg-primarycolor rounded-lg p-2 text-[5em]" />
@@ -100,7 +101,7 @@ const Dashboard = () => {
                                 BOOKINGS ONGOING
                             </p>
                             <p className="text-userclient text-[3em] font-bold xl:text-[2em]">
-                                #
+                                5
                             </p>
                         </div>
                         <MdPendingActions className="text-userclient bg-primarycolor rounded-lg p-2 text-[5em]" />
@@ -113,7 +114,7 @@ const Dashboard = () => {
                                 BOOKINGS COMPLETED
                             </p>
                             <p className="text-userclient text-[3em] font-bold xl:text-[2em]">
-                                #
+                                23
                             </p>
                         </div>
                         <FaCalendarCheck className="text-userclient bg-primarycolor rounded-lg p-2 text-[5em]" />
