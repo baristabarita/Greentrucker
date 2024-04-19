@@ -14,6 +14,7 @@ const UserRegister = () => {
     const [lastName, setLastName] = useState("");
     const [contactNum, setContactNum] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
@@ -49,6 +50,10 @@ const UserRegister = () => {
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
+        setError(""); // Clear error on password change
+    };
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value);
         setError(""); // Clear error on password change
     };
     const togglePasswordVisibility = () => {
@@ -181,10 +186,10 @@ const UserRegister = () => {
                                     placeholder="Confirm Password"
                                     type={showPassword ? "text" : "password"} // Toggle password visibility
                                     className="mt-1 p-3 w-full border border-gray-300 rounded focus:ring focus:ring-primarycolor focus:border-primarycolor"
-                                    id="password"
-                                    name="password"
-                                    value={password}
-                                    onChange={handlePasswordChange}
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    value={confirmPassword}
+                                    onChange={handleConfirmPasswordChange}
                                     required
                                 />
                                 {/* Button to toggle password visibility */}
