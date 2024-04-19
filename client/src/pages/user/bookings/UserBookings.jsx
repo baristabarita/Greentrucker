@@ -95,9 +95,21 @@ const UserBookings = () => {
                 businessName: "Reliable Transports", 
                 delivery_address: "42 Galaxy Way, Central City",
                 pickup_location: "100 South St, Metropolis",  
-                est_finish_date: "2023-08-05", 
+                est_finish_date: "2023-08-05",
+                container:{
+                    quantity: "3",
+                    container_type: "3 x 20",
+                    item_type: "Food",
+                    item_weight: "15",
+                },
+                payments:{
+                    container_charge: "9000.00",
+                    service_charge: "1350.00",
+                    distance_charge: "450.00",
+                    total_balance: "10800.00",
+                    paymentStatus: "Cancelled",
+                }, 
                 is_visible: 1
-                // No truckAsset, container, or payments due to cancellation
             },
             {
                 booking_id: 5, 

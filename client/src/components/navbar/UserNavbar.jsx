@@ -77,13 +77,13 @@ const UserNavbar = () => {
                 <div className={`items-center justify-between transition-all duration-500 ease-in-out ${isOpen ? 'block' : 'hidden'} w-full md:flex md:w-auto md:order-1`} id="navbar-sticky">
                     <ul className="font-roboto flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 ">
                         <li>
-                            <div onClick={() => navigate('/')} className={`block px-2 rounded cursor-pointer ${location.pathname === '/' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">Home</div>
+                            <div onClick={() => navigate('/')} className={`block px-2 py-2 rounded cursor-pointer ${location.pathname === '/' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">Home</div>
                         </li>
                         <li>
-                            <div onClick={() => navigate('/services')} className={`block px-2 rounded cursor-pointer ${location.pathname === '/services' || location.pathname === '/services/choice' || location.pathname === '/services/choice/book' || location.pathname === '/services/choice/book/confirm' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">Services</div>
+                            <div onClick={() => navigate('/services')} className={`block px-2 py-2 rounded cursor-pointer ${location.pathname === '/services' || location.pathname === '/services/choice' || location.pathname === '/services/choice/book' || location.pathname === '/services/choice/book/confirm' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">Services</div>
                         </li>
                         <li>
-                            <div onClick={() => navigate('/userbookings')} className={`block px-2 rounded cursor-pointer ${location.pathname === '/userbookings' || location.pathname === '/userbookings/booking' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">My Bookings</div>
+                            <div onClick={() => navigate('/userbookings')} className={`block px-2 py-2 rounded cursor-pointer ${location.pathname === '/userbookings' || location.pathname === '/userbookings/booking' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">My Bookings</div>
                         </li>
                     </ul>
                 </div>
