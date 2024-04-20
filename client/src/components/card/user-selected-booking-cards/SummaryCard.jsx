@@ -92,7 +92,7 @@ const SummaryCard = ({ bookingDetails, onOpenDocumentModal }) => {
                             {bookingDetails.container.quantity}
                         </p>
                         <div className="ml-3 text-[1.3em] font-medium">
-                            {bookingDetails.container.container_type} ft. Containers
+                            {bookingDetails.container.container_size} ft. Containers
                         </div>
                     </div>
                     <ul>

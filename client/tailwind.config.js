@@ -27,6 +27,9 @@ export default {
         'poppins': ['Poppins','sans-serif'],
         'roboto' : ['Roboto', 'sans-serif'],
       },
+      boxShadow: {
+        'custom': '4px 4px 1px rgba(0, 0, 0, 0.4)'
+      },
       keyframes: {
         'slide-down': {
           '0%': {

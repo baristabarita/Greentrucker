@@ -11,8 +11,8 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [pendingBookings, setPendingBookings] = useState([
-        { booking_id: 'BKG001', client_name: 'ACME Corp.', item_type: 'General Goods', container_type: '20ft', booking_date: '2023-09-01' },
-        { booking_id: 'BKG002', client_name: 'Global Importers', item_type: 'Building Materials', container_type: '40ft', booking_date: '2023-09-05' },
+        { booking_id: 'BKG001', client_name: 'ACME Corp.', item_type: 'General Goods', container_size: '20ft', booking_date: '2023-09-01' },
+        { booking_id: 'BKG002', client_name: 'Global Importers', item_type: 'Building Materials', container_size: '40ft', booking_date: '2023-09-05' },
     ]);
     const [assets, setAssets] = useState([
         { asset_id: 'AST001', asset_category: 'Truck', status: 'Idle' },
@@ -157,7 +157,7 @@ const Dashboard = () => {
                                     <tr key={booking.booking_id} className="text-sm">
                                         <td className="py-2">{booking.client_name}</td>
                                         <td>{booking.item_type}</td>
-                                        <td>{booking.container_type}</td>
+                                        <td>{booking.container_size}</td>
                                         <td>{booking.booking_date}</td>
                                     </tr>
                                 ))}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import CustomConfirmationModal from "@/components/modals/CustomConfirmationModal.jsx";
 import { FaUser, FaPhone, FaEnvelope, FaMapMarker, FaCheck, FaTimes } from "react-icons/fa";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import Rating from "@mui/material/Rating";
 import backgroundimg from '@/assets/images/bgimg1.png';
 
@@ -34,6 +35,16 @@ const BookingConfirmation = () => {
 
     return (
         <div className="animate-fade-in bg-image bg-cover h-full" style={{ backgroundImage: `url(${backgroundimg})` }}>
+            {/* Back to Bookings Page */}
+            <div className="mt-[1em] text-userclient bg-primarycolor">
+                <h3
+                    className="ml-[2%] py-[1%] font-bold flex items-center xl:max-2xl:text-[1.2em] xl:max-2xl:py-[0.5%]"
+                    onClick={() => navigate('/services/choice/book')}
+                >
+                    <AiOutlineArrowLeft className="text-black mr-[1%] hover:text-white" />
+                    Back to Booking Form
+                </h3>
+            </div>
             <div className="container mx-auto py-8">
                 <div className="grid grid-cols-2 gap-8 p-4">
                     {/* First Column */}
@@ -159,7 +170,7 @@ const BookingConfirmation = () => {
                             </tr>
                             <tr>
                                 <td className="border-b border-r p-2 border-gray-300">Container Type:</td>
-                                <td className="border-b p-2 border-gray-300">{storedFormData.container_type}</td>
+                                <td className="border-b p-2 border-gray-300">{storedFormData.container_size}</td>
                             </tr>
                             <tr>
                                 <td className="border-b border-r p-2 border-gray-300">Container Weight:</td>
@@ -167,21 +178,14 @@ const BookingConfirmation = () => {
                             </tr>
 
                             {/* Item Information */}
-                            <tr>
-                                <td colSpan="2" className="border-b border-r font-bold p-2 bg-usertrucker text-primarycolor">Item Information</td>
-                            </tr>
-                            <tr>
-                                <td className="border-b border-r p-2 border-gray-300">Item Quantity:</td>
-                                <td className="border-b p-2 border-gray-300">{storedFormData.item_quantity}</td>
-                            </tr>
-                            <tr>
-                                <td className="border-b border-r p-2 border-gray-300">Item Type:</td>
-                                <td className="border-b p-2 border-gray-300">{storedFormData.item_type}</td>
-                            </tr>
-                            <tr>
-                                <td className="border-b border-r p-2 border-gray-300">Item Weight:</td>
-                                <td className="border-b p-2 border border-gray-300 ">{storedFormData.item_weight}</td>
-                            </tr>
+                            {storedFormData.itemDetails?.map((item, index) => (
+                                <tr key={index}>
+                                    <td className="border-b border-r font-bold p-2 bg-usertrucker text-primarycolor">Item {index + 1} Details</td>
+                                    <td className="border-b p-2 border-gray-300">
+                                        Type: {item.item_type}, Quantity: {item.item_quantity}, Weight: {item.item_weight}
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
 

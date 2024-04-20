@@ -31,7 +31,7 @@ const UserBookings = () => {
                 },  
                 container:{
                     quantity: "4",
-                    container_type: "1 x 40",
+                    container_size: "1 x 40",
                     item_type: "Building Materials",
                     item_weight: "20",
                 },
@@ -54,7 +54,7 @@ const UserBookings = () => {
                 est_finish_date: "2023-09-20",
                 container:{
                     quantity: "2",
-                    container_type: "2 x 20",
+                    container_size: "2 x 20",
                     item_type: "Electronics",
                     item_weight: "10",
                 },
@@ -76,7 +76,7 @@ const UserBookings = () => {
                 est_finish_date: "2023-11-15",
                 container:{
                     quantity: "3",
-                    container_type: "3 x 20",
+                    container_size: "3 x 20",
                     item_type: "Furniture",
                     item_weight: "15",
                 },
@@ -98,7 +98,7 @@ const UserBookings = () => {
                 est_finish_date: "2023-08-05",
                 container:{
                     quantity: "3",
-                    container_type: "3 x 20",
+                    container_size: "3 x 20",
                     item_type: "Food",
                     item_weight: "15",
                 },
@@ -126,7 +126,7 @@ const UserBookings = () => {
                 },
                 container:{
                     quantity: "5",
-                    container_type: "5 x 20",
+                    container_size: "5 x 20",
                     item_type: "Automotive Parts",
                     item_weight: "25",
                 },

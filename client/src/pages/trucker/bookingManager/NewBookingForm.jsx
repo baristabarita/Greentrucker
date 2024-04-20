@@ -16,7 +16,7 @@ const NewBookingForm = () => {
         delivery_address: "",
         est_finish_date: "",
         quantity: 0,
-        container_type: "",
+        container_size: "",
         weight: "",
         item_quantity: 0,
         item_type: "",
@@ -103,12 +103,12 @@ const NewBookingForm = () => {
                             <div className="col-span-1 px-4 border-r-2 ">
                                 <h1 className="text-userclient text-[1.2em]">Container Details</h1>
                                 <hr className="my-4 border-gray-400" />
-                                <label htmlFor="container_type">Container Size (ft.)</label>
+                                <label htmlFor="container_size">Container Size (ft.)</label>
                                 <input
                                     type="text"
-                                    id="container_type"
-                                    name="container_type"
-                                    value={formData.container_type}
+                                    id="container_size"
+                                    name="container_size"
+                                    value={formData.container_size}
                                     onChange={handleInputChange}
                                     className="w-full bg-gray-100 border border-gray-300 rounded p-2"
                                     required
