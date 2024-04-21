@@ -37,14 +37,15 @@ const EditProfile = () => {
 
     return (
         <div className="bg-white rounded-lg p-4 w-full mx-auto">
-            <h2 className="text-center font-bold mb-4">Edit Profile</h2>
+            <h2 className="font-bold mb-4">Edit Profile</h2>
             {/* Profile Image */}
-            <div className="flex justify-center mb-4">
+            <div className="flex justify-center">
                 <label htmlFor="profile-image-upload" className="cursor-pointer">
                     <img src={userDetails.profileImage || defaultimage} alt="Profile" className="rounded-full hover:border-4 hover:border-primarycolor h-24 w-24 object-cover mb-2" />
                     <input type="file" id="profile-image-upload" className="hidden" onChange={handleFileChange} />
                 </label>
             </div>
+            <label htmlFor="profile-image" className="flex justify-center text-sm font-medium text-gray-700 mb-4">Edit Profile Image</label>
             {/* Input Rows */}
             <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full md:w-1/2 px-3 mb-4 md:mb-0">
@@ -96,7 +97,7 @@ const EditProfile = () => {
             </div>
             {/* Save Changes Button */}
             <div className="flex justify-center">
-                <button onClick={handleSaveChanges} className="bg-primarycolor hover:bg-usertrucker text-userclient hover:text-primarycolor font-bold py-2 px-4 rounded">
+                <button onClick={handleSaveChanges} className="bg-primarycolor hover:bg-usertrucker text-userclient hover:text-primarycolor font-bold py-2 px-4 rounded shadow-custom">
                     Save Changes
                 </button>
             </div>
