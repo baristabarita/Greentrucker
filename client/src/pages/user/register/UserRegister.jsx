@@ -15,7 +15,7 @@ const UserRegister = () => {
     const [contactNum, setContactNum] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [errors, setErrors] = useState("");
+    const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
     const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
@@ -105,14 +105,11 @@ const UserRegister = () => {
 
     return (
         <>
-            <div className="h-screen flex items-center justify-center overflow-hidden font-roboto animate-fade-in">
-                {/* Background Picture */}
-                <img
-                    className="absolute h-screen w-full object-cover"
-                    src={background}
-                    alt="background"
-                />
+            <div className="flex flex-col justify-between min-h-screen overflow-hidden font-roboto animate-fade-in" 
+            style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center center' }}>
                 {/* registration box */}
+                <div className="flex flex-col items-center justify-center w-full pt-5 pb-5">
+
                 <div className="relative flex flex-col md:flex-row max-w-4xl w-full bg-white shadow-[4px_15px_10px_4px_gray] rounded-[7px_7px_7px_7px] mt-10 mb-10">
                     {/* Left side */}
                     <section
@@ -126,7 +123,7 @@ const UserRegister = () => {
                         </div>
                         <Link
                             to="/trkregister"
-                            className="block bg-usertrucker text-white w-full py-2 px-4 rounded-full mt-3 hover:bg-primarycolor hover:text-white transition-colors delay-250 duration-3000 ease-in text-center"
+                            className="block bg-secondarycolor text-usertrucker font-bold w-full py-2 px-4 rounded-full mt-3 hover:bg-primarycolor hover:text-white transition-colors delay-250 duration-3000 ease-in text-center shadow-custom"
                         >
                             Register as Manager
                         </Link>
@@ -151,7 +148,7 @@ const UserRegister = () => {
                                 </button>
                             </div>
                         )}
-                        <form className="w-full max-w-sm">
+                        <form onSubmit={handleRegister} className="w-full max-w-sm">
                             {/* Row 1 */}
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="mt-3 mb-2">
@@ -163,7 +160,6 @@ const UserRegister = () => {
                                         name="firstName"
                                         value={firstName}
                                         onChange={handleFnameChange}
-                                        required
                                     />
                                 </div>
                                 <div className="mt-3 mb-2">
@@ -175,7 +171,6 @@ const UserRegister = () => {
                                         name="lastName"
                                         value={lastName}
                                         onChange={handleLnameChange}
-                                        required
                                     />
                                 </div>
                             </div>
@@ -190,7 +185,6 @@ const UserRegister = () => {
                                         name="emailAdd"
                                         value={emailAdd}
                                         onChange={handleEmailChange}
-                                        required
                                     />
                                 </div>
                                 <div className="mt-3 mb-2">
@@ -202,7 +196,6 @@ const UserRegister = () => {
                                         name="contactNum"
                                         value={contactNum}
                                         onChange={handleContactChange}
-                                        required
                                     />
                                 </div>
                             </div>
@@ -216,7 +209,6 @@ const UserRegister = () => {
                                     name="password"
                                     value={password}
                                     onChange={handlePasswordChange}
-                                    required
                                 />
                                 {/* Button to toggle password visibility */}
                                 <button
@@ -236,7 +228,6 @@ const UserRegister = () => {
                                     name="confirmPassword"
                                     value={confirmPassword}
                                     onChange={handleConfirmPasswordChange}
-                                    required
                                 />
                                 {/* Button to toggle password visibility */}
                                 <button
@@ -250,7 +241,6 @@ const UserRegister = () => {
                             <div className="buttons flex flex-col items-center space-y-5">
                                 <button
                                     type="submit"
-                                    onClick={handleRegister}
                                     className="flex items-center justify-center button bg-primarycolor text-white p-[0.7em] w-full rounded-full hover:bg-secondarycolor hover:text-usertrucker font-bold transition-colors delay-250 duration-[3000] ease-in"
                                 >
                                     Create an Account
@@ -274,6 +264,7 @@ const UserRegister = () => {
                             </div>
                         </form>
                     </section>
+                </div>
                 </div>
             </div>
             <Footer />

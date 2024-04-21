@@ -12,12 +12,12 @@ const UserLogin = () => {
     const navigate = useNavigate();
     const [emailAdd, setEmailAdd] = useState("");
     const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState("");
+    const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = (e) => {
         e.preventDefault();
-        let newErrors = {};
+        const newErrors = {};
 
         if (!emailAdd.trim()) {
             newErrors.emailAdd = "Email address is required";
@@ -91,7 +91,7 @@ const UserLogin = () => {
                             to="/trkrlogin"
                             className="block bg-secondarycolor text-usertrucker font-bold w-full py-2 px-4 rounded-full mt-3 hover:bg-primarycolor hover:text-white transition-colors delay-250 duration-3000 ease-in text-center shadow-custom"
                         >
-                            Login as Manager
+                            Sign In as Manager
                         </Link>
                     </div>
 
