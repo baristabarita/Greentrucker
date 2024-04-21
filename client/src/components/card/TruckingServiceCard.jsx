@@ -73,7 +73,7 @@ const TruckingServiceCard = ({ trucker }) => {
                 <div className="text-black text-[1.5em] font-bold mb-2">₱ {servCharge.toFixed(2)}</div>
                 <div className="flex space-x-2">
                     <button
-                        className="bg-usertrucker font-medium text-white rounded-md p-2 flex items-center hover:bg-primarycolor hover:text-usertrucker"
+                        className="bg-usertrucker font-medium text-white rounded-md p-2 flex items-center hover:bg-primarycolor hover:text-usertrucker shadow-custom"
                         onClick={handleViewMoreClick}
                     >
                         <FaEye className="mr-1" />

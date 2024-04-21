@@ -83,7 +83,7 @@ const BookingForm = () => {
     };
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        let newErrors = {};
+        const newErrors = {};
         // Validate fields
         if (!formData.pickup_location) newErrors.pickup_location = true;
         if (!formData.delivery_address) newErrors.delivery_address = true;
