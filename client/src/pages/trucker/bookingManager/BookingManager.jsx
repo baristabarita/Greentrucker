@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiSolidBookBookmark } from "react-icons/bi";
 import { initialBookings } from "@/util/data/sampleBookingsData";
+import { BiSolidAddToQueue } from "react-icons/bi";
 
 const BookingManager = () => {
     
@@ -9,28 +10,38 @@ const BookingManager = () => {
     const [bookings, setBookings] = useState(initialBookings);
     const [currentPage, setCurrentPage] = useState(1);
     const bookingsPerPage = 10;
+
     // States for filtering
     const [filterDate, setFilterDate] = useState('');
     const [filterStatus, setFilterStatus] = useState('');
+    const [sortOrder, setSortOrder] = useState('newest');
 
     // Status options for the dropdown
     const statusOptions = ["All", "Pending", "Processing", "Reserved", "Ongoing", "Completed", "Cancelled"];
 
     // Function to filter bookings based on selected filters
-    const getFilteredBookings = () => {
-        return bookings.filter(booking => {
-            const dateMatches = filterDate ? booking.booking_date === filterDate : true;
+    const getFilteredAndSortedBookings = useMemo(() => {
+        const filteredBookings = bookings.filter(booking => {
+            const dateMatches = filterDate ? new Date(booking.booking_date) <= new Date(filterDate) : true;
             const statusMatches = filterStatus === "All" || filterStatus === '' ? true : booking.status === filterStatus;
             return dateMatches && statusMatches;
         });
-    };
 
-    const totalPages = Math.ceil(getFilteredBookings().length / bookingsPerPage);
+        // Sorting logic based on the sortOrder state
+        if (sortOrder === 'newest') {
+            filteredBookings.sort((a, b) => new Date(b.booking_date) - new Date(a.booking_date));
+        } else {
+            filteredBookings.sort((a, b) => new Date(a.booking_date) - new Date(b.booking_date));
+        }
+        return filteredBookings;
+    }, [bookings, filterDate, filterStatus, sortOrder]);
+
+    const totalPages = Math.ceil(getFilteredAndSortedBookings.length / bookingsPerPage);
 
     // Calculate the currently displayed bookings
     const indexOfLastBooking = currentPage * bookingsPerPage;
     const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
-    const currentBookings = getFilteredBookings().slice(indexOfFirstBooking, indexOfLastBooking);
+    const currentBookings = getFilteredAndSortedBookings.slice(indexOfFirstBooking, indexOfLastBooking);
 
 
     // Function to navigate to the next and previous page
@@ -81,10 +92,22 @@ const BookingManager = () => {
                             ))}
                         </select>
                     </div>
+                    <div>
+                        <select
+                            value={sortOrder}
+                            onChange={(e) => setSortOrder(e.target.value)}
+                            className="select select-bordered select-sm">
+                            <option value="newest">Most Recent</option>
+                            <option value="oldest">Oldest</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div>
-                    <button onClick={handleNewBooking} className="btn btn-sm px-4 py-2 rounded-md bg-usertrucker text-white hover:bg-primarycolor hover:text-usertrucker btn-primary">Add New Booking</button>
+                    <button onClick={handleNewBooking} className="btn btn-sm flex px-4 py-2 rounded-md bg-usertrucker text-white hover:bg-primarycolor hover:text-usertrucker btn-primary shadow-custom">
+                        <BiSolidAddToQueue className="mr-2 mt-1" />
+                        Add Booking
+                    </button>
                 </div>
 
             </div>

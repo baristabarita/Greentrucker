@@ -114,7 +114,7 @@ const PaymentManager = () => {
                     </div>
                 </div>
                 <div>
-                    <button onClick={handleOpenSetCharges} className="btn btn-sm px-4 py-2 rounded-md bg-usertrucker text-white hover:bg-primarycolor hover:text-usertrucker btn-primary">Set Payment Charges</button>
+                    <button onClick={handleOpenSetCharges} className="btn btn-sm px-4 py-2 rounded-md bg-usertrucker text-white hover:bg-primarycolor hover:text-usertrucker btn-primary shadow-custom">Set Payment Charges</button>
                 </div>
 
             </section>

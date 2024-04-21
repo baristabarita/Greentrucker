@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomConfirmationModal from "@/components/modals/CustomConfirmationModal";
-import { FaPlus , FaTimes } from "react-icons/fa";
+import { FaPlus, FaTimes } from "react-icons/fa";
+import { BiSolidBookAdd } from "react-icons/bi";
 import { FiX } from "react-icons/fi";
 
 const NewBookingForm = () => {
@@ -18,47 +19,92 @@ const NewBookingForm = () => {
         quantity: 0,
         container_size: "",
         weight: "",
-        item_quantity: 0,
-        item_type: "",
-        item_weight: ""
     });
+    const [itemDetails, setItemDetails] = useState([{
+        item_type: "",
+        item_quantity: 0,
+        item_weight: ""
+    }]);
+    const [errors, setErrors] = useState({});
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }));
+        setFormData(prev => ({ ...prev, [name]: value }));
+        if (value.trim() !== "") {
+            const newErrors = { ...errors };
+            delete newErrors[name];
+            setErrors(newErrors);
+        }
     };
+    const handleItemChange = (index, e) => {
+        const { name, value } = e.target;
+        const newItems = [...itemDetails];
+        newItems[index] = { ...newItems[index], [name]: value };
+        setItemDetails(newItems);
+        if (value.trim() !== "") {
+            const newErrors = { ...errors };
+            delete newErrors[`item_${index}_${name}`];
+            setErrors(newErrors);
+        }
+    };
+
+    const addItemDetail = () => {
+        // Simply add a new item detail without checking other inputs
+        setItemDetails([...itemDetails, { item_type: "", item_quantity: 0, item_weight: "" }]);
+    };
+    const removeItemDetail = (index) => {
+        const newItems = itemDetails.filter((_, i) => i !== index);
+        setItemDetails(newItems);
+    };
+
+
     const handleConfirmBooking = () => {
         // Logic after confirmation goes here
         navigate('/trucker/truckerbookings');
     };
     const handleFormSubmit = (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
+        e.preventDefault();
+        const newErrors = {};
+        // Validate fields
+        if (!formData.client_name) newErrors.client_name = true;
+        if (!formData.email_address) newErrors.email_address = true;
+        if (!formData.contact_number) newErrors.contact_number = true;
+        if (!formData.pickup_location) newErrors.pickup_location = true;
+        if (!formData.delivery_address) newErrors.delivery_address = true;
+        if (!formData.est_finish_date) newErrors.est_finish_date = true;
+        if (!formData.quantity) newErrors.quantity = true;
+        if (!formData.container_size) newErrors.container_size = true;
+        if (!formData.weight) newErrors.weight = true;
 
-        // Check for empty fields in formData
-        const isFormComplete = Object.values(formData).every(value => {
-            // Check if the value is not empty
-            return value !== "" && value !== 0;
+        itemDetails.forEach((item, index) => {
+            if (!item.item_type) newErrors[`item_${index}_item_type`] = true;
+            if (!item.item_quantity) newErrors[`item_${index}_item_quantity`] = true;
+            if (!item.item_weight) newErrors[`item_${index}_item_weight`] = true;
         });
 
-        if (isFormComplete) {
-            setShowConfirmationModal(true);
+        if (Object.keys(newErrors).length === 0) {
+            localStorage.setItem('formData', JSON.stringify({ ...formData, itemDetails }));
+            navigate('/services/choice/book/confirm');
         } else {
-            setShowPopup(true); // Show popup if form is incomplete
+            setErrors(newErrors);
+            setShowPopup(true);
         }
-    }
+    };
     return (
         <div className="animate-fade-in font-roboto">
-            {/* Back to Bookings Page */}
-
             <div className="container w-[60%] mx-auto px-5 py-4">
+
                 <form onSubmit={handleFormSubmit}>
                     <div className="bg-white rounded-lg shadow-lg drop-shadow-lg">
                         <h1 className="text-2xl font-bold text-center mt-0 rounded-t-lg bg-usertrucker text-primarycolor p-4">Creating New Booking</h1>
+                        {showPopup && (
+                            <div className="text-alert text-center font-bold">
+                                Please fill in all required fields.
+                            </div>
+                        )}
                         {/* Client Details */}
                         <div className="flex flex-col gap-4 px-5 mt-4 mb-5">
-                            <h1 className="text-userclient text-[1.2em]">Client Details</h1>
+                            <h1 className="text-userclient text-[1.2em] font-bold">Client Details</h1>
                             <hr className="border-gray-400" />
                             <div className="col-span-1">
                                 <label htmlFor="client_name">Client Name</label>
@@ -68,8 +114,7 @@ const NewBookingForm = () => {
                                     name="client_name"
                                     value={formData.client_name}
                                     onChange={handleInputChange}
-                                    className="w-full bg-gray-100 border border-gray-300  rounded p-2"
-                                    required
+                                    className={`w-full bg-gray-100 rounded p-2 ${errors.client_name ? 'border-red-500' : 'border-gray-300'}`}
                                 />
                             </div>
                             <div className="col-span-2">
@@ -80,8 +125,7 @@ const NewBookingForm = () => {
                                     name="email_address"
                                     value={formData.email_address}
                                     onChange={handleInputChange}
-                                    className="w-full bg-gray-100 border border-gray-300  rounded p-2"
-                                    required
+                                    className={`w-full bg-gray-100 rounded p-2 ${errors.email_address ? 'border-red-500' : 'border-gray-300'}`}
                                 />
                             </div>
                             <div className="col-span-2">
@@ -92,105 +136,125 @@ const NewBookingForm = () => {
                                     name="contact_number"
                                     value={formData.contact_number}
                                     onChange={handleInputChange}
-                                    className="w-full bg-gray-100 border border-gray-300 rounded p-2"
-                                    required
+                                    className={`w-full bg-gray-100 rounded p-2 ${errors.contact_number ? 'border-red-500' : 'border-gray-300'}`}
                                 />
                             </div>
                         </div>
 
-                        {/* Container and Item Details */}
-                        <div className="grid grid-cols-2 gap-4 mb-4 px-5">
-                            <div className="col-span-1 px-4 border-r-2 ">
-                                <h1 className="text-userclient text-[1.2em]">Container Details</h1>
-                                <hr className="my-4 border-gray-400" />
-                                <label htmlFor="container_size">Container Size (ft.)</label>
-                                <input
-                                    type="text"
-                                    id="container_size"
-                                    name="container_size"
-                                    value={formData.container_size}
-                                    onChange={handleInputChange}
-                                    className="w-full bg-gray-100 border border-gray-300 rounded p-2"
-                                    required
-                                />
-
-                                <label htmlFor="quantity"># of Containers</label>
-                                <input
-                                    type="number"
-                                    id="quantity"
-                                    name="quantity"
-                                    value={formData.quantity}
-                                    onChange={handleInputChange}
-                                    className="w-full bg-gray-100 border border-gray-300  rounded p-2"
-                                    required
-                                />
-
-                                <label htmlFor="weight">Weight per Container</label>
-                                <input
-                                    type="text"
-                                    id="weight"
-                                    name="weight"
-                                    value={formData.weight}
-                                    onChange={handleInputChange}
-                                    placeholder="Format: XX.X kg"
-                                    className="w-full bg-gray-100 border border-gray-300  rounded p-2"
-                                    required
-                                />
+                        {/* Container Details */}
+                        <div className="mb-4 px-5">
+                            <h1 className="text-userclient font-bold text-[1.2em]">Container Details</h1>
+                            <hr className="my-4 border-gray-400" />
+                            <div className="grid grid-cols-3 gap-4">
+                                <div className="col-span-1">
+                                    <label htmlFor="container_size" className="text-xs">Size (length x width x height)</label>
+                                    <input
+                                        type="text"
+                                        id="container_size"
+                                        name="container_size"
+                                        value={formData.container_size}
+                                        onChange={handleInputChange}
+                                        className={`w-full bg-gray-100 rounded p-2 ${errors.container_size ? 'border-red-500' : 'border-gray-300'}`}
+                                        placeholder="ex. 20 ft. x  8ft. x 6 inches"
+                                    />
+                                </div>
+                                <div className="col-span-1">
+                                    <label htmlFor="quantity">No. of Containers</label>
+                                    <input
+                                        type="number"
+                                        id="quantity"
+                                        name="quantity"
+                                        value={formData.quantity}
+                                        onChange={(handleInputChange)}
+                                        className={`w-full bg-gray-100 rounded p-2 appearance-none ${errors.quantity ? 'border-red-500' : 'border-gray-300'}`}
+                                        min="0"
+                                    />
+                                </div>
+                                <div className="col-span-1">
+                                    <label htmlFor="weight" className="text-xs">Weight per Container (lbs.)</label>
+                                    <input
+                                        type="text"
+                                        id="weight"
+                                        name="weight"
+                                        value={formData.weight}
+                                        onChange={handleInputChange}
+                                        className={`w-full bg-gray-100 rounded p-2 ${errors.weight ? 'border-red-500' : 'border-gray-300'}`}
+                                        placeholder="ex. 4,850 lbs."
+                                    />
+                                </div>
                             </div>
-
-                            <div className="col-span-1 px-4">
-                                <h1 className="text-userclient text-[1.2em]">Item Details</h1>
-                                <hr className="my-4 border-gray-400" />
-
-                                <label htmlFor="item_type">Item Type</label>
-                                <select
-                                    id="item_type"
-                                    name="item_type"
-                                    value={formData.item_type}
-                                    onChange={handleInputChange}
-                                    className="w-full bg-gray-100 border border-gray-300  rounded p-2"
-                                    required
+                        </div>
+                        {/* Item Details */}
+                        <div className="mb-4 px-5">
+                            <div className="flex justify-between items-center mb-4">
+                                <h1 className="text-userclient text-xl font-bold">Item Details</h1>
+                                <button
+                                    onClick={addItemDetail}
+                                    className="bg-primarycolor hover:bg-usertrucker text-white px-3 py-2 rounded shadow-custom"
                                 >
-                                    <option value="">Select an item type</option>
-                                    <option value="Consumer Goods and Retail Products">Consumer Goods and Retail Products</option>
-                                    <option value="Food and Beverages">Food and Beverages</option>
-                                    <option value="Furniture and Home Decor">Furniture and Home Decor</option>
-                                    <option value="Building Materials">Building Materials</option>
-                                    <option value="Machinery and Industrial Equipment">Machinery and Industrial Equipment</option>
-                                    <option value="Others">Others</option>
-                                </select>
+                                    <BiSolidBookAdd className="inline mr-2 mb-1" />
+                                    Add Items
+                                </button>
+                            </div>
+                            <hr className="my-4 border-gray-400" />
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {itemDetails.map((item, index) => (
+                                    <div key={index} className="bg-gray-100 p-4 border rounded">
+                                        <div className="flex justify-between items-center mb-2">
+                                            <h2 className="text-userclient font-semibold">Item {index + 1}</h2>
+                                            {itemDetails.length > 1 && (
+                                                <button onClick={() => removeItemDetail(index)} className="bg-alert hover:bg-red-600 text-white px-2 py-1 rounded">
+                                                    Remove
+                                                </button>
+                                            )}
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label htmlFor={`item_type_${index}`}>Item Type</label>
+                                            <select
+                                                id={`item_type_${index}`}
+                                                name="item_type"
+                                                value={item.item_type}
+                                                onChange={(e) => handleItemChange(index, e)}
+                                                className={`w-full bg-white rounded p-2 ${errors[`item_${index}_item_type`] ? 'border-red-500' : 'border-gray-300'}`}
+                                            >
+                                                <option value="">Select type</option>
+                                                <option value="Consumer Goods and Retail Products">Consumer Goods and Retail Products</option>
+                                                <option value="Food and Beverages">Food and Beverages</option>
+                                                <option value="Furniture and Home Decor">Furniture and Home Decor</option>
+                                                <option value="Building Materials">Building Materials</option>
+                                                <option value="Machinery and Industrial Equipment">Machinery and Industrial Equipment</option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                            <label htmlFor={`item_quantity_${index}`} className="text-xs">No. of Items / Units</label>
+                                            <input
+                                                type="number"
+                                                id={`item_quantity_${index}`}
+                                                name="item_quantity"
+                                                value={item.item_quantity}
+                                                onChange={(e) => handleItemChange(index, e)}
+                                                className={`w-full bg-white rounded p-2 appearance-none ${errors[`item_${index}_item_quantity`] ? 'border-red-500' : 'border-gray-300'}`}
+                                                min="0"
+                                            />
+                                            <label htmlFor={`item_weight_${index}`} className="text-xs">Weight per Item / Unit</label>
+                                            <input
+                                                type="text"
+                                                id={`item_weight_${index}`}
+                                                name="item_weight"
+                                                value={item.item_weight}
+                                                onChange={(e) => handleItemChange(index, e)}
+                                                className={`w-full bg-white rounded p-2 ${errors[`item_${index}_item_weight`] ? 'border-red-500' : 'border-gray-300'}`}
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
 
-                                <label htmlFor="item_quantity"># of Items per Container</label>
-                                <input
-                                    type="number"
-                                    id="item_quantity"
-                                    name="item_quantity"
-                                    value={formData.item_quantity}
-                                    onChange={handleInputChange}
-                                    className="w-full bg-gray-100 border border-gray-300  rounded p-2"
-                                    required
-                                />
-
-
-                                <label htmlFor="item_weight">Weight per Item</label>
-                                <input
-                                    type="text"
-                                    id="item_weight"
-                                    name="item_weight"
-                                    value={formData.item_weight}
-                                    onChange={handleInputChange}
-                                    placeholder="Format: XX.X kg"
-                                    className="w-full bg-gray-100 border border-gray-300  rounded p-2"
-                                    required
-                                />
                             </div>
                         </div>
-                        {/* Date and Location Details */}
+                        {/* Date and Location */}
                         <div className="flex flex-col gap-4 px-5 mb-4">
-                            <h1 className="text-userclient text-[1.2em]">Date and Location Details</h1>
+                            <h1 className="text-userclient font-bold text-[1.2em]">Date and Location Details</h1>
                             <hr className="border-gray-400" />
                             <div className="col-span-1 w-[35%]">
-
                                 <label htmlFor="est_finish_date">Expected Finish Date</label>
                                 <input
                                     type="date"
@@ -198,9 +262,7 @@ const NewBookingForm = () => {
                                     name="est_finish_date"
                                     value={formData.est_finish_date}
                                     onChange={handleInputChange}
-                                    placeholder="Format: MM/DD/YY"
-                                    className="w-full bg-gray-100 border border-gray-300  rounded p-2"
-                                    required
+                                    className={`w-full bg-gray-100 rounded p-2 ${errors.est_finish_date ? 'border-red-500' : 'border-gray-300'}`}
                                 />
                             </div>
                             <div className="col-span-2">
@@ -211,8 +273,8 @@ const NewBookingForm = () => {
                                     name="pickup_location"
                                     value={formData.pickup_location}
                                     onChange={handleInputChange}
-                                    className="w-full bg-gray-100 border border-gray-300  rounded p-2"
-                                    required
+                                    className={`w-full bg-gray-100 rounded p-2 ${errors.pickup_location ? 'border-red-500' : 'border-gray-300'}`}
+                                    placeholder="Dock 42, Port of Miami, Miami, FL"
                                 />
                             </div>
                             <div className="col-span-2">
@@ -223,8 +285,8 @@ const NewBookingForm = () => {
                                     name="delivery_address"
                                     value={formData.delivery_address}
                                     onChange={handleInputChange}
-                                    className="w-full bg-gray-100 border border-gray-300 rounded p-2"
-                                    required
+                                    className={`w-full bg-gray-100 rounded p-2 ${errors.delivery_address ? 'border-red-500' : 'border-gray-300'}`}
+                                    placeholder="5678 Oak Avenue, Madison, WI"
                                 />
                             </div>
                         </div>
@@ -233,34 +295,22 @@ const NewBookingForm = () => {
                         {/* Buttons */}
                         <div className="flex justify-center py-4">
                             <button
-                                type="submit"
-                                className="bg-secondarycolor hover:bg-usertrucker text-userclient hover:text-white p-2 rounded"
-                            >
-                                Submit <FaPlus  className="inline ml-2" />
-                            </button>
-                            <button
                                 type="button"
-                                className="bg-alert hover:bg-red-600 text-white p-2 rounded ml-4"
+                                className="bg-alert hover:bg-red-600 text-white p-2 rounded shadow-custom"
                                 onClick={() => {
                                     navigate("/trucker/truckerbookings");
                                 }}
                             >
-                                Cancel <FaTimes  className="inline ml-2" />
+                                <FaTimes className="inline mr-2" /> Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                className="bg-primarycolor hover:bg-usertrucker text-userclient hover:text-white p-2 rounded ml-4 shadow-custom"
+                            >
+                                <FaPlus className="inline mr-2" /> Submit
                             </button>
                         </div>
                     </div>
-                    {showPopup && (
-                        <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 bg-black backdrop-blur">
-                            <div className="bg-white p-8 rounded shadow-lg flex items-center justify-between">
-                                <p>Please fill in all required fields.</p>
-                                <button
-                                    onClick={closePopup}
-                                >
-                                    <FiX className="text-black hover:text-[#2d7df6] ml-2" />
-                                </button>
-                            </div>
-                        </div>
-                    )}
                 </form>
             </div>
             <CustomConfirmationModal
