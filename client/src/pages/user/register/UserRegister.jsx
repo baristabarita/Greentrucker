@@ -109,7 +109,6 @@ const UserRegister = () => {
             style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center center' }}>
                 {/* registration box */}
                 <div className="flex flex-col items-center justify-center w-full pt-5 pb-5">
-
                 <div className="relative flex flex-col md:flex-row max-w-4xl w-full bg-white shadow-[4px_15px_10px_4px_gray] rounded-[7px_7px_7px_7px] mt-10 mb-10">
                     {/* Left side */}
                     <section
