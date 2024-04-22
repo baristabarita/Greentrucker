@@ -141,13 +141,13 @@ const NewBookingForm = () => {
                             </div>
                         </div>
 
-                        {/* Container Details */}
-                        <div className="mb-4 px-5">
+                         {/* Container Details */}
+                         <section className="mb-4 px-5">
                             <h1 className="text-userclient font-bold text-[1.2em]">Container Details</h1>
                             <hr className="my-4 border-gray-400" />
-                            <div className="grid grid-cols-3 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                 <div className="col-span-1">
-                                    <label htmlFor="container_size" className="text-xs">Size (length x width x height)</label>
+                                    <label htmlFor="container_size" className="text-sm">Size (length x width x height)</label>
                                     <input
                                         type="text"
                                         id="container_size"
@@ -165,13 +165,13 @@ const NewBookingForm = () => {
                                         id="quantity"
                                         name="quantity"
                                         value={formData.quantity}
-                                        onChange={(handleInputChange)}
+                                        onChange={handleInputChange}
                                         className={`w-full bg-gray-100 rounded p-2 appearance-none ${errors.quantity ? 'border-red-500' : 'border-gray-300'}`}
                                         min="0"
                                     />
                                 </div>
                                 <div className="col-span-1">
-                                    <label htmlFor="weight" className="text-xs">Weight per Container (lbs.)</label>
+                                    <label htmlFor="weight">Weight per Container (lbs.)</label>
                                     <input
                                         type="text"
                                         id="weight"
@@ -183,17 +183,17 @@ const NewBookingForm = () => {
                                     />
                                 </div>
                             </div>
-                        </div>
-                        {/* Item Details */}
-                        <div className="mb-4 px-5">
-                            <div className="flex justify-between items-center mb-4">
-                                <h1 className="text-userclient text-xl font-bold">Item Details</h1>
+                        </section>
+
+                         {/* Item Details */}
+                         <section className="mb-4 px-5">
+                            <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+                                <h1 className="text-userclient text-xl font-bold mb-2 md:mb-0">Item Details</h1>
                                 <button
                                     onClick={addItemDetail}
-                                    className="bg-primarycolor hover:bg-usertrucker text-white px-3 py-2 rounded shadow-custom"
+                                    className="bg-primarycolor hover:bg-usertrucker text-white px-3 py-2 rounded shadow-custom flex items-center"
                                 >
-                                    <BiSolidBookAdd className="inline mr-2 mb-1" />
-                                    Add Items
+                                    <BiSolidBookAdd className="inline mr-2" />Add Items
                                 </button>
                             </div>
                             <hr className="my-4 border-gray-400" />
@@ -203,8 +203,8 @@ const NewBookingForm = () => {
                                         <div className="flex justify-between items-center mb-2">
                                             <h2 className="text-userclient font-semibold">Item {index + 1}</h2>
                                             {itemDetails.length > 1 && (
-                                                <button onClick={() => removeItemDetail(index)} className="bg-alert hover:bg-red-600 text-white px-2 py-1 rounded">
-                                                    Remove
+                                                <button onClick={() => removeItemDetail(index)} className="bg-alert hover:bg-red-600 text-white px-2 py-1 rounded flex items-center">
+                                                    <FiX className="inline mr-1" />
                                                 </button>
                                             )}
                                         </div>
@@ -217,7 +217,7 @@ const NewBookingForm = () => {
                                                 onChange={(e) => handleItemChange(index, e)}
                                                 className={`w-full bg-white rounded p-2 ${errors[`item_${index}_item_type`] ? 'border-red-500' : 'border-gray-300'}`}
                                             >
-                                                <option value="">Select type</option>
+                                                <option value="">Select an item type</option>
                                                 <option value="Consumer Goods and Retail Products">Consumer Goods and Retail Products</option>
                                                 <option value="Food and Beverages">Food and Beverages</option>
                                                 <option value="Furniture and Home Decor">Furniture and Home Decor</option>
@@ -225,7 +225,7 @@ const NewBookingForm = () => {
                                                 <option value="Machinery and Industrial Equipment">Machinery and Industrial Equipment</option>
                                                 <option value="Others">Others</option>
                                             </select>
-                                            <label htmlFor={`item_quantity_${index}`} className="text-xs">No. of Items / Units</label>
+                                            <label htmlFor={`item_quantity_${index}`}>No. of Items / Units</label>
                                             <input
                                                 type="number"
                                                 id={`item_quantity_${index}`}
@@ -235,7 +235,7 @@ const NewBookingForm = () => {
                                                 className={`w-full bg-white rounded p-2 appearance-none ${errors[`item_${index}_item_quantity`] ? 'border-red-500' : 'border-gray-300'}`}
                                                 min="0"
                                             />
-                                            <label htmlFor={`item_weight_${index}`} className="text-xs">Weight per Item / Unit</label>
+                                            <label htmlFor={`item_weight_${index}`}>Weight per Item / Unit</label>
                                             <input
                                                 type="text"
                                                 id={`item_weight_${index}`}
@@ -249,67 +249,71 @@ const NewBookingForm = () => {
                                 ))}
 
                             </div>
-                        </div>
-                        {/* Date and Location */}
-                        <div className="flex flex-col gap-4 px-5 mb-4">
-                            <h1 className="text-userclient font-bold text-[1.2em]">Date and Location Details</h1>
-                            <hr className="border-gray-400" />
-                            <div className="col-span-1 w-[35%]">
-                                <label htmlFor="est_finish_date">Expected Finish Date</label>
-                                <input
-                                    type="date"
-                                    id="est_finish_date"
-                                    name="est_finish_date"
-                                    value={formData.est_finish_date}
-                                    onChange={handleInputChange}
-                                    className={`w-full bg-gray-100 rounded p-2 ${errors.est_finish_date ? 'border-red-500' : 'border-gray-300'}`}
-                                />
+                        </section>
+                         {/* Date and Location */}
+                         <section className="px-5 mb-4">
+                            <h1 className="text-userclient font-bold text-[1.2em] mb-4">Date and Location Details</h1>
+                            <hr className="border-gray-400 mb-4" />
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label htmlFor="est_finish_date">Expected Finish Date</label>
+                                    <input
+                                        type="date"
+                                        id="est_finish_date"
+                                        name="est_finish_date"
+                                        value={formData.est_finish_date}
+                                        onChange={handleInputChange}
+                                        className={`w-full bg-gray-100 rounded p-2 ${errors.est_finish_date ? 'border-red-500' : 'border-gray-300'}`}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="pickup_location">Pick Up Location</label>
+                                    <input
+                                        type="text"
+                                        id="pickup_location"
+                                        name="pickup_location"
+                                        value={formData.pickup_location}
+                                        onChange={handleInputChange}
+                                        className={`w-full bg-gray-100 rounded p-2 ${errors.pickup_location ? 'border-red-500' : 'border-gray-300'}`}
+                                        placeholder="Dock 42, Port of Miami, Miami, FL"
+                                    />
+                                </div>
+                                <div className="md:col-span-2">
+                                    <label htmlFor="delivery_address">Delivery Location</label>
+                                    <input
+                                        type="text"
+                                        id="delivery_address"
+                                        name="delivery_address"
+                                        value={formData.delivery_address}
+                                        onChange={handleInputChange}
+                                        className={`w-full bg-gray-100 rounded p-2 ${errors.delivery_address ? 'border-red-500' : 'border-gray-300'}`}
+                                        placeholder="5678 Oak Avenue, Madison, WI"
+                                    />
+                                </div>
                             </div>
-                            <div className="col-span-2">
-                                <label htmlFor="pickup_location">Pick Up Location</label>
-                                <input
-                                    type="text"
-                                    id="pickup_location"
-                                    name="pickup_location"
-                                    value={formData.pickup_location}
-                                    onChange={handleInputChange}
-                                    className={`w-full bg-gray-100 rounded p-2 ${errors.pickup_location ? 'border-red-500' : 'border-gray-300'}`}
-                                    placeholder="Dock 42, Port of Miami, Miami, FL"
-                                />
-                            </div>
-                            <div className="col-span-2">
-                                <label htmlFor="delivery_address">Delivery Location</label>
-                                <input
-                                    type="text"
-                                    id="delivery_address"
-                                    name="delivery_address"
-                                    value={formData.delivery_address}
-                                    onChange={handleInputChange}
-                                    className={`w-full bg-gray-100 rounded p-2 ${errors.delivery_address ? 'border-red-500' : 'border-gray-300'}`}
-                                    placeholder="5678 Oak Avenue, Madison, WI"
-                                />
-                            </div>
-                        </div>
-                        <hr className="mt-4 border-gray-400" />
+                        </section>
+                        
 
-                        {/* Buttons */}
-                        <div className="flex justify-center py-4">
+                        <hr className="mt-4 border-gray-400" />
+                        {/* buttons */}
+                        <section className="flex justify-center py-4 flex-wrap">
                             <button
                                 type="button"
-                                className="bg-alert hover:bg-red-600 text-white p-2 rounded shadow-custom"
+                                className="bg-alert hover:bg-red-600 text-white p-2 rounded shadow-custom mb-2 md:mb-0 md:mr-4"
                                 onClick={() => {
+                                    localStorage.removeItem('formData');
                                     navigate("/trucker/truckerbookings");
                                 }}
                             >
-                                <FaTimes className="inline mr-2" /> Cancel
+                                <FaTimes className="inline mr-2 mb-1" /> Cancel
                             </button>
                             <button
                                 type="submit"
-                                className="bg-primarycolor hover:bg-usertrucker text-userclient hover:text-white p-2 rounded ml-4 shadow-custom"
+                                className="bg-usertrucker hover:bg-primarycolor text-white hover:text-usertrucker p-2 rounded shadow-custom mb-2 md:mb-0 md:mr-4"
                             >
-                                <FaPlus className="inline mr-2" /> Submit
+                                <FaPlus className="inline mr-2 mb-1" /> Submit
                             </button>
-                        </div>
+                        </section>
                     </div>
                 </form>
             </div>
