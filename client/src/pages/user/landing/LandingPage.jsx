@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
+import useAuth from "@/util/userAuthentication";
 import LandingPageSkeleton from '@/components/skeletons/LandingPageSkeleton';
-
 import { FaEnvelope, FaPhone } from 'react-icons/fa'
 import headerbackgroundimage from '@/assets/images/landingbannerimg.png'
 import aboutusimg from '@/assets/images/landingpage-aboutimg.png'
@@ -11,8 +11,8 @@ import feature3 from '@/assets/icons/bar-chart.png'
 import contactusimg from '@/assets/images/contactus-img.png'
 
 const LandingPage = () => {
+    const { isLoggedIn } = useAuth();
     const [loading, setLoading] = useState(true);
-
     useEffect(() => {
         const timer = setTimeout(() => setLoading(false), 2000); // Wait for 2 seconds
         return () => clearTimeout(timer);
@@ -44,37 +44,45 @@ const LandingPage = () => {
         <div className='font-roboto animate-fade-in'>
             {/* Landing Page Banner Img */}
             <header className="bg-cover bg-center relative h-[20em] sm:h-[30em] md:h-[35em]" style={{ backgroundImage: `url(${headerbackgroundimage})` }}>
-    <div className="container mx-auto flex items-center h-full text-white p-8">
-        <div className="flex flex-col z-10 items-start max-w-full sm:max-w-[50%]">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">GreenTrucker: Streamlining Trucking Operations</h1>
-            <p className="text-sm sm:text-md md:text-lg mb-8">
-                Experience seamless booking and efficient asset management with GreenTrucker, your all-in-one solution for modern trucking management.
-            </p>
-            <Link to="/usregister">
-                <button className="bg-primarycolor hover:bg-usertrucker text-white py-2 px-6 rounded">Try GreenTrucker Now</button>
-            </Link>
-        </div>
-    </div>
-</header>
+                <div className="container mx-auto flex items-center h-full text-white p-8">
+                    <div className="flex flex-col z-10 items-start max-w-full sm:max-w-[50%]">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">GreenTrucker: Streamlining Trucking Operations</h1>
+                        <p className="text-sm sm:text-md md:text-lg mb-8">
+                            Experience seamless booking and efficient asset management with GreenTrucker, your all-in-one solution for modern trucking management.
+                        </p>
+                        { !isLoggedIn ? (
+                        <Link to="/usregister">
+                            <button className="bg-primarycolor hover:bg-usertrucker text-white py-2 px-6 rounded shadow-custom">Try GreenTrucker Now</button>
+                        </Link>
+                        ) : (
+                            <></>
+                        )}
+                    </div>
+                </div>
+            </header>
 
 
             {/* About Us section */}
             <section id="about" className="bg-white py-10 flex flex-col md:flex-row justify-center items-center space-y-6 md:space-x-10 md:space-y-0">
-    {/* Column 1 - Info */}
-    <div className="md:w-1/2 max-w-md px-4 md:px-0">
-        <h1 className="text-3xl md:text-4xl font-bold text-userclient">About Us</h1>
-        <p className="text-sm md:text-base">
-            Our mission is to provide trucking managers with a user-friendly and comprehensive web application that streamlines their operations, optimizes their fleet, and ultimately drives their business forward.
-        </p>
-        <Link to="/usregister">
-            <button className="bg-primarycolor hover:bg-usertrucker text-white py-2 px-6 mt-3 rounded">Try GreenTrucker Now</button>
-        </Link>
-    </div>
-    {/* Column 2 - Image */}
-    <div className="md:w-1/2 max-w-md">
-        <img src={aboutusimg} alt="About Us" className="object-cover w-full h-full rounded-lg shadow-lg" />
-    </div>
-</section>
+                {/* Column 1 - Info */}
+                <div className="md:w-1/2 max-w-md px-4 md:px-0">
+                    <h1 className="text-3xl md:text-4xl font-bold text-userclient">About Us</h1>
+                    <p className="text-sm md:text-base">
+                        Our mission is to provide trucking managers with a user-friendly and comprehensive web application that streamlines their operations, optimizes their fleet, and ultimately drives their business forward.
+                    </p>
+                    { !isLoggedIn ? (
+                    <Link to="/usregister">
+                        <button className="bg-primarycolor hover:bg-usertrucker text-white py-2 px-6 mt-3 rounded shadow-custom">Try GreenTrucker Now</button>
+                    </Link>
+                    ) : (
+                        <></>
+                    )}
+                </div>
+                {/* Column 2 - Image */}
+                <div className="md:w-1/2 max-w-md">
+                    <img src={aboutusimg} alt="About Us" className="object-cover w-full h-full rounded-lg shadow-lg" />
+                </div>
+            </section>
 
 
 
