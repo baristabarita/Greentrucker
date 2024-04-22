@@ -303,7 +303,7 @@ const BookingForm = () => {
                             </button>
                             <button
                                 type="submit"
-                                className="bg-usertrucker hover:bg-primarycolor text-white hover:text-usertrucker p-2 rounded shadow-custom"
+                                className="bg-usertrucker hover:bg-primarycolor text-white hover:text-usertrucker p-2 rounded shadow-custom mb-2 md:mb-0 md:mr-4"
                             >
                                 <FaCheck className="inline mr-2 mb-1" /> Submit
                             </button>
