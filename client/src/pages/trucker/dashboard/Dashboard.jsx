@@ -11,8 +11,8 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [pendingBookings, setPendingBookings] = useState([
-        { booking_id: 'BKG001', client_name: 'ACME Corp.', item_type: 'General Goods', container_type: '20ft', booking_date: '2023-09-01' },
-        { booking_id: 'BKG002', client_name: 'Global Importers', item_type: 'Building Materials', container_type: '40ft', booking_date: '2023-09-05' },
+        { booking_id: 'BKG001', client_name: 'ACME Corp.', item_type: 'General Goods', container_size: '20ft', booking_date: '2023-09-01' },
+        { booking_id: 'BKG002', client_name: 'Global Importers', item_type: 'Building Materials', container_size: '40ft', booking_date: '2023-09-05' },
     ]);
     const [assets, setAssets] = useState([
         { asset_id: 'AST001', asset_category: 'Truck', status: 'Idle' },
@@ -45,8 +45,8 @@ const Dashboard = () => {
 
     return (
         <div className="animate-fade-in p-5">
-            {/* Page title and verification status */}
-            <div className="flex text-[1.8em] font-bold items-center justify-between">
+            {/* Page title and verification status Section*/}
+            <section className="flex flex-col sm:flex-row text-[1.8em] font-bold items-center justify-between space-y-2 sm:space-y-0">
                 <p className="flex">
                     <BiSolidDashboard className="mr-2" /> Dashboard
                 </p>
@@ -54,17 +54,11 @@ const Dashboard = () => {
                     <div className="flex">
                         <p className="text-darkblue font-bold mr-2 text-[0.7em]">Verification Status:</p>
                         <span className="text-white bg-primarycolor px-2 rounded-md text-[0.7em]">Verified</span>
-                        {/*
-                        isVerified ? (
-                            <span className="text-green-500 text-[0.7em]">Verified</span>
-                        ) : (
-                            <span className="text-red-500 text-[0.7em]">Not Verified</span>
-                        ) */
-                        }
                     </div>
-                    <p className="flex font-medium mt-1 text-[0.7em]">Verify your account <span className="ml-2 cursor-pointer text-ongoing hover:text-primarycolor" onClick={() => navigate("/trucker/truckersettings")}> here</span>.</p>
+                    <p className="flex font-medium text-[0.7em]">Verify your account <span className="ml-2 cursor-pointer text-ongoing hover:text-primarycolor" onClick={() => navigate("/trucker/truckersettings")}>here</span>.</p>
                 </div>
-            </div>
+            </section>
+
             {/* Top Boxes */}
             <section className="h-[30vh] flex overflow-x-auto rounded-lg">
                 <div className="flex flex-row gap-4 items-center justify-between w-full mx-auto mt-2">
@@ -124,7 +118,7 @@ const Dashboard = () => {
 
 
             {/* Graph Section */}
-            <section className="container mt-5 bg-[white] rounded-md border shadow-lg drop-shadow-lg ">
+            <section className="container mt-5 mb-8 bg-[white] rounded-md border shadow-lg drop-shadow-lg">
                 <div className="flex items-center justify-between py-2 px-4 border-b-2 border-gray-300">
                     <h2 className="text-[1.5em] font-bold">Bookings This Month</h2>
                 </div>
@@ -134,69 +128,70 @@ const Dashboard = () => {
             </section>
 
             {/* Tables Section */}
-            <section className="h-[50vh] flex overflow-auto mt-5">
-                {/* Pending Bookings */}
-                <div className="w-full lg:w-[49%] text-center bg-white flex-col pt-0 rounded-lg overflow-auto border shadow-lg drop-shadow-lg m-2">
-                    <div className="text-left">
-                        <p className="bg-primarycolor rounded-t-lg font-semibold text-xl px-5 py-2">
-                            Pending Bookings
-                        </p>
-                    </div>
-                    <div className="px-5 py-2">
-                        <table className="w-full text-left">
-                            <thead>
-                                <tr className="text-sm font-semibold">
-                                    <th className="py-2">Client Name</th>
-                                    <th>Item Type</th>
-                                    <th>Container Type</th>
-                                    <th>Booking Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {pendingBookings.map((booking) => (
-                                    <tr key={booking.booking_id} className="text-sm">
-                                        <td className="py-2">{booking.client_name}</td>
-                                        <td>{booking.item_type}</td>
-                                        <td>{booking.container_type}</td>
-                                        <td>{booking.booking_date}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <section className="h-[50vh] flex flex-col lg:flex-row overflow-auto mt-5">
+    {/* Pending Bookings */}
+    <div className="w-full lg:w-[49%] text-center bg-white flex-col pt-0 rounded-lg overflow-auto border shadow-lg drop-shadow-lg m-2">
+        <div className="text-left">
+            <p className="bg-primarycolor rounded-t-lg font-semibold text-xl px-5 py-2">
+                Pending Bookings
+            </p>
+        </div>
+        <div className="px-5 py-2">
+            <table className="w-full text-left">
+                <thead>
+                    <tr className="text-sm font-semibold">
+                        <th className="py-2">Client Name</th>
+                        <th>Item Type</th>
+                        <th>Container Type</th>
+                        <th>Booking Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {pendingBookings.map((booking) => (
+                        <tr key={booking.booking_id} className="text-sm">
+                            <td className="py-2">{booking.client_name}</td>
+                            <td>{booking.item_type}</td>
+                            <td>{booking.container_size}</td>
+                            <td>{booking.booking_date}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-                {/* Asset Overview */}
-                <div className="w-full lg:w-[49%] text-center bg-white rounded-lg flex-col pt-0 overflow-auto border shadow-lg drop-shadow-lg m-2">
-                    <div className="text-left bg-primarycolor">
-                        <p className="font-semibold text-xl px-5 py-2">
-                            Asset Overview
-                        </p>
-                    </div>
-                    <div className="px-5 py-2">
-                        <table className="w-full text-left">
-                            <thead>
-                                <tr className="text-sm font-semibold">
-                                    <th className="py-2 px-4">Asset ID</th>
-                                    <th>Asset Type</th>
-                                    <th>Current Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {assets.map((asset) => (
-                                    <tr key={asset.asset_id} className="text-sm">
-                                        <td className="py-3 px-4">{asset.asset_id}</td>
-                                        <td>{asset.asset_category}</td>
-                                        <td className={`font-bold ${asset.status === 'Idle' ? 'text-cancelled' : 'text-complete'}`}>
-                                            {asset.status}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
+    {/* Asset Overview */}
+    <div className="w-full lg:w-[49%] text-center bg-white rounded-lg flex-col pt-0 overflow-auto border shadow-lg drop-shadow-lg m-2">
+        <div className="text-left bg-primarycolor">
+            <p className="font-semibold text-xl px-5 py-2">
+                Asset Overview
+            </p>
+        </div>
+        <div className="px-5 py-2">
+            <table className="w-full text-left">
+                <thead>
+                    <tr className="text-sm font-semibold">
+                        <th className="py-2 px-4">Asset ID</th>
+                        <th>Asset Type</th>
+                        <th>Current Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {assets.map((asset) => (
+                        <tr key={asset.asset_id} className="text-sm">
+                            <td className="py-3 px-4">{asset.asset_id}</td>
+                            <td>{asset.asset_category}</td>
+                            <td className={`font-bold ${asset.status === 'Idle' ? 'text-cancelled' : 'text-complete'}`}>
+                                {asset.status}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
 
         </div>
     )

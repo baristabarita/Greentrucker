@@ -165,71 +165,61 @@ const TrackingDetailsCard = ({ bookingDetails, onShowAlertModal, onOpenRatingMod
 
 
     return (
-        <div className="bg-white col-span-2 md:col-span-2 border rounded p-4 shadow-lg drop-shadow-lg m-5 w-[55%]">
+        <div className="bg-white col-span-2 md:col-span-1 lg:col-span-2 border rounded p-4 shadow-lg drop-shadow-lg m-5 md:w-full lg:w-[55%]">
 
-            {/* First Row */}
-            <div className="flex justify-between mb-4">
-                <div>
-                    <h2 className="font-bold text-[1.6em]">
-                        Tracking Booking ID: {bookingDetails.booking_id}
+        {/* First Row */}
+        <div className="flex flex-col md:flex-row justify-between mb-4">
+            <div>
+                <h2 className="font-bold text-lg md:text-xl lg:text-[1.6em]">
+                    Tracking Booking ID: {bookingDetails.booking_id}
+                </h2>
+                <div className="flex items-center">
+                    <h2 className="font-bold text-md md:text-lg lg:text-[1.4em] mr-2">Booking Status:</h2>
+                    <h2 className={`font-bold ${getStatusTextColor()}`}>
+                        {bookingDetails.status}
                     </h2>
-                    <div className="flex items-center">
-                        <h2 className="font-bold text-[1.4em] mr-2">Booking Status:</h2>
-                        <h2 className={`font-bold text-[0.8em] ${getStatusTextColor()}`}>
-                            {bookingDetails.status}
-                        </h2>
-                    </div>
-                    <div className="flex items-center mb-2">
-                        {bookingDetails.status === "Completed" ? (
-                            <h2 className="font-bold text-[1.4em] mr-2">Completion Date:</h2>
-                        ) :
-                            bookingDetails.status === "Cancelled" ? (
-                                <></>
-                            ) : (
-                                <h2 className="font-bold text-[1.4em] mr-2">Est. Finish Date:</h2>
-                            )}
-                        {bookingDetails.status === "Completed" ? (
-                            <h2 className="text-[1.2em]">{bookingDetails.est_finish_date}</h2>
-                        ) :
-                            bookingDetails.status === "Cancelled" ? (
-                                <></>
-                            ) : (
-                                <h2 className="text-[1.2em] mr-2">{bookingDetails.est_finish_date}</h2>
-                            )}
-                    </div>
                 </div>
-            </div>
-
-            {/* Second Row */}
-            <div className="flex items-center mr-1 mb-4">
-                <div className="w-[35%] h-auto ml-4">{getStatusIcon()}</div>
-                <div className="ml-[5%]">{renderStatusDetails()}</div>
-            </div>
-            <hr className="my-4 border-gray-400" />
-
-            {/* Third Row */}
-            <div className="mb-4 flex items-center">
-                {/* First Column */}
-                <div className="flex-1">
-                    <p>
-                        <strong>Pickup Location:</strong>
-                    </p>
-                    <p>{bookingDetails.pickup_location}</p>
-                </div>
-
-                {/* Second Column */}
-                <div className="mx-2">
-                    <FaArrowRight size={50} />
-                </div>
-                {/* Third Column */}
-                <div className="flex-1 ml-[10%]">
-                    <p>
-                        <strong>Delivery Location:</strong>
-                    </p>
-                    <p>{bookingDetails.delivery_address}</p>
+                <div className="flex flex-col md:flex-row items-center mb-2">
+                    {bookingDetails.status === "Completed" ? (
+                        <h2 className="font-bold text-md md:text-lg lg:text-[1.4em] mr-2">Completion Date:</h2>
+                    ) : null}
+                    {bookingDetails.status === "Completed" ? (
+                        <h2 className="text-sm md:text-md lg:text-[1.2em]">{bookingDetails.est_finish_date}</h2>
+                    ) : null}
                 </div>
             </div>
         </div>
+
+        {/* Second Row */}
+        <div className="flex flex-col md:flex-row items-center mr-1 mb-4">
+            <div className="w-full md:w-[35%] h-auto ml-4">{getStatusIcon()}</div>
+            <div className="ml-[5%] md:ml-4 lg:ml-[5%]">{renderStatusDetails()}</div>
+        </div>
+        <hr className="my-4 border-gray-400" />
+
+        {/* Third Row */}
+        <div className="flex flex-col md:flex-row items-center">
+            {/* First Column */}
+            <div className="flex-1">
+                <p>
+                    <strong>Pickup Location:</strong>
+                </p>
+                <p>{bookingDetails.pickup_location}</p>
+            </div>
+
+            {/* Second Column */}
+            <div className="hidden md:block mx-2">
+                <FaArrowRight size={50} />
+            </div>
+            {/* Third Column */}
+            <div className="flex-1 mt-4 md:mt-0 md:ml-[10%]">
+                <p>
+                    <strong>Delivery Location:</strong>
+                </p>
+                <p>{bookingDetails.delivery_address}</p>
+            </div>
+        </div>
+    </div>
     );
 }
 

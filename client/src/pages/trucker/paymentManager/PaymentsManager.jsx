@@ -89,23 +89,23 @@ const PaymentManager = () => {
                     <PaymentRevenueChart data={paymentsGraphData} />
                 </div>
             </section>
-            {/* Filter and  Set payment charges button*/}
-            <section className="flex justify-between items-center">
-                <div className="flex items-center space-x-3 bg-white border border-gray-200 rounded-lg p-3 shadow-sm">
+            {/* Filter and Set payment charges button*/}
+            <section className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+                <div className="flex flex-wrap justify-between items-center space-x-0 sm:space-x-3 bg-white border border-gray-200 rounded-lg p-3 shadow-sm w-full sm:w-auto">
                     <span className="font-medium">Filter by:</span>
-                    <div>
+                    <div className="w-full md:w-auto p-2 md:p-0">
                         <input
                             type="date"
                             value={filterDate}
                             onChange={(e) => setFilterDate(e.target.value)}
-                            className="input input-bordered input-sm"
+                            className="input input-bordered input-sm w-full sm:w-auto"
                         />
                     </div>
-                    <div>
+                    <div className="w-full md:w-auto p-2 md:p-0">
                         <select
                             value={filterStatus}
                             onChange={(e) => setFilterStatus(e.target.value)}
-                            className="select select-bordered select-sm"
+                            className="select select-bordered select-sm w-full sm:w-auto"
                         >
                             {statusOptions.map((status) => (
                                 <option key={status} value={status}>{status}</option>
@@ -114,19 +114,21 @@ const PaymentManager = () => {
                     </div>
                 </div>
                 <div>
-                    <button onClick={handleOpenSetCharges} className="btn btn-sm px-4 py-2 rounded-md bg-usertrucker text-white hover:bg-primarycolor hover:text-usertrucker btn-primary">Set Payment Charges</button>
+                    <button onClick={handleOpenSetCharges} className="btn btn-sm px-4 py-2 rounded-md bg-usertrucker text-white hover:bg-primarycolor hover:text-usertrucker btn-primary shadow-custom w-full sm:w-auto">
+                        Set Payment Charges
+                    </button>
                 </div>
-
             </section>
-            {/* Table to display paymeents */}
+
+            {/* Table to display payments */}
             <section className="overflow-y-auto mt-4 bg-white rounded-lg drop-shadow-lg shadow-lg opacity-1">
                 <table className="w-full text-sm text-center text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-primarycolor">
                         <tr>
                             <th scope="col" className="py-3 px-6">CLIENT NAME</th>
-                            <th scope="col" className="py-3 px-6">INVOICE SENT DATE</th>
-                            <th scope="col" className="py-3 px-6">TOTAL BALANCE (₱)</th>
-                            <th scope="col" className="py-3 px-6">REMAINING BALANCE (₱)</th>
+                            <th scope="col" className="py-3 px-6 hidden lg:table-cell">INVOICE SENT DATE</th>
+                            <th scope="col" className="py-3 px-6 hidden lg:table-cell">TOTAL BALANCE (₱)</th>
+                            <th scope="col" className="py-3 px-6 hidden lg:table-cell">REMAINING BALANCE (₱)</th>
                             <th scope="col" className="py-3 px-6">STATUS</th>
                             <th scope="col" className="py-3 px-6">ACTIONS</th>
                         </tr>
@@ -136,9 +138,9 @@ const PaymentManager = () => {
                             currentPayments.map((payment) => (
                                 <tr key={payment.payment_id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td className="py-4 px-6">{payment.client_name}</td>
-                                    <td className="py-4 px-6">{payment.invoice_date}</td>
-                                    <td className="py-4 px-6">{payment.total_balance}</td>
-                                    <td className="py-4 px-6">{payment.remaining_balance}</td>
+                                    <td className="py-4 px-6 hidden lg:table-cell">{payment.invoice_date}</td>
+                                    <td className="py-4 px-6 hidden lg:table-cell">{payment.total_balance}</td>
+                                    <td className="py-4 px-6 hidden lg:table-cell">{payment.remaining_balance}</td>
                                     <td className="py-4 px-6 text-center">
                                         <div className="flex justify-center items-center">
                                             <span className={`inline-flex items-center justify-center font-bold rounded-full py-1 px-3 text-sm 

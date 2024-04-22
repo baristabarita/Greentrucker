@@ -1,36 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiSolidBookBookmark } from "react-icons/bi";
 import { initialBookings } from "@/util/data/sampleBookingsData";
+import { BiSolidAddToQueue } from "react-icons/bi";
 
 const BookingManager = () => {
-    
+
     const navigate = useNavigate();
     const [bookings, setBookings] = useState(initialBookings);
     const [currentPage, setCurrentPage] = useState(1);
     const bookingsPerPage = 10;
+
     // States for filtering
     const [filterDate, setFilterDate] = useState('');
     const [filterStatus, setFilterStatus] = useState('');
+    const [sortOrder, setSortOrder] = useState('newest');
 
     // Status options for the dropdown
     const statusOptions = ["All", "Pending", "Processing", "Reserved", "Ongoing", "Completed", "Cancelled"];
 
     // Function to filter bookings based on selected filters
-    const getFilteredBookings = () => {
-        return bookings.filter(booking => {
-            const dateMatches = filterDate ? booking.booking_date === filterDate : true;
+    const getFilteredAndSortedBookings = useMemo(() => {
+        const filteredBookings = bookings.filter(booking => {
+            const dateMatches = filterDate ? new Date(booking.booking_date) <= new Date(filterDate) : true;
             const statusMatches = filterStatus === "All" || filterStatus === '' ? true : booking.status === filterStatus;
             return dateMatches && statusMatches;
         });
-    };
 
-    const totalPages = Math.ceil(getFilteredBookings().length / bookingsPerPage);
+        // Sorting logic based on the sortOrder state
+        if (sortOrder === 'newest') {
+            filteredBookings.sort((a, b) => new Date(b.booking_date) - new Date(a.booking_date));
+        } else {
+            filteredBookings.sort((a, b) => new Date(a.booking_date) - new Date(b.booking_date));
+        }
+        return filteredBookings;
+    }, [bookings, filterDate, filterStatus, sortOrder]);
+
+    const totalPages = Math.ceil(getFilteredAndSortedBookings.length / bookingsPerPage);
 
     // Calculate the currently displayed bookings
     const indexOfLastBooking = currentPage * bookingsPerPage;
     const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
-    const currentBookings = getFilteredBookings().slice(indexOfFirstBooking, indexOfLastBooking);
+    const currentBookings = getFilteredAndSortedBookings.slice(indexOfFirstBooking, indexOfLastBooking);
 
 
     // Function to navigate to the next and previous page
@@ -50,54 +61,66 @@ const BookingManager = () => {
         localStorage.setItem('selectedBookingId', bookingId);
         navigate('/trucker/truckerbookings/booking'); // Adjust the route as necessary
     };
-    
+
 
     return (
         <div className="animate-fade-in p-5">
-            <div className="flex items-center mb-4">
+            <section className="flex items-center mb-4">
                 <BiSolidBookBookmark className="text-3xl mr-2" />
                 <h2 className="text-3xl font-bold">Bookings List</h2>
-            </div>
-            {/* Filter and  Add new Booking button*/}
-            <div className="flex justify-between items-center">
-                <div className="flex items-center space-x-3 bg-white border border-gray-200 rounded-lg p-3 shadow-sm">
-                    <span className="font-medium">Filter by:</span>
-                    <div>
+            </section>
+            {/* Filter and Add new Booking button */}
+            <section className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <div className="flex flex-wrap justify-between items-center space-x-0 md:space-x-3 bg-white border border-gray-200 rounded-lg p-3 shadow-sm w-full md:w-auto">
+                    <span className="font-medium w-full md:w-auto p-2 md:p-0">Filter by:</span>
+                    <div className="w-full md:w-auto p-2 md:p-0">
                         <input
                             type="date"
                             value={filterDate}
                             onChange={(e) => setFilterDate(e.target.value)}
-                            className="input input-bordered input-sm"
+                            className="input input-bordered input-sm w-full"
                         />
                     </div>
-                    <div>
+                    <div className="w-full md:w-auto p-2 md:p-0">
                         <select
                             value={filterStatus}
                             onChange={(e) => setFilterStatus(e.target.value)}
-                            className="select select-bordered select-sm"
+                            className="select select-bordered select-sm w-full"
                         >
                             {statusOptions.map((status) => (
                                 <option key={status} value={status}>{status}</option>
                             ))}
                         </select>
                     </div>
+                    <div className="w-full md:w-auto p-2 md:p-0">
+                        <select
+                            value={sortOrder}
+                            onChange={(e) => setSortOrder(e.target.value)}
+                            className="select select-bordered select-sm w-full">
+                            <option value="newest">Most Recent</option>
+                            <option value="oldest">Oldest</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div>
-                    <button onClick={handleNewBooking} className="btn btn-sm px-4 py-2 rounded-md bg-usertrucker text-white hover:bg-primarycolor hover:text-usertrucker btn-primary">Add New Booking</button>
+                <div className="w-full md:w-auto p-2 md:p-0">
+                    <button onClick={handleNewBooking} className="btn btn-sm flex px-4 py-2 rounded-md bg-usertrucker text-white hover:bg-primarycolor hover:text-usertrucker btn-primary shadow-custom w-full md:w-auto">
+                        <BiSolidAddToQueue className="mr-2 mt-1" />
+                        Add Booking
+                    </button>
                 </div>
+            </section>
 
-            </div>
 
             {/* Table to display bookings */}
-            <div className="overflow-y-auto mt-4 bg-white rounded-lg drop-shadow-lg shadow-lg opacity-1">
+            <section className="overflow-y-auto mt-4 bg-white rounded-lg drop-shadow-lg shadow-lg opacity-1">
                 <table className="w-full text-sm text-center text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-primarycolor">
                         <tr>
-                            <th scope="col" className="py-3 px-6">Client Name</th>
-                            <th scope="col" className="py-3 px-6">Delivery Address</th>
+                            <th scope="col" className="py-3 px-6 hidden lg:table-cell">Client Name</th>
+                            <th scope="col" className="py-3 px-6 hidden lg:table-cell">Delivery Address</th>
                             <th scope="col" className="py-3 px-6">Booking Date</th>
-                            <th scope="col" className="py-3 px-6">Est. Arrival Date</th>
+                            <th scope="col" className="py-3 px-6 hidden lg:table-cell">Est. Arrival Date</th>
                             <th scope="col" className="py-3 px-6">Status</th>
                             <th scope="col" className="py-3 px-6">Actions</th>
                         </tr>
@@ -106,10 +129,10 @@ const BookingManager = () => {
                         {currentBookings.length > 0 ? (
                             currentBookings.map((booking) => (
                                 <tr key={booking.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td className="py-4 px-6">{booking.clientDetails ? booking.clientDetails.client_name : 'N/A'}</td>
-                                    <td className="py-4 px-6">{booking.delivery_address}</td>
+                                    <td className="py-4 px-6 hidden lg:table-cell">{booking.clientDetails ? booking.clientDetails.client_name : 'N/A'}</td>
+                                    <td className="py-4 px-6 hidden lg:table-cell">{booking.delivery_address}</td>
                                     <td className="py-4 px-6">{booking.booking_date}</td>
-                                    <td className="py-4 px-6">{booking.est_finish_date}</td>
+                                    <td className="py-4 px-6 hidden lg:table-cell">{booking.est_finish_date}</td>
                                     <td className="py-4 px-6 text-center">
                                         <div className="flex justify-center items-center">
                                             <span className={`inline-flex items-center justify-center font-bold rounded-full py-1 px-3 text-sm 
@@ -126,10 +149,10 @@ const BookingManager = () => {
                                     </td>
                                     <td className="py-4 px-6 flex justify-center items-center">
                                         <button className="font-bold px-4 py-1 rounded-lg bg-secondarycolor text-userclient hover:bg-primarycolor hover:underline mr-2"
-                                        onClick={() => handleViewDetails(booking.id)}
+                                            onClick={() => handleViewDetails(booking.id)}
 
                                         >View Details
-                                    </button>
+                                        </button>
 
                                     </td>
                                 </tr>
@@ -141,10 +164,10 @@ const BookingManager = () => {
                         )}
                     </tbody>
                 </table>
-            </div>
+            </section>
 
             {/* Pagination and Showing X of Y bookings */}
-            <div className="flex justify-between items-center mt-4">
+            <section className="flex justify-between items-center mt-4">
                 <span className="text-gray-600 font-bold">Showing {currentBookings.length} of {bookings.length} bookings</span>
                 <div className="flex">
                     <button
@@ -169,7 +192,7 @@ const BookingManager = () => {
                         &#8594;
                     </button>
                 </div>
-            </div>
+            </section>
         </div>
     );
 };

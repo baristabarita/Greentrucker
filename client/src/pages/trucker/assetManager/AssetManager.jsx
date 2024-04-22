@@ -92,10 +92,10 @@ const AssetManager = () => {
             <div className="mt-4 mb-8 flex font-bold items-center">
                 <p className="flex text-[2em]"><BiSolidTruck className="mr-2 mt-1" />Assets Overview</p>
                 <button
-                    className="flex ml-auto items-center bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient font-bold px-4 py-3 rounded"
+                    className="flex ml-auto items-center bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient font-bold px-4 py-3 rounded shadow-custom"
                     onClick={handleOpenNewAssetModal}
                 >
-                    <BiSolidAddToQueue className="mt-[5%] mr-2" /> Add New Asset
+                    <BiSolidAddToQueue className="mr-2" /> Add New Asset
                 </button>
             </div>
 

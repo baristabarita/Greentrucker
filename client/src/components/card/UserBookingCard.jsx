@@ -1,29 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
 import { GiEmptyHourglass } from "react-icons/gi";
 import { FaFile, FaCalendar, FaTruck, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { ImTruck } from "react-icons/im";
-import { MdDateRange } from "react-icons/md";
+import { MdDateRange } from "react-icons/md"; 
 
 const UserBookingCard = ({ status, bookingId, businessName, deliveryAddress, estFinishDate, handleDetailsClick }) => {
-    const navigate = useNavigate();
     const getStatusIcon = () => {
         switch (status) {
             case "Pending":
-                return <GiEmptyHourglass size={100} />;
+                return <GiEmptyHourglass size={24} />;
             case "Processing":
-                return <FaFile size={100} />;
+                return <FaFile size={24} />;
             case "Reserved":
-                return <FaCalendar size={100} />;
+                return <FaCalendar size={24} />;
             case "Ongoing":
-                return <FaTruck size={100} />;
+                return <FaTruck size={24} />;
             case "Completed":
-                return <FaCheckCircle size={100} />;
+                return <FaCheckCircle size={24} />;
             default:
-                return <FaTimesCircle size={100} />;
+                return <FaTimesCircle size={24} />;
         }
     };
+
     const getStatusTextColor = () => {
         switch (status) {
             case "Pending":
@@ -44,48 +43,39 @@ const UserBookingCard = ({ status, bookingId, businessName, deliveryAddress, est
     };
 
     return (
-        <div className="bg-white rounded-lg border p-4 mb-4 w-[80%] flex flex-col shadow-lg drop-shadow-lg">
-            <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center">
-                    <div className="mr-4">{getStatusIcon()}</div>
-                    <div>
-                        <div className="flex items-center">
-                            <h2 className="font-bold">{bookingId}</h2>
+        <div className="bg-white rounded-lg border p-4 mb-4 flex flex-col sm:flex-row justify-between items-start shadow-lg drop-shadow-lg">
+            <div className="flex items-start">
+                <div className="flex flex-col sm:flex-row items-center mr-4">
+                    {getStatusIcon()}
+                    <div className="mt-3 sm:mt-0 sm:ml-4">
+                        <h2 className="font-bold text-lg">{bookingId}</h2>
+                        <div className="flex items-center text-sm">
+                            <h2 className="font-bold mr-2">Booking Status:</h2>
+                            <span className={`font-bold px-2 py-1 rounded text-white ${getStatusTextColor()}`}>{status}</span>
                         </div>
-
-                        <div className="flex items-center">
-                            <h2 className="font-bold text-[0.5 em] mr-2">Booking Status:</h2>
-                            <h2
-                                className={`font-bold text-[0.8em] text-white px-2 py-1 rounded ${getStatusTextColor()}`}
-                            >
-                                {status}
-                            </h2>
+                        <div className="text-sm font-bold mt-2">
+                            <ImTruck className="inline-block mr-2" />
+                            {businessName}
                         </div>
-                        <hr className="my-4 bg-gray-400 h-[2px]" />
-                        <div className="flex font-bold">
-                            <ImTruck className="mt-1 mr-3" />
-                            <p>{businessName}</p>
+                        <div className="text-sm mt-1">
+                            <FaLocationDot className="inline-block mr-2" />
+                            {deliveryAddress}
                         </div>
-                        <div className="flex">
-                            <FaLocationDot className="mt-1 mr-3" />
-                            <p>{deliveryAddress}</p>
+                        <div className="text-sm mt-1">
+                            <MdDateRange className="inline-block mr-2" />
+                            {estFinishDate}
                         </div>
-                        <div className="flex">
-                            <MdDateRange className="mt-1 mr-3" />
-                            <p>{estFinishDate}</p>
-                        </div>
-
                     </div>
                 </div>
-                <button
-                    className="bg-usertrucker hover:bg-primarycolor text-white hover:text-usertrucker px-2 py-1 ml-4 rounded self-start"
-                    onClick={() => handleDetailsClick(bookingId)}
-                >
-                    View Booking Details
-                </button>
             </div>
+            <button
+                className="bg-usertrucker hover:bg-primarycolor text-white px-3 py-1 rounded mt-4 sm:mt-0 shadow-custom"
+                onClick={() => handleDetailsClick(bookingId)}
+            >
+                View Booking Details
+            </button>
         </div>
     );
-}
+};
 
-export default UserBookingCard
+export default UserBookingCard;

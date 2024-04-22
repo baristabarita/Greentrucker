@@ -14,68 +14,104 @@ const UserRegister = () => {
     const [lastName, setLastName] = useState("");
     const [contactNum, setContactNum] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
+    const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
     const handleGuest = () => {
-        setError("");
+        setErrors("");
         navigate("/");
     };
 
-    const closeError = () => {
-        setError("");
+    const handleRegister = (e) => {
+        e.preventDefault();
+        const newErrors = {};
+
+        if (!firstName.trim()) {
+            newErrors.firstName = "First name is required";
+        }
+        if (!lastName.trim()) {
+            newErrors.lastName = "Last name is required";
+        }
+        if (!emailAdd.trim()) {
+            newErrors.emailAdd = "Email address is required";
+        }
+        if (!contactNum.trim()) {
+            newErrors.contactNum = "Contact number is required";
+        }
+        if (!password.trim()) {
+            newErrors.password = "Password is required";
+        }
+        if (password.trim() && (confirmPassword.trim() !== password.trim())) {
+            newErrors.confirmPassword = "Passwords do not match.";
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+        } else {
+            setRegistrationSuccess(true);
+            setTimeout(() => {
+                navigate("/userlogin");
+            }, 3000);
+        }
     };
 
-    const handleRegister = () => {
-        navigate("/userlogin");
-    };
-
-    const handleEmailChange = (e) => {
-        setEmailAdd(e.target.value);
-        setError(""); // Clear error on email change
-    };
     const handleFnameChange = (e) => {
         setFirstName(e.target.value);
-        setError(""); // Clear error on email change
+        const newErrors = { ...errors };
+        delete newErrors.firstName;
+        setErrors(newErrors);
     };
     const handleLnameChange = (e) => {
         setLastName(e.target.value);
-        setError(""); // Clear error on email change
+        const newErrors = { ...errors };
+        delete newErrors.lastName;
+        setErrors(newErrors);
+    };
+    const handleEmailChange = (e) => {
+        setEmailAdd(e.target.value);
+        const newErrors = { ...errors };
+        delete newErrors.emailAdd;
+        setErrors(newErrors);
     };
     const handleContactChange = (e) => {
         setContactNum(e.target.value);
-        setError(""); // Clear error on email change
+        const newErrors = { ...errors };
+        delete newErrors.contactNum;
+        setErrors(newErrors);
     };
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
-        setError(""); // Clear error on password change
+        const newErrors = { ...errors };
+        delete newErrors.password;
+        setErrors(newErrors);
+    };
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value);
+        const newErrors = { ...errors };
+        delete newErrors.confirmPassword;
+        setErrors(newErrors);
     };
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
+    const closeError = () => {
+        setErrors("");
+
+    };
+
     return (
         <>
-            <div className="h-screen flex items-center justify-center overflow-hidden font-roboto animate-fade-in">
-                {/* Background Picture */}
-                <img
-                    className="absolute h-screen w-full object-cover"
-                    src={background}
-                    alt="background"
-                />
-                {error && (
-                    <div className="absolute top-0 left-0 right-0 bg-red-500 text-white p-2 text-center flex justify-between items-center animate-slide-down">
-                        <span>{error}</span>
-                        <button onClick={closeError}>
-                            <FiX className="text-white" />
-                        </button>
-                    </div>
-                )}
+            <div className="flex flex-col justify-between min-h-screen overflow-hidden font-roboto animate-fade-in" 
+            style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center center' }}>
                 {/* registration box */}
+                <div className="flex flex-col items-center justify-center w-full pt-5 pb-5">
                 <div className="relative flex flex-col md:flex-row max-w-4xl w-full bg-white shadow-[4px_15px_10px_4px_gray] rounded-[7px_7px_7px_7px] mt-10 mb-10">
                     {/* Left side */}
-                    <div
+                    <section
                         className="leftBox flex flex-col items-center justify-center w-full md:w-1/3 p-10 rounded-[7px_0px_0px_7px]"
                         style={{ backgroundImage: `url(${leftboximg})`, backgroundSize: 'cover' }}
                     >
@@ -86,45 +122,54 @@ const UserRegister = () => {
                         </div>
                         <Link
                             to="/trkregister"
-                            className="block bg-usertrucker text-white w-full py-2 px-4 rounded-full mt-3 hover:bg-primarycolor hover:text-white transition-colors delay-250 duration-3000 ease-in text-center"
+                            className="block bg-secondarycolor text-usertrucker font-bold w-full py-2 px-4 rounded-full mt-3 hover:bg-primarycolor hover:text-white transition-colors delay-250 duration-3000 ease-in text-center shadow-custom"
                         >
                             Register as Manager
                         </Link>
-                    </div>
+                    </section>
 
 
                     {/* Right Side */}
-                    <div className="right flex flex-col items-center justify-center max-w-4xl md:w-2/3 p-10">
+                    <section className="right flex flex-col items-center justify-center max-w-4xl md:w-2/3 p-10">
                         <div className="imgBox mb-2">
                             <img className="w-16" src={logo} alt="logo" />
                         </div>
                         <h2 className="text-2xl font-bold mb-1">Welcome to GreenTrucker!</h2>
                         <p>Set up your account to start your journey.</p>
-                        <form className="w-full max-w-sm">
+                        {registrationSuccess && (
+                            <p className="bg-primarycolor text-usertrucker py-2 px-3 my-2 rounded-md">Account Registered! Redirecting you to the login page.</p>
+                        )}
+                        {Object.keys(errors).length > 0 && (
+                            <div className="text-alert p-2 text-center flex justify-between items-center animate-slide-down">
+                                <span>{Object.values(errors).join(', ')}</span>
+                                <button onClick={() => setErrors({})}>
+                                    <FiX className="text-white" />
+                                </button>
+                            </div>
+                        )}
+                        <form onSubmit={handleRegister} className="w-full max-w-sm">
                             {/* Row 1 */}
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="mt-3 mb-2">
                                     <input
                                         placeholder="First Name"
                                         type="text"
-                                        className="mt-1 p-3 w-full border border-gray-300 rounded focus:ring focus:ring-primarycolor focus:border-primarycolor"
+                                        className={`mt-1 p-3 w-full border rounded ${errors.firstName ? 'border-red-500' : 'border-gray-300'} focus:ring focus:ring-primarycolor focus:border-primarycolor`}
                                         id="firstName"
                                         name="firstName"
                                         value={firstName}
                                         onChange={handleFnameChange}
-                                        required
                                     />
                                 </div>
                                 <div className="mt-3 mb-2">
                                     <input
                                         placeholder="Last Name"
                                         type="text"
-                                        className="mt-1 p-3 w-full border border-gray-300 rounded focus:ring focus:ring-primarycolor focus:border-primarycolor"
+                                        className={`mt-1 p-3 w-full border rounded ${errors.lastName ? 'border-red-500' : 'border-gray-300'} focus:ring focus:ring-primarycolor focus:border-primarycolor`}
                                         id="lastName"
                                         name="lastName"
                                         value={lastName}
                                         onChange={handleLnameChange}
-                                        required
                                     />
                                 </div>
                             </div>
@@ -134,24 +179,22 @@ const UserRegister = () => {
                                     <input
                                         placeholder="Email Address"
                                         type="email"
-                                        className="mt-1 p-3 w-full border border-gray-300 rounded focus:ring focus:ring-primarycolor focus:border-primarycolor"
+                                        className={`mt-1 p-3 w-full border rounded ${errors.emailAdd ? 'border-red-500' : 'border-gray-300'} focus:ring focus:ring-primarycolor focus:border-primarycolor`}
                                         id="emailAdd"
                                         name="emailAdd"
                                         value={emailAdd}
                                         onChange={handleEmailChange}
-                                        required
                                     />
                                 </div>
                                 <div className="mt-3 mb-2">
                                     <input
                                         placeholder="Phone Number"
                                         type="text"
-                                        className="mt-1 p-3 w-full border border-gray-300 rounded focus:ring focus:ring-primarycolor focus:border-primarycolor"
+                                        className={`mt-1 p-3 w-full border rounded ${errors.contactNum ? 'border-red-500' : 'border-gray-300'} focus:ring focus:ring-primarycolor focus:border-primarycolor`}
                                         id="contactNum"
                                         name="contactNum"
                                         value={contactNum}
                                         onChange={handleContactChange}
-                                        required
                                     />
                                 </div>
                             </div>
@@ -160,12 +203,11 @@ const UserRegister = () => {
                                 <input
                                     placeholder="Password"
                                     type={showPassword ? "text" : "password"} // Toggle password visibility
-                                    className="mt-1 p-3 w-full border border-gray-300 rounded focus:ring focus:ring-primarycolor focus:border-primarycolor"
+                                    className={`mt-1 p-3 w-full border rounded ${errors.password ? 'border-red-500' : 'border-gray-300'} focus:ring focus:ring-primarycolor focus:border-primarycolor`}
                                     id="password"
                                     name="password"
                                     value={password}
                                     onChange={handlePasswordChange}
-                                    required
                                 />
                                 {/* Button to toggle password visibility */}
                                 <button
@@ -180,12 +222,11 @@ const UserRegister = () => {
                                 <input
                                     placeholder="Confirm Password"
                                     type={showPassword ? "text" : "password"} // Toggle password visibility
-                                    className="mt-1 p-3 w-full border border-gray-300 rounded focus:ring focus:ring-primarycolor focus:border-primarycolor"
-                                    id="password"
-                                    name="password"
-                                    value={password}
-                                    onChange={handlePasswordChange}
-                                    required
+                                    className={`mt-1 p-3 w-full border rounded ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} focus:ring focus:ring-primarycolor focus:border-primarycolor`}
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    value={confirmPassword}
+                                    onChange={handleConfirmPasswordChange}
                                 />
                                 {/* Button to toggle password visibility */}
                                 <button
@@ -199,7 +240,6 @@ const UserRegister = () => {
                             <div className="buttons flex flex-col items-center space-y-5">
                                 <button
                                     type="submit"
-                                    onClick={handleRegister}
                                     className="flex items-center justify-center button bg-primarycolor text-white p-[0.7em] w-full rounded-full hover:bg-secondarycolor hover:text-usertrucker font-bold transition-colors delay-250 duration-[3000] ease-in"
                                 >
                                     Create an Account
@@ -222,9 +262,8 @@ const UserRegister = () => {
                                 </Link>
                             </div>
                         </form>
-                    </div>
-
-
+                    </section>
+                </div>
                 </div>
             </div>
             <Footer />

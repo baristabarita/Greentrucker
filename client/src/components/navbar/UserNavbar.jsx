@@ -29,14 +29,14 @@ const UserNavbar = () => {
     return (
         <nav className="bg-userclient fixed w-full z-20 top-0 start-0">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src={logoicon} className="h-8" alt="Flowbite Logo" />
+                <div onClick={() => navigate('/')} className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer">
+                    <img src={logoicon} className="h-8" alt="Logo" />
                     <span className="self-center text-1xl text-white font-semibold whitespace-nowrap">GreenTrucker</span>
                 </div>
                 <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     {/* If user is not logged in */}
                     {!isLoggedIn && (
-                        <button onClick={() => navigate('/userlogin')} type="button" className="font-roboto text-black bg-secondarycolor hover:bg-secondarycolor focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-secondarycolor dark:hover:bg-secondarycolor dark:focus:ring-blue-800">Sign In</button>
+                        <button onClick={() => navigate('/userlogin')} type="button" className="font-roboto text-black bg-secondarycolor hover:bg-primarycolor focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-secondarycolor dark:hover:bg-secondarycolor dark:focus:ring-blue-800">Sign In</button>
                     )}
                     {/* If user is logged in */}
                     {isLoggedIn && (
@@ -77,13 +77,13 @@ const UserNavbar = () => {
                 <div className={`items-center justify-between transition-all duration-500 ease-in-out ${isOpen ? 'block' : 'hidden'} w-full md:flex md:w-auto md:order-1`} id="navbar-sticky">
                     <ul className="font-roboto flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 ">
                         <li>
-                            <div onClick={() => navigate('/')} className={`block py-2 px-3 rounded md:p-0 cursor-pointer ${location.pathname === '/' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">Home</div>
+                            <div onClick={() => navigate('/')} className={`block px-2 py-2 rounded cursor-pointer ${location.pathname === '/' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">Home</div>
                         </li>
                         <li>
-                            <div onClick={() => navigate('/services')} className={`block py-2 px-3 rounded md:p-0 cursor-pointer ${location.pathname === '/services' || location.pathname === '/services/choice' || location.pathname === '/services/choice/book' || location.pathname === '/services/choice/book/confirm' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">Services</div>
+                            <div onClick={() => navigate('/services')} className={`block px-2 py-2 rounded cursor-pointer ${location.pathname === '/services' || location.pathname === '/services/choice' || location.pathname === '/services/choice/book' || location.pathname === '/services/choice/book/confirm' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">Services</div>
                         </li>
                         <li>
-                            <div onClick={() => navigate('/userbookings')} className={`block py-2 px-3 rounded md:p-0 cursor-pointer ${location.pathname === '/userbookings' || location.pathname === '/userbookings/booking' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">My Bookings</div>
+                            <div onClick={() => navigate('/userbookings')} className={`block px-2 py-2 rounded cursor-pointer ${location.pathname === '/userbookings' || location.pathname === '/userbookings/booking' ? 'text-white bg-primarycolor md:bg-transparent md:text-primarycolor md:dark:text-primarycolor' : 'text-white hover:bg-primarycolor md:hover:text-black'}`} aria-current="page">My Bookings</div>
                         </li>
                     </ul>
                 </div>
