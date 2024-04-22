@@ -120,24 +120,29 @@ const SelectedBooking = () => {
     return (
         <div className="animate-fade-in p-5">
 
-            <div className="flex justify-between mb-4">
+            <section className="flex flex-col md:flex-row md:justify-between items-center mb-4">
                 <h3
-                    className="text-userclient cursor-pointer py-[1%] font-bold flex items-center xl:max-2xl:text-[1.2em] xl:max-2xl:py-[0.5%]"
+                    className="text-userclient cursor-pointer py-[1%] font-bold flex items-center w-full md:w-auto text-[1.2em] py-[0.5%]"
                     onClick={() => navigate('/trucker/truckerbookings')}
                 >
-                    <AiOutlineArrowLeft className="text-black hover:text-primarycolor" />
+                    <AiOutlineArrowLeft className="text-black hover:text-primarycolor mr-2" />
                     Back to Bookings List
                 </h3>
-                <div>
-                    <button className="mb-2 mr-2 px-4 py-2 bg-alert text-white hover:bg-red-500  rounded-lg font-bold"
-                        onClick={handleShowAlertModal}>Delete Booking</button>
-                    <button className="mb-2 px-4 py-2 bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient  rounded-lg font-bold"
-                    onClick={handleShowEditModal}>Edit Booking</button>
+                <div className="w-full md:w-auto mt-2 md:mt-0 md:ml-4 flex justify-center">
+                    <button className="mb-2 mr-2 px-4 py-2 bg-alert text-white hover:bg-red-500 rounded-lg font-bold"
+                        onClick={handleShowAlertModal}>
+                        Delete Booking
+                    </button>
+                    <button className="mb-2 px-4 py-2 bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient rounded-lg font-bold"
+                        onClick={handleShowEditModal}>
+                        Edit Booking
+                    </button>
                 </div>
-            </div>
+            </section>
+
 
             <MainDetailsCard booking={booking} />
-            <div className="flex flex-col md:flex-row md:space-x-4 mt-5">
+            <section className="flex flex-col md:flex-row md:space-x-4 mt-5">
                 {/* First Column: Container and Item details */}
                 <div className="flex-1">
                     <h3 className="font-bold text-lg mb-2">Container, Items and Document Details</h3>
@@ -167,7 +172,7 @@ const SelectedBooking = () => {
                 <div className="flex-1 mt-5 md:mt-0">
                     <div className="flex justify-between">
                         <h2 className="text-xl font-bold mb-4">Assigned Assets</h2>
-                        <button className="mb-2 px-4 py-2 bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient  rounded-lg font-bold"
+                        <button className="mb-2 px-4 py-2 bg-usertrucker text-white hover:bg-primarycolor hover:text-userclient rounded-lg font-bold shadow-custom"
                             onClick={handleShowAssetModal}>Set Assets</button>
                     </div>
                     {booking.assignedAssetDetails && booking.assignedAssetDetails.length > 0 ? (
@@ -178,7 +183,7 @@ const SelectedBooking = () => {
                         <p>No assigned assets found.</p>
                     )}
                 </div>
-            </div>
+            </section>
             <ViewDocumentModal
                 isOpen={isOpen}
                 documentUrl={documentUrl}

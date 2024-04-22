@@ -28,7 +28,10 @@ const TruckerLayout = () => {
             <TruckerNavbar toggleSidebar={toggleSidebar} />
             <div className='flex flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 transition-all duration-300 ease-in-out'>
                 <TruckerSide isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} isMobile={isMobile} />
-                <div className={`flex-1 transition-all duration-300 ease-in-out font-roboto ${isSidebarOpen && !isMobile ? 'ml-[20%] mr-[4%] w-[76%]' : 'ml-[4%] mr-[2%] w-full'}`}>
+                <div className={`flex-1 transition-all duration-300 ease-in-out font-roboto ${
+                    isMobile ? (isSidebarOpen ? 'ml-[20%] mr-[4%] w-[76%]' : 'ml-0 mr-0 w-full') :
+                    (isSidebarOpen ? 'ml-[20%] mr-[4%] w-[76%]' : 'ml-[4%] mr-[2%] w-full')
+                }`}>
                     <Outlet />
                 </div>
             </div>
