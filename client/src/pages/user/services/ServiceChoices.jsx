@@ -264,12 +264,12 @@ const ServiceChoices = () => {
 
     return (
         <div className="flex-grow min-h-screen bg-image bg-cover h-full animate-fade-in" style={{ backgroundImage: `url(${backgroundimg})` }}>
-            <div className="mb-4 text-center bg-primarycolor py-4 rounded-lg">
+            <section className="mb-4 text-center bg-primarycolor py-4 rounded-lg">
                 <h1 className="font-bold text-5xl text-[#363636] mt-4 mb-5">Choose the Trucking Service that Fits Your Needs</h1>
                 <p className="text-[#363636] text-xl mb-5">
                     We offer a wide variety of trucking services to meet your needs, from local moves to long-haul shipments.
                 </p>
-            </div>
+            </section>
 
             {loading ? (
                 <>
@@ -280,36 +280,41 @@ const ServiceChoices = () => {
 
             ) : (
                 <div className='mx-5'>
-                    <div className="flex flex-wrap justify-between items-center p-2">
-                        <div>
-                            <span className="font-bold text-[#363636] text-xl">Showing {firstItemIndex + 1}-{lastItemIndex} of {truckerData.length} Services</span>
-                        </div>
-                        <div className="flex justify-end items-center">
-                            <h1 className="font-bold text-[#363636] text-xl mr-5">Sort by:</h1>
-                            <div className="flex space-x-2 rounded-full p-2 bg-white border-slate-950 border-2">
-                                <button
-                                    className={`rounded-full px-4 p-2 ${sortOrder === 'desc' ? 'bg-usertrucker text-white' : 'bg-transparent text-[#2e2e2e]'}`}
-                                    onClick={() => handleSort('desc')}
-                                >
-                                    <FaSortAlphaUp className="inline mr-1" /> Highest Price First
-                                </button>
-                                <button
-                                    className={`rounded-full px-4 p-2 ${sortOrder === 'asc' ? 'bg-usertrucker text-white' : 'bg-transparent text-[#2e2e2e]'}`}
-                                    onClick={() => handleSort('asc')}
-                                >
-                                    <FaSortAlphaDown className="inline mr-1" /> Lowest Price First
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    {/* Sorting section */}
+                    <section className="flex flex-col sm:flex-row justify-between items-center p-2">
+    <div>
+        <span className="font-bold text-[#363636] text-lg sm:text-xl">Showing {firstItemIndex + 1}-{lastItemIndex} of {truckerData.length} Services</span>
+    </div>
+    <div className="mt-4 sm:mt-0 sm:ml-4 flex flex-col sm:flex-row items-center">
+        <h1 className="font-bold text-[#363636] text-lg sm:text-xl mb-2 sm:mb-0 sm:mr-4">Sort by:</h1>
+        <div className="flex space-x-2 rounded-full p-2 bg-white border-slate-950 border-2">
+            <button
+                className={`rounded-full px-4 p-2 ${sortOrder === 'desc' ? 'bg-usertrucker text-white' : 'bg-transparent text-[#2e2e2e]'}`}
+                onClick={() => handleSort('desc')}
+            >
+                <FaSortAlphaUp className="inline mr-1" /> Highest Price First
+            </button>
+            <button
+                className={`rounded-full px-4 p-2 ${sortOrder === 'asc' ? 'bg-usertrucker text-white' : 'bg-transparent text-[#2e2e2e]'}`}
+                onClick={() => handleSort('asc')}
+            >
+                <FaSortAlphaDown className="inline mr-1" /> Lowest Price First
+            </button>
+        </div>
+    </div>
+</section>
 
-                    <div className="flex flex-wrap justify-center mt-4">
+
+                    
+                    {/* Trucking Cards called */}
+                    <section className="flex flex-wrap justify-center mt-4">
                         {currentItems.map((trucker, index) => (
                             <TruckingServiceCard key={index} trucker={trucker} />
                         ))}
-                    </div>
-
-                    <div className="flex justify-center mt-4">
+                    </section>
+                    
+                    {/* Pagination */}
+                    <section className="flex justify-center mt-4">
                         <button
                             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                             disabled={currentPage === 1}
@@ -333,7 +338,7 @@ const ServiceChoices = () => {
                         >
                             &raquo;
                         </button>
-                    </div>
+                    </section>
                 </div>
             )}
         </div>

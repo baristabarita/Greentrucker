@@ -129,15 +129,15 @@ const BookingForm = () => {
                         <h1 className="text-2xl font-bold text-center mt-0 rounded-t-lg bg-usertrucker text-primarycolor p-4">Booking Services for {selectedTrucker?.business_name}</h1>
                         <hr className="mb-4 border-gray-400" />
                         {showPopup && (
-                        <div className="text-alert text-center font-bold">
-                            Please fill in all required fields.
-                        </div>
-                    )}
+                            <div className="text-alert text-center font-bold">
+                                Please fill in all required fields.
+                            </div>
+                        )}
                         {/* Container Details */}
-                        <div className="mb-4 px-5">
+                        <section className="mb-4 px-5">
                             <h1 className="text-userclient font-bold text-[1.2em]">Container Details</h1>
                             <hr className="my-4 border-gray-400" />
-                            <div className="grid grid-cols-3 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                 <div className="col-span-1">
                                     <label htmlFor="container_size" className="text-sm">Size (length x width x height)</label>
                                     <input
@@ -157,7 +157,7 @@ const BookingForm = () => {
                                         id="quantity"
                                         name="quantity"
                                         value={formData.quantity}
-                                        onChange={(handleInputChange)}
+                                        onChange={handleInputChange}
                                         className={`w-full bg-gray-100 rounded p-2 appearance-none ${errors.quantity ? 'border-red-500' : 'border-gray-300'}`}
                                         min="0"
                                     />
@@ -175,17 +175,17 @@ const BookingForm = () => {
                                     />
                                 </div>
                             </div>
-                        </div>
+                        </section>
+
                         {/* Item Details */}
-                        <div className="mb-4 px-5">
-                            <div className="flex justify-between items-center mb-4">
-                                <h1 className="text-userclient text-xl font-bold">Item Details</h1>
+                        <section className="mb-4 px-5">
+                            <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+                                <h1 className="text-userclient text-xl font-bold mb-2 md:mb-0">Item Details</h1>
                                 <button
                                     onClick={addItemDetail}
-                                    className="bg-primarycolor hover:bg-usertrucker text-white px-3 py-2 rounded shadow-custom"
+                                    className="bg-primarycolor hover:bg-usertrucker text-white px-3 py-2 rounded shadow-custom flex items-center"
                                 >
-                                    <BiSolidBookAdd className="inline mr-2 mb-1" />
-                                    Add Items
+                                    <BiSolidBookAdd className="inline mr-2" />Add Items
                                 </button>
                             </div>
                             <hr className="my-4 border-gray-400" />
@@ -195,8 +195,8 @@ const BookingForm = () => {
                                         <div className="flex justify-between items-center mb-2">
                                             <h2 className="text-userclient font-semibold">Item {index + 1}</h2>
                                             {itemDetails.length > 1 && (
-                                                <button onClick={() => removeItemDetail(index)} className="bg-alert hover:bg-red-600 text-white px-2 py-1 rounded">
-                                                    Remove
+                                                <button onClick={() => removeItemDetail(index)} className="bg-alert hover:bg-red-600 text-white px-2 py-1 rounded flex items-center">
+                                                    <FiX className="inline mr-1" />
                                                 </button>
                                             )}
                                         </div>
@@ -241,54 +241,59 @@ const BookingForm = () => {
                                 ))}
 
                             </div>
-                        </div>
+                        </section>
+
+
 
                         {/* Date and Location */}
-                        <div className="flex flex-col gap-4 px-5 mb-4">
-                            <h1 className="text-userclient font-bold text-[1.2em]">Date and Location Details</h1>
-                            <hr className="border-gray-400" />
-                            <div className="col-span-1 w-[35%]">
-                                <label htmlFor="est_finish_date">Expected Finish Date</label>
-                                <input
-                                    type="date"
-                                    id="est_finish_date"
-                                    name="est_finish_date"
-                                    value={formData.est_finish_date}
-                                    onChange={handleInputChange}
-                                    className={`w-full bg-gray-100 rounded p-2 ${errors.est_finish_date ? 'border-red-500' : 'border-gray-300'}`}
-                                />
+                        <section className="px-5 mb-4">
+                            <h1 className="text-userclient font-bold text-[1.2em] mb-4">Date and Location Details</h1>
+                            <hr className="border-gray-400 mb-4" />
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label htmlFor="est_finish_date">Expected Finish Date</label>
+                                    <input
+                                        type="date"
+                                        id="est_finish_date"
+                                        name="est_finish_date"
+                                        value={formData.est_finish_date}
+                                        onChange={handleInputChange}
+                                        className={`w-full bg-gray-100 rounded p-2 ${errors.est_finish_date ? 'border-red-500' : 'border-gray-300'}`}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="pickup_location">Pick Up Location</label>
+                                    <input
+                                        type="text"
+                                        id="pickup_location"
+                                        name="pickup_location"
+                                        value={formData.pickup_location}
+                                        onChange={handleInputChange}
+                                        className={`w-full bg-gray-100 rounded p-2 ${errors.pickup_location ? 'border-red-500' : 'border-gray-300'}`}
+                                        placeholder="Dock 42, Port of Miami, Miami, FL"
+                                    />
+                                </div>
+                                <div className="md:col-span-2">
+                                    <label htmlFor="delivery_address">Delivery Location</label>
+                                    <input
+                                        type="text"
+                                        id="delivery_address"
+                                        name="delivery_address"
+                                        value={formData.delivery_address}
+                                        onChange={handleInputChange}
+                                        className={`w-full bg-gray-100 rounded p-2 ${errors.delivery_address ? 'border-red-500' : 'border-gray-300'}`}
+                                        placeholder="5678 Oak Avenue, Madison, WI"
+                                    />
+                                </div>
                             </div>
-                            <div className="col-span-2">
-                                <label htmlFor="pickup_location">Pick Up Location</label>
-                                <input
-                                    type="text"
-                                    id="pickup_location"
-                                    name="pickup_location"
-                                    value={formData.pickup_location}
-                                    onChange={handleInputChange}
-                                    className={`w-full bg-gray-100 rounded p-2 ${errors.pickup_location ? 'border-red-500' : 'border-gray-300'}`}
-                                    placeholder="Dock 42, Port of Miami, Miami, FL"
-                                />
-                            </div>
-                            <div className="col-span-2">
-                                <label htmlFor="delivery_address">Delivery Location</label>
-                                <input
-                                    type="text"
-                                    id="delivery_address"
-                                    name="delivery_address"
-                                    value={formData.delivery_address}
-                                    onChange={handleInputChange}
-                                    className={`w-full bg-gray-100 rounded p-2 ${errors.delivery_address ? 'border-red-500' : 'border-gray-300'}`}
-                                    placeholder="5678 Oak Avenue, Madison, WI"
-                                />
-                            </div>
-                        </div>
-
+                        </section>
+                        
                         <hr className="mt-4 border-gray-400" />
-                        <div className="flex justify-center py-4">
+                        {/* buttons */}
+                        <section className="flex justify-center py-4 flex-wrap">
                             <button
                                 type="button"
-                                className="bg-alert hover:bg-red-600 text-white p-2 rounded shadow-custom"
+                                className="bg-alert hover:bg-red-600 text-white p-2 rounded shadow-custom mb-2 md:mb-0 md:mr-4"
                                 onClick={() => {
                                     localStorage.removeItem('formData');
                                     navigate("/services/choice");
@@ -298,11 +303,12 @@ const BookingForm = () => {
                             </button>
                             <button
                                 type="submit"
-                                className="bg-usertrucker hover:bg-primarycolor text-white hover:text-usertrucker p-2 rounded ml-4 shadow-custom"
+                                className="bg-usertrucker hover:bg-primarycolor text-white hover:text-usertrucker p-2 rounded shadow-custom"
                             >
                                 <FaCheck className="inline mr-2 mb-1" /> Submit
                             </button>
-                        </div>
+                        </section>
+
                     </div>
                 </form>
             </div>

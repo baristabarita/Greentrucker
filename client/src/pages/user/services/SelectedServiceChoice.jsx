@@ -39,7 +39,7 @@ const SelectedServiceChoice = () => {
     return (
         <div className="animate-fade-in font-poppings bg-primarycolor text-darkblue">
             {/* Back to Bookings Page */}
-            <div className="mt-[1em] text-userclient ml-[2%]">
+            <section className="mt-[1em] text-userclient ml-[2%]">
                 <h3
                     className="py-[1%] font-bold flex items-center xl:max-2xl:text-[1.2em] xl:max-2xl:py-[0.5%]"
                     onClick={() => navigate('/services')}
@@ -47,7 +47,7 @@ const SelectedServiceChoice = () => {
                     <AiOutlineArrowLeft className="text-black mr-[1%] hover:text-white" />
                     Back to Bookings Page
                 </h3>
-            </div>
+            </section>
 
             {!businessDetails ? (
                 <LoadingBar />
@@ -56,42 +56,44 @@ const SelectedServiceChoice = () => {
                     <div className="max-w-screen-lg mx-auto">
                         {/* View your Selection */}
                         <h1 className="font-bold text-2xl">View your Selection</h1>
+
                         {/* Main Section */}
-                        <div className="grid grid-cols-3 gap-4 mt-4 mb-4">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 mb-4">
                             {/* Business Details */}
-                            <section className="bg-white col-span-2 md:col-span-2 border rounded p-4 shadow-lg drop-shadow-xl">
+                            <section className="bg-white col-span-1 md:col-span-2 border rounded p-4 shadow-lg drop-shadow-xl">
                                 {/* Business Logo and Name */}
-                                <div className="flex items-center mb-4">
-                                    <img src={businessDetails.logo || truckicon} alt="Business Logo" className="w-auto h-[10.5em] mr-4" />
+                                <div className="flex flex-col md:flex-row items-center mb-4">
+                                    <img src={businessDetails.logo || truckicon} alt="Business Logo" className="w-full md:w-auto md:h-[10.5em] mx-auto md:mx-0 mb-4 md:mb-0 md:mr-4" />
                                     <div>
-                                        <h1 className="text-[2em] font-bold mb-1">{businessDetails.business_name}</h1>
-                                        <div className="flex items-center mb-2">
-                                            <FaUser className="mr-2" /> {businessDetails.contact_name}
+                                        <h1 className="text-xl md:text-[2em] font-bold mb-1 text-center md:text-left">{businessDetails.business_name}</h1>
+                                        <div className="text-sm block md:flex items-center justify-center md:justify-start mb-2">
+                                            <FaUser className="mr-2" /> <span className="text-center md:text-left">{businessDetails.contact_name}</span>
                                         </div>
-                                        <div className="flex items-center mb-2">
-                                            <FaPhone className="mr-2" /> {businessDetails.contact_number}
+                                        <div className="text-sm block md:flex items-center justify-center md:justify-start mb-2">
+                                            <FaPhone className="mr-2" /> <span className="text-center md:text-left">{businessDetails.contact_number}</span>
                                         </div>
-                                        <div className="flex items-center mb-2">
-                                            <FaEnvelope className="mr-2" /> {businessDetails.email_address}
+                                        <div className="text-sm block md:flex items-center justify-center md:justify-start mb-2">
+                                            <FaEnvelope className="mr-2" /> <span className="text-center md:text-left">{businessDetails.email_address}</span>
                                         </div>
-                                        <div className="flex items-center mb-2">
-                                            <FaMapMarker className="mr-2" /> {businessDetails.address}
+                                        <div className="text-sm block md:flex items-center justify-center md:justify-start mb-2">
+                                            <FaMapMarker className="mr-2" /> <span className="text-center md:text-left">{businessDetails.address}</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <hr className="my-4 border-gray-400" />
                                 {/* Star Ratings */}
-                                <div className="flex items-center">
-                                    <div className="bg-primarycolor text-usertrucker font-bold rounded-md ml-2 p-2">
+                                <div className="flex flex-col md:flex-row items-center justify-center md:justify-start">
+                                    <div className="bg-primarycolor text-usertrucker font-bold rounded-md p-2 mx-auto md:mx-2">
                                         {Math.round(businessDetails.averageRating * 10) / 10}
                                     </div>
-                                    <div className="ml-4">
-                                        <div className="text-left">Review Score</div>
+                                    <div>
+                                        <div className="text-center md:text-left">Review Score</div>
                                         <Rating name="read-only" value={businessDetails.averageRating} precision={0.1} readOnly />
                                     </div>
                                 </div>
                             </section>
+
 
                             {/* Service Charges Breakdown */}
                             <section className="bg-white md:col-span-1 border rounded p-4 shadow-lg drop-shadow-xl flex flex-col h-auto">
@@ -127,41 +129,45 @@ const SelectedServiceChoice = () => {
 
                             </section>
                         </div>
-                        {/* Assets Section */}
-                        <div className="bg-white border rounded p-4 shadow-lg drop-shadow-xl mt-6">
-                            <h2 className="font-bold text-2xl mb-4">Current Available Assets</h2>
-                            <hr className="my-4 border-gray-400" />
 
-                            <div className='flex flex-row justify-between'> {/* Use flex-row for side-by-side layout */}
-                                {/* Trucks Section */}
-                                <div className="flex-1 mr-2"> {/* flex-1 for equal width and mr-2 for a small gap */}
-                                    <h3 className="font-bold text-xl mb-2 ml-3">Available Trucks</h3>
-                                    <div className='flex flex-wrap'> {/* flex-wrap to allow items to wrap in the container */}
-                                        {businessDetails?.assets?.filter(asset => asset.asset_category === "Truck").length > 0 ? (
-                                            businessDetails.assets.filter(asset => asset.asset_category === "Truck").map((asset, index) => (
-                                                <TruckingServiceAssetsCard key={`truck-${index}`} asset={asset} />
-                                            ))
-                                        ) : (
-                                            <p>No truck assets available</p>
-                                        )}
-                                    </div>
-                                </div>
 
-                                {/* Trailers Section */}
-                                <div className="flex-1 ml-2"> {/* flex-1 for equal width and ml-2 for a small gap */}
-                                    <h3 className="font-bold text-xl mb-2 ml-3">Available Trailers</h3>
-                                    <div className='flex flex-wrap'> {/* flex-wrap to allow items to wrap in the container */}
-                                        {businessDetails?.assets?.filter(asset => asset.asset_category === "Trailer").length > 0 ? (
-                                            businessDetails.assets.filter(asset => asset.asset_category === "Trailer").map((asset, index) => (
-                                                <TruckingServiceAssetsCard key={`trailer-${index}`} asset={asset} />
-                                            ))
-                                        ) : (
-                                            <p>No trailer assets available</p>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{/* Assets Section */}
+<div className="bg-white border rounded p-4 shadow-lg drop-shadow-xl mt-6">
+    <h2 className="font-bold text-2xl mb-4">Current Available Assets</h2>
+    <hr className="my-4 border-gray-400" />
+
+    <div className="flex flex-col md:flex-row justify-between"> {/* Use flex-row on desktop and flex-col on mobile */}
+        {/* Trucks Section */}
+        <div className="md:flex-1 md:mr-2"> {/* Use md:flex-1 for equal width on desktop and right margin */}
+            <h3 className="font-bold text-xl mb-2 ml-3">Available Trucks</h3>
+            <div className='flex flex-wrap'> {/* flex-wrap to allow items to wrap in the container */}
+                {businessDetails?.assets?.filter(asset => asset.asset_category === "Truck").length > 0 ? (
+                    businessDetails.assets.filter(asset => asset.asset_category === "Truck").map((asset, index) => (
+                        <TruckingServiceAssetsCard key={`truck-${index}`} asset={asset} />
+                    ))
+                ) : (
+                    <p>No truck assets available</p>
+                )}
+            </div>
+        </div>
+
+        {/* Trailers Section */}
+        <div className="md:flex-1 md:ml-2"> {/* Use md:flex-1 for equal width on desktop and left margin */}
+            <h3 className="font-bold text-xl mb-2 ml-3">Available Trailers</h3>
+            <div className='flex flex-wrap'> {/* flex-wrap to allow items to wrap in the container */}
+                {businessDetails?.assets?.filter(asset => asset.asset_category === "Trailer").length > 0 ? (
+                    businessDetails.assets.filter(asset => asset.asset_category === "Trailer").map((asset, index) => (
+                        <TruckingServiceAssetsCard key={`trailer-${index}`} asset={asset} />
+                    ))
+                ) : (
+                    <p>No trailer assets available</p>
+                )}
+            </div>
+        </div>
+    </div>
+</div>
+
+
                     </div>
                 </div>
             )}

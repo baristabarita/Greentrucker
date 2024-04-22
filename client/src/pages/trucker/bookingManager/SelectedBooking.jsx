@@ -122,7 +122,7 @@ const SelectedBooking = () => {
 
             <section className="flex flex-col md:flex-row md:justify-between items-center mb-4">
                 <h3
-                    className="text-userclient cursor-pointer py-[1%] font-bold flex items-center w-full md:w-auto text-[1.2em] py-[0.5%]"
+                    className="text-userclient cursor-pointer font-bold flex items-center w-full md:w-auto text-[1.2em] py-[0.5%]"
                     onClick={() => navigate('/trucker/truckerbookings')}
                 >
                     <AiOutlineArrowLeft className="text-black hover:text-primarycolor mr-2" />
